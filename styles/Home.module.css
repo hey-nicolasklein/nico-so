@@ -16,7 +16,6 @@
   display: flex;
   flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
 }
@@ -43,6 +42,42 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  background-color: #CA4246;
+  background-image: linear-gradient(59deg, rgba(254,200,0,1) 0%, rgba(241,144,52,1) 56%, rgba(227,50,46,1) 100%);
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+}
+
+.title:hover{
+  animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+}
+
+@keyframes rainbow-text-simple-animation-rev {
+  0% {
+      background-size: 650%;
+  }
+  40% {
+      background-size: 650%;
+  }
+  100% {
+      background-size: 100%;
+  }
+}
+
+@keyframes rainbow-text-simple-animation {
+  0% {
+      background-size: 100%;
+  }
+  80% {
+      background-size: 650%;
+  }
+  100% {
+      background-size: 650%;
+  }
 }
 
 .title,
@@ -51,9 +86,9 @@
 }
 
 .description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+  margin: 0rem 0;
+  line-height: 1;
+  font-size: 4rem;
 }
 
 .code {
@@ -83,13 +118,15 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
+  color: #f19034;
+
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #f19034;
+  border-color: #f19034;
 }
 
 .card h2 {
@@ -112,18 +149,5 @@
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
   }
 }
