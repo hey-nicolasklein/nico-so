@@ -1,0 +1,38 @@
+.Navbar{
+    color: green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 140px;
+}
+
+.NavItems{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NavItem{
+    color: rgba(0, 0, 0, 0.75);
+    padding: 10px 25px;
+    line-height: 1;
+    font-size: 25px;
+}
+
+.ContactButton{
+    border: none;
+    background: none;
+    padding: 10px 22px;
+    border: solid rgba(0, 0, 0, 0.75) 2px;
+    border-radius: 5px;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.75);
+    margin-left: 25px;
+}
+
+@media (max-width: 1200px) {
+    .NavItem {
+      display: none;
+    }
+}

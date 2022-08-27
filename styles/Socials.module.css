@@ -1,0 +1,11 @@
+.SocialsBar{
+    margin: 40px 140px;
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.react-icons {
+    vertical-align: middle;
+    color: blue;
+}

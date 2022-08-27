@@ -1,5 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Hero from '../components/Hero'
+import Navbar from '../components/Navbar'
+import Socials from '../components/Socials'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -12,17 +15,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          <span className={styles.description}>Hey I&apos;m</span> Nico
-        </h1>
-        <div className={styles.grid}>
-          <a href="https://www.linkedin.com/in/heynicolas" className={styles.card}>
-            <h2>LinkedIn &rarr;</h2>
-          </a> 
-          <a href="https://github.com/hey-nicolasklein" className={styles.card}>
-            <h2>Github &rarr;</h2>
-          </a> 
-        </div>
+        <Navbar/>
+        <Hero/>
+        <Socials/>
       </main>
     </div>
   )
