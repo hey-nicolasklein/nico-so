@@ -1,0 +1,14 @@
+.Section {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    /* margin-left: 140px; */
+}
+
+.Item:first-child {
+    margin-right: 3rem;
+}
+
+.Item:last-child {
+    margin-left: 3rem;
+}

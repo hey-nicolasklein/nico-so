@@ -1,9 +1,10 @@
 .container {
-  padding: 0 2rem;
+  display: flex;
+  justify-content: space-around;
 }
 
 .main {
+  padding: 0 4rem;
   max-width: 1500px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }

@@ -1,0 +1,11 @@
+.ContactButton{
+    border: none;
+    background: none;
+    padding: 10px 22px;
+    border: solid rgba(0, 0, 0, 0.75) 2px;
+    border-radius: 5px;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.75);
+    margin-left: 25px;
+}

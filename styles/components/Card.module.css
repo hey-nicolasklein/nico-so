@@ -1,0 +1,66 @@
+.Card {
+    padding: 29px 38px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #FBAB7E 0%, #F7CE68 100%);
+    position: relative;
+    width: 70%;
+    height: 100%;
+}
+
+.Card:first-child {
+    margin-right: 6rem;
+}
+
+.Card:last-child {
+    margin-left: 6rem;
+}
+
+.Card.Secondary {
+    background: #000000;
+    color: #ffffff;
+    width: 40%;
+}
+
+.Row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 140px;
+}
+
+.Highlight {
+    position: absolute;
+    right: 0;
+    top: -150px;
+    z-index: 10;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.Card:hover .Highlight {
+    top: -160px;
+}
+
+.Body {
+    z-index: 20;
+}
+
+.Title {
+    margin: 0;
+    margin-top: 28px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.Content {
+    opacity: 62%;
+    font-size: 22px;
+}
+
+/* .Content {
+    margin: 0;
+    margin-top: 34px;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+} */

@@ -1,38 +1,32 @@
+.Wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(17.9px);
+    -webkit-backdrop-filter: blur(17.9px);
+    z-index: 20;
+    padding: 1rem 0;
+    border-radius: 10px;
+    margin: 0 20px;
+}
+
 .Navbar{
-    color: green;
+    padding: 0 4rem;
+    width: 100%;
+    max-width: 1500px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 40px 140px;
 }
 
 .NavItems{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.NavItem{
-    color: rgba(0, 0, 0, 0.75);
-    padding: 10px 25px;
-    line-height: 1;
-    font-size: 25px;
-}
-
-.ContactButton{
-    border: none;
-    background: none;
-    padding: 10px 22px;
-    border: solid rgba(0, 0, 0, 0.75) 2px;
-    border-radius: 5px;
-    font-size: 22px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.75);
-    margin-left: 25px;
-}
-
-@media (max-width: 1200px) {
-    .NavItem {
-      display: none;
-    }
 }

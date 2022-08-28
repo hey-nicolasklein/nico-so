@@ -1,0 +1,12 @@
+.NavItem{
+    color: rgba(0, 0, 0, 0.75);
+    padding: 10px 25px;
+    line-height: 1;
+    font-size: 25px;
+}
+
+@media (max-width: 1200px) {
+    .NavItem {
+      display: none;
+    }
+}
