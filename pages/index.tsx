@@ -3,6 +3,7 @@ import Image from "next/image";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import SectionHeader from "../components/SectionHeader";
+import Skills from "../components/Skills";
 import Socials from "../components/Socials";
 import WhatIDo from "../components/WhatIDo/WhatIDo";
 import styles from "../styles/Home.module.css";
@@ -24,6 +25,8 @@ export default function Home(props: { name: string }) {
                     <Hero />
                     <SectionHeader title="What I do?" />
                     <WhatIDo />
+                    <SectionHeader title="Skills" />
+                    <Skills />
                 </main>
             </div>
         </>
