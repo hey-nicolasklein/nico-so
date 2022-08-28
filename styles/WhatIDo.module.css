@@ -1,6 +1,6 @@
 .Section {
     display: flex;
-    align-items: baseline;
+    align-items: stretch;
     justify-content: space-between;
     /* margin-left: 140px; */
 }

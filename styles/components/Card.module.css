@@ -3,22 +3,24 @@
     border-radius: 20px;
     background: linear-gradient(180deg, #FBAB7E 0%, #F7CE68 100%);
     position: relative;
-    width: 70%;
-    height: 100%;
+    width: 50%;
+    min-height: 250px;
+    max-height: 400px;
+    transition-duration: 150ms;
 }
 
 .Card:first-child {
-    margin-right: 6rem;
+    margin-right: 3rem;
 }
 
 .Card:last-child {
-    margin-left: 6rem;
+    margin-left: 3rem;
 }
 
 .Card.Secondary {
     background: #000000;
     color: #ffffff;
-    width: 40%;
+    width: 50%;
 }
 
 .Row {
@@ -30,18 +32,22 @@
 .Highlight {
     position: absolute;
     right: 0;
-    top: -150px;
+    top: -100px;
     z-index: 10;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
 }
 
-.Card:hover .Highlight {
-    top: -160px;
+.Highlight:hover{
+    top: -120px;
 }
 
-.Body {
+.Card:hover{
+    box-shadow: 9px 4px 44px 7px rgba(0,0,0,0.1);
+}
+
+.body {
     z-index: 20;
 }
 
@@ -56,11 +62,3 @@
     opacity: 62%;
     font-size: 22px;
 }
-
-/* .Content {
-    margin: 0;
-    margin-top: 34px;
-    font-size: 22px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.6);
-} */

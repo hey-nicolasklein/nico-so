@@ -22,6 +22,8 @@ export default function Home(props: { name: string }) {
             <div className={styles.container}>
                 <main className={styles.main}>
                     <Hero />
+                    <SectionHeader title="What I do?" />
+                    <WhatIDo />
                 </main>
             </div>
         </>
