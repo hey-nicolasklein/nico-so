@@ -5,6 +5,13 @@ const Hero = () => {
     return (
         <div className={styles.heroContainer}>
             <div className={styles.hero}>
+                <img
+                    src="/assets/me.jpg"
+                    alt="SVG mit img laden"
+                    width="200"
+                    height="200"
+                    className={styles.ProfilPicture}
+                />
                 <div>
                     <h2 className={styles.top}>Hey, I&apos;m</h2>
                     <h1 className={styles.name}>Nicolas</h1>

@@ -6,7 +6,7 @@
 
 .hero{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 100%;
 }
@@ -39,4 +39,16 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+}
+
+.ProfilPicture{
+    border-radius: 300px;
+    margin-right: 20px;
+    transition: 0.5s;
+}
+
+.ProfilPicture:hover{
+    vertical-align: middle;
+    color: rgba(0, 0, 0, 1);
+    filter:drop-shadow(0 8px 24px rgba(149, 157, 165, 0.5))
 }
