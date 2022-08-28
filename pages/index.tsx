@@ -19,14 +19,9 @@ export default function Home(props: { name: string }) {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <Navbar />
-
             <div className={styles.container}>
                 <main className={styles.main}>
                     <Hero />
-                    <SectionHeader title={props.name} />
-                    <WhatIDo />
                 </main>
             </div>
         </>
