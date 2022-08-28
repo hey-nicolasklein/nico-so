@@ -7,7 +7,8 @@ import Socials from "../components/Socials";
 import WhatIDo from "../components/WhatIDo/WhatIDo";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export default function Home(props: { name: string }) {
+    console.log(props);
     return (
         <>
             <Head>
@@ -24,8 +25,31 @@ export default function Home() {
             <div className={styles.container}>
                 <main className={styles.main}>
                     <Hero />
+                    <SectionHeader title={props.name} />
+                    <WhatIDo />
                 </main>
             </div>
         </>
     );
+}
+
+async function fetchBitcoinMetaData(currency: string) {
+    const res = await fetch(
+        "https://api.coindesk.com/v1/bpi/currentprice.json"
+    );
+
+    const data = await res.json();
+
+    console.log(data);
+    return data["bpi"][currency]["rate"];
+}
+
+export async function getStaticProps() {
+    const res = await fetchBitcoinMetaData("USD");
+
+    return {
+        props: {
+            name: res,
+        },
+    };
 }
