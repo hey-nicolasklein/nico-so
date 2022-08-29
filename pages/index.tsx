@@ -22,14 +22,9 @@ export default function Home(props: { name: string }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
-            <div className={styles.container}>
-                <main className={styles.main}>
+            <div className="flex justify-center">
+                <main className="max-w-7xl w-full px-16">
                     <Hero />
-                    <SectionHeader title="What I do?" />
-                    <WhatIDo />
-                    <SectionHeader title="Skills" />
-                    <Skills />
-                    <SayHello />
                 </main>
             </div>
         </>
