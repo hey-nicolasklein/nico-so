@@ -25,6 +25,9 @@ export default function Home(props: { name: string }) {
             <div className="flex justify-center">
                 <main className="max-w-7xl w-full px-16">
                     <Hero />
+                    <p className="text-center italic text-slate-500 mb-4">
+                        More to come ...
+                    </p>
                 </main>
             </div>
         </>
