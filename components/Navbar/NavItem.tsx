@@ -3,7 +3,10 @@ import styles from "../../styles/components/NavItem.module.css";
 
 const NavItem = (props: { name: string }) => {
     return (
-        <a href="#" className={styles.NavItem}>
+        <a
+            href={`#${props.name != "Home" ? props.name : ""}`}
+            className={styles.NavItem}
+        >
             {props.name}
         </a>
     );

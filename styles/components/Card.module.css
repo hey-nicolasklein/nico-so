@@ -4,10 +4,12 @@
     background: linear-gradient(180deg, #FBAB7E 0%, #F7CE68 100%);
     position: relative;
     width: 50%;
-    min-height: 250px;
     max-height: 400px;
+    min-width: 200px;
     transition-duration: 150ms;
 }
+
+
 
 .Card:first-child {
     margin-right: 3rem;
@@ -16,6 +18,8 @@
 .Card:last-child {
     margin-left: 3rem;
 }
+
+
 
 .Card.Secondary {
     background: #000000;
@@ -49,6 +53,7 @@
 
 .body {
     z-index: 20;
+    height: 100%;
 }
 
 .Title {
@@ -61,4 +66,10 @@
 .Content {
     opacity: 62%;
     font-size: 22px;
+}
+
+@media (max-width: 1000px) {
+    .Highlight { display: none }
+    .Content { display: none }
+
 }

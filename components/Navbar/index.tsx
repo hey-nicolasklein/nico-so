@@ -14,9 +14,7 @@ const Navbar = () => {
                 />
                 <div className={styles.NavItems}>
                     <NavItem name="Home" />
-                    <NavItem name="Experience" />
                     <NavItem name="Skills" />
-                    <NavItem name="Links" />
                     <ContactButton />
                 </div>
             </div>

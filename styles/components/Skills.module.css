@@ -5,6 +5,11 @@
     justify-items: center;
 }
 
+@media (min-width: 300px) {
+    .Skills { grid-template-columns: repeat(1, 1fr); }
+}
+
 @media (min-width: 900px) {
     .Skills { grid-template-columns: repeat(3, 1fr); }
 }
+

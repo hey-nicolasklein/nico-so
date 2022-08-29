@@ -8,3 +8,9 @@
   max-width: 1500px;
   width: 100%;
 }
+
+@media (max-width: 1000px) {
+  .main {
+    padding: 0 2rem;
+  }
+}
