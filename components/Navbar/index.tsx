@@ -12,6 +12,7 @@ const Navbar = () => {
                         alt="SVG mit img laden"
                         width="50"
                         height="50"
+                        className="dark:invert"
                     />
                     <div className={styles.NavItems}>
                         <NavItem name="Home" />

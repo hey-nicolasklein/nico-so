@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 
 const Socials = () => {
     return (
-        <IconContext.Provider value={{ className: styles.Icons }}>
+        <IconContext.Provider value={{ className: "black dark:white" }}>
             <div className={styles.SocialsBar}>
                 <a href="https://www.linkedin.com/in/heynicolas/">
                     <BsLinkedin size={40} />
