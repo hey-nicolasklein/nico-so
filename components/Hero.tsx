@@ -24,7 +24,7 @@ const Hero = () => {
                         <span className="dark:hidden">🖤</span>
                         <span className="hidden dark:inline-block">🤍</span>
                     </h3>
-                    <h3 className="m-0 font-normal text-2xl sm:text-3xl sm:inline">
+                    <h3 className="m-0 font-normal text-2xl sm:text-3xl sm:hidden">
                         Developer by <span className="dark:hidden">🖤</span>
                         <span className="hidden dark:inline-block">🤍</span>
                     </h3>
