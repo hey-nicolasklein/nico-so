@@ -7,6 +7,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  dark: "media",
   theme: {
     fontFamily: {
       sans: ["Poppins", "sans-serif", '"Helvetica Neue"', 'Arial', '"Apple Color Emoji"',],
