@@ -42,15 +42,20 @@ const Hero = () => {
                     />
                 </div>
             </div>
-            <div className="z-50 flex justify-center items-center h-full flex-col sm:flex-row">
-                <img
-                    src="/assets/me.jpg"
-                    alt="SVG mit img laden"
-                    width="200"
-                    height="200"
-                    className="rounded-full mr-3 transition ease-in-out duration-500 sm:visible hover:drop-shadow-3xl mb-5 sm:mb-0"
-                />
-                <div className="flex flex-col align-center">
+            <div className="flex justify-center items-center h-full flex-col sm:flex-row">
+                <a
+                    href="https://www.instagram.com/hey.nicolasklein/"
+                    style={{ zIndex: 50 }}
+                >
+                    <img
+                        src="/assets/me.jpg"
+                        alt="SVG mit img laden"
+                        width="200"
+                        height="200"
+                        className="rounded-full mr-3 transition ease-in-out duration-500 sm:visible hover:drop-shadow-3xl mb-5 sm:mb-0"
+                    />
+                </a>
+                <div className=" z-50 flex flex-col align-center ">
                     <h2 className="m-0 font-normal text-3xl sm:text-6xl mb-2 sm:mb-2">
                         Hey, I&apos;m
                     </h2>
