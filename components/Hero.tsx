@@ -4,7 +4,45 @@ import Socials from "./Socials";
 const Hero = () => {
     return (
         <div className="relative h-screen">
-            <div className="flex justify-center	items-center h-full flex-col sm:flex-row">
+            <div className="z-10">
+                <div
+                    style={{ filter: "saturate(2)" }}
+                    className="dark:opacity-1000 absolute top-80 ml-auto mr-auto right-0 left-0 z-0 h-80 w-72 origin-center animate-spin-slow opacity-50"
+                >
+                    <div
+                        className="absolute -top-36 -left-36 h-96 w-96 animate-pulse-slow-3 rounded-full bg-primary-500 opacity-80"
+                        style={{ filter: "blur(180px)" }}
+                    />
+                    <div
+                        className="absolute top-36 -left-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-emerald-300 opacity-70"
+                        style={{ filter: "blur(120px)" }}
+                    />
+                    <div
+                        className="absolute top-12 left-44 h-72 w-72 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-50"
+                        style={{ filter: "blur(120px)" }}
+                    />
+                </div>
+            </div>
+            <div className="z-10">
+                <div
+                    style={{ filter: "saturate(2)" }}
+                    className="dark:opacity-1000 absolute top-0 right-0 z-0 h-72 w-72 origin-center animate-spin-slow opacity-50"
+                >
+                    <div
+                        className="absolute -top-36 -right-36 h-96 w-96 animate-pulse-slow-7 rounded-full bg-orange-500 opacity-80"
+                        style={{ filter: "blur(180px)" }}
+                    />
+                    <div
+                        className="absolute top-36 -right-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-primary-500 opacity-70"
+                        style={{ filter: "blur(120px)" }}
+                    />
+                    <div
+                        className="absolute top-0 right-64 h-72 w-72 animate-pulse-slow-3 rounded-full bg-pink-500 opacity-50"
+                        style={{ filter: "blur(120px)" }}
+                    />
+                </div>
+            </div>
+            <div className="z-50 flex justify-center items-center h-full flex-col sm:flex-row">
                 <img
                     src="/assets/me.jpg"
                     alt="SVG mit img laden"
@@ -31,7 +69,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className={styles.socials}>
+            <div className="absolute bottom-10 flex justify-around w-full">
                 <Socials />
             </div>
         </div>

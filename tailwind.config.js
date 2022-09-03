@@ -27,6 +27,78 @@ module.exports = {
         ],
         "nav": "0 4px 30px rgba(0, 0, 0, 0.1)"
       },
+      animation: {
+        "spin-slow": "spin 25s linear infinite",
+        "pulse-slow-3": "pulse 5s linear infinite",
+        "pulse-slow-5": "pulse 7s linear infinite",
+        "pulse-slow-7": "pulse 9s linear infinite",
+        sideways: "sideways 1s ease-in-out infinite",
+        "fade-in-l": "fade-in-l 1s ease-in-out",
+        "fade-in-r": "fade-in-r 1s ease-in-out",
+        "fade-in-l-slow": "fade-in-l 2s ease-in-out",
+        "fade-in-r-slow": "fade-in-r 2s ease-in-out",
+        "scale-in": "scale 1s ease-in-out",
+        "twist-in": "twist-in 1s ease-in-out",
+        "fade-in-up": "fade-in-up 500ms ease-in-out",
+    },
+    keyframes: {
+        sideways: {
+            "0%, 100%": {
+                transform: "translateX(-25%)",
+            },
+            "50%": {
+                transform: "translateX(0)",
+            },
+        },
+        "fade-in-up": {
+            "0%": {
+                opacity: 0,
+                transform: "translateY(10px)",
+            },
+            "100%": {
+                opacity: 100,
+                transform: "translateY(0)",
+            },
+        },
+        "fade-in-l": {
+            "0%": {
+                opacity: 0,
+                transform: "translateY(100px) translateX(-100px)",
+            },
+            "100%": {
+                opacity: 100,
+                transform: "translateY(0) translateX(0)",
+            },
+        },
+        "fade-in-r": {
+            "0%": {
+                opacity: 0,
+                transform: "translateY(100px) translateX(100px)",
+            },
+            "100%": {
+                opacity: 100,
+                transform: "translateY(0) translateX(0)",
+            },
+        },
+        scale: {
+            "0%": {
+                opacity: 0,
+                transform: "scale(0.95) translateY(100px)",
+            },
+            "100%": {
+                opacity: 100,
+                transform: "scale(1) translateY(0)",
+            },
+        },
+        "twist-in": {
+            "0%": {
+                transform: "rotate(-15deg)",
+            },
+            "100%": {
+                transform: "rotate(0)",
+            },
+        },
+      },
       borderWidth: {
         DEFAULT: "1px",
         0: "0",
