@@ -1,8 +1,7 @@
 import React from "react";
-import ContactButton from "../Navbar/ContactButton";
-import CustomButton from "./CustomButton";
 import styles from "../../styles/components/SayHello.module.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import CustomButton from "./CustomButton";
 
 const SayHello = () => {
     return (

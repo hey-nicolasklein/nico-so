@@ -1,12 +1,9 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import SayHello from "../components/SayHello";
 import SectionHeader from "../components/SectionHeader";
 import Skills from "../components/Skills";
-import Socials from "../components/Socials";
 import WhatIDo from "../components/WhatIDo/WhatIDo";
 import styles from "../styles/Home.module.css";
 import { DateTime, Interval } from "luxon";
@@ -80,7 +77,7 @@ const Home = (props: { age: number }) => {
                             />
                         </div>
 
-                        <div className="relative z-20 flex w-full items-center justify-center">
+                        <div className="relative z-20 flex flex-col sm:flex-row w-full items-center justify-center">
                             <a href="https://www.instagram.com/hey.nicolasklein/">
                                 <img
                                     src="/assets/me.jpg"
@@ -114,7 +111,7 @@ const Home = (props: { age: number }) => {
                             </div>
                         </div>
 
-                        <div className="absolute bottom-9 flex justify-center w-full">
+                        <div className="absolute bottom-20 flex justify-center w-full">
                             <IconContext.Provider
                                 value={{ className: "black dark:white" }}
                             >
