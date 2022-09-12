@@ -11,6 +11,7 @@ const Track = (props: { track: any }) => {
             <a
                 href={props.track.url}
                 target="_blank"
+                rel="noreferrer"
                 className="block rounded-lg transition hover:-translate-y-0.5 hover:shadow-lg"
             >
                 <Image

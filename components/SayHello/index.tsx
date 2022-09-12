@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../styles/components/SayHello.module.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import CustomButton from "./CustomButton";
+import Image from "next/image";
 
 const SayHello = () => {
     return (
@@ -16,7 +17,7 @@ const SayHello = () => {
                     icon={<AiOutlineArrowRight size={20} />}
                 />
             </div>
-            <img
+            <Image
                 src="/assets/flutter.svg"
                 alt="SVG mit img laden"
                 className={styles.Image}

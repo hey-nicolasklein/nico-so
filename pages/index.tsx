@@ -12,6 +12,7 @@ import { BsBehance, BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { getRecentTracks } from "../lib/spotify";
 import Track from "../components/Track";
+import Image from "next/image";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getRecentTracks();
@@ -85,7 +86,7 @@ const Home = (props: { age: number; tracks: any[] }) => {
 
                         <div className="relative z-20 flex flex-col sm:flex-row w-full items-center justify-center">
                             <a href="https://www.instagram.com/hey.nicolasklein/">
-                                <img
+                                <Image
                                     src="/assets/me.jpg"
                                     alt="SVG mit img laden"
                                     width="200"

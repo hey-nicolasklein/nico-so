@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Navbar = () => {
     return (
         <div className="relative">
@@ -7,7 +9,7 @@ const Navbar = () => {
             rounded-lg mx-5 my-5 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg"
             >
                 <div className="flex justify-between align-center w-full px-6 py-4 sm:px-6 max max-w-screen-2xl">
-                    <img
+                    <Image
                         src="/logo.svg"
                         alt="SVG mit img laden"
                         width="50"

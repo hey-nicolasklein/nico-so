@@ -3,6 +3,7 @@ import styles from "../../styles/WhatIDo.module.css";
 import { AiFillDatabase, AiOutlineMobile } from "react-icons/ai";
 
 import Card from "../Card";
+import Image from "next/image";
 
 const WhatIDo = () => {
     return (
@@ -10,7 +11,7 @@ const WhatIDo = () => {
             <Card
                 icon={<AiOutlineMobile size={50} />}
                 title="Mobile"
-                highlight={<img src="/assets/phoneFaded.png" width={250} />}
+                highlight={<Image src="/assets/phoneFaded.png" width={250} />}
             >
                 <p>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
