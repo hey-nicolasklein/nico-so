@@ -8,7 +8,7 @@ import { IconContext } from "react-icons";
 const Socials = () => {
     return (
         <IconContext.Provider value={{ className: "black dark:white" }}>
-            <div className={styles.SocialsBar}>
+            <div className="flex justify-around	 w-72">
                 <a href="https://www.linkedin.com/in/heynicolas/">
                     <BsLinkedin size={40} />
                 </a>

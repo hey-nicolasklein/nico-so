@@ -5,7 +5,7 @@ import NavItem from "./NavItem";
 const Navbar = () => {
     return (
         <div className="relative">
-            <div className="bg-none dark:bg-white fixed top-0 inset-x-0 sm:inset-x-auto sm:right-0 flex duration-700 justify-around align-center drop-shadow-3xl hover:drop-shadow-4xl z-10 rounded-lg mx-5 my-5 py-4 sm:py-0  dark:bg-opacity-30 backdrop-filter backdrop-blur-lg">
+            <div className="bg-none dark:bg-white fixed top-0 inset-x-0 sm:inset-x-auto sm:right-0 flex duration-700 justify-around align-center drop-shadow-3xl hover:drop-shadow-4xl z-10 rounded-lg mx-5 my-5 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg">
                 <div className="flex justify-between align-center w-full px-6 py-4 sm:px-6 max max-w-screen-2xl">
                     <img
                         src="/logo.svg"

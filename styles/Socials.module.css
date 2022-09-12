@@ -1,4 +1,4 @@
-.SocialsBar{
+.SocialsBar {
     display: flex;
     justify-content: space-between;
     width: 300px;
@@ -13,11 +13,11 @@
 .Icons:hover {
     vertical-align: middle;
     color: rgba(0, 0, 0, 1);
-    filter:drop-shadow(0 8px 24px rgba(149, 157, 165, 0.5))
+    filter: drop-shadow(0 8px 24px rgba(149, 157, 165, 0.5));
 }
 
 @media (max-width: 1000px) {
     .SocialsBar {
-        margin: 0
+        margin: 0;
     }
 }
