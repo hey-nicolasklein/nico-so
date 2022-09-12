@@ -2,9 +2,9 @@ const Navbar = () => {
     return (
         <div className="relative">
             <div
-                className="bg-none dark:bg-white fixed top-0 inset-x-0 sm:inset-x-auto 
+                className="z-50 bg-none dark:bg-white fixed top-0 inset-x-0 sm:inset-x-auto 
             sm:right-0 flex duration-700 justify-around align-center drop-shadow-3xl hover:drop-shadow-4xl 
-            z-10 rounded-lg mx-5 my-5 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg"
+            rounded-lg mx-5 my-5 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg"
             >
                 <div className="flex justify-between align-center w-full px-6 py-4 sm:px-6 max max-w-screen-2xl">
                     <img
@@ -39,7 +39,7 @@ const NavItem = (props: { name: string }) => {
 const ContactButton = () => {
     return (
         <button
-            className="leading-none	 background bg-transparent px-2.5 py-2.5 rounded border-solid border-2 
+            className="leading-none	background bg-transparent px-2.5 py-2.5 rounded border-solid border-2 
             text-xl	font-normal	text-black border-black	ml-5 dark:text-white dark:border-white"
             onClick={() =>
                 (window.location.href =

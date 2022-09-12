@@ -10,8 +10,12 @@ import { DateTime, Interval } from "luxon";
 import Layout from "../components/Layout";
 import { BsBehance, BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { IconContext } from "react-icons";
+import { getRecentTracks } from "../lib/spotify";
+import Track from "../components/Track";
 
 export const getStaticProps: GetStaticProps = async () => {
+    const tracks = await getRecentTracks();
+
     let birthday = new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
     let i = Interval.fromDateTimes(birthday, DateTime.now());
@@ -19,11 +23,13 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
             age: Math.floor(i.length("years")),
+            tracks,
         },
+        revalidate: 600,
     };
 };
 
-const Home = (props: { age: number }) => {
+const Home = (props: { age: number; tracks: any[] }) => {
     console.log(props.age);
     return (
         <>
@@ -131,6 +137,16 @@ const Home = (props: { age: number }) => {
                                 </div>
                             </IconContext.Provider>
                         </div>
+                    </div>
+                </div>
+                <div className="z-50 mt-24 mb-10">
+                    <h1 className="text-2xl sm:text-3xl mb-4">
+                        What I have been coding to
+                    </h1>
+                    <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 grid-rows-2 sm:grid-rows-1">
+                        {props.tracks.slice(0, 4).map((track: any, index) => (
+                            <Track key={index} track={track} />
+                        ))}
                     </div>
                 </div>
             </Layout>
