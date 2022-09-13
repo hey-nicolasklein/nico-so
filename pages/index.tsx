@@ -8,7 +8,13 @@ import WhatIDo from "../components/WhatIDo/WhatIDo";
 import styles from "../styles/Home.module.css";
 import { DateTime, Interval } from "luxon";
 import Layout from "../components/Layout";
-import { BsBehance, BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
+import {
+    BsBehance,
+    BsLinkedin,
+    BsTwitter,
+    BsGithub,
+    BsSpotify,
+} from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { getRecentTracks } from "../lib/spotify";
 import Track from "../components/Track";
@@ -91,7 +97,7 @@ const Home = (props: { age: number; tracks: any[] }) => {
                                     alt="SVG mit img laden"
                                     width="200"
                                     height="200"
-                                    className="rounded-full mr-3 transition ease-in-out duration-500 sm:visible hover:drop-shadow-3xl mb-5 sm:mb-0 border-white border-4"
+                                    className="rounded-full mr-3 transition ease-in-out duration-500 sm:visible mb-5 sm:mb-0"
                                 />
                             </a>
                             <div className="ml-5">
@@ -120,9 +126,12 @@ const Home = (props: { age: number; tracks: any[] }) => {
 
                         <div className="absolute bottom-20 flex justify-center w-full">
                             <IconContext.Provider
-                                value={{ className: "black dark:white" }}
+                                value={{
+                                    className:
+                                        "black dark:white hover:drop-shadow-4xl transtion duration-300 hover:scale-110 ease-in-out",
+                                }}
                             >
-                                <div className="flex justify-around	 w-72">
+                                <div className="flex justify-around	w-72">
                                     <a href="https://www.linkedin.com/in/heynicolas/">
                                         <BsLinkedin size={40} />
                                     </a>
@@ -141,9 +150,14 @@ const Home = (props: { age: number; tracks: any[] }) => {
                     </div>
                 </div>
                 <div className="z-50 mt-24 mb-10">
-                    <h1 className="text-2xl sm:text-3xl mb-4">
-                        What I have been coding to
-                    </h1>
+                    <div className="flex justify-start align-start mb-4">
+                        <a href="https://open.spotify.com/user/funforstarax">
+                            <BsSpotify size={30} />
+                        </a>
+                        <h1 className="text-2xl sm:text-3xl pl-3">
+                            What I have been coding to ...
+                        </h1>
+                    </div>
                     <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 grid-rows-2 sm:grid-rows-1">
                         {props.tracks.slice(0, 4).map((track: any, index) => (
                             <Track key={index} track={track} />
