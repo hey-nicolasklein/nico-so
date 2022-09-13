@@ -2,6 +2,8 @@ import { animated, useSpring } from "@react-spring/web";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import useCheckMobileScreen from "../../hooks/useIsMobile";
+import useIsMobile from "../../hooks/useIsMobile";
 import { classNames } from "../../lib/tailwind";
 
 const Navbar = () => {
@@ -17,7 +19,6 @@ const Navbar = () => {
         };
     });
 
-    // Use Spring Hook to make Card "wiggly"
     const [styles, api] = useSpring(() => ({
         y: "0px",
         config: { mass: 1, tension: 280, friction: 70 },
@@ -36,20 +37,22 @@ const Navbar = () => {
             />
             <animated.div
                 className={classNames(
-                    isScrolled ? "" : "bg-transparent hover:opacity-100",
-                    "fixed top-0 right-0 z-50 py-6 px-6 transition-colors"
+                    isScrolled
+                        ? " bg-white/80 shadow-2xl shadow-black/5 backdrop-blur-md backdrop-saturate-150 backdrop-filter dark:bg-gray-900/80 sm:bg-transparent sm:shadow-none sm:backdrop-filter-none"
+                        : "bg-transparent hover:opacity-100 ",
+                    "fixed top-0 right-0 z-50 w-full py-6 px-6 transition-colors sm:w-fit"
                 )}
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
                 style={styles}
             >
-                <div className="flex align-center max-w-5xl px-6 sm:px-12 xl:px-0">
+                <div className="align-center flex justify-center px-6 sm:px-12 xl:px-0">
                     <Image
                         src="/logo.svg"
                         alt="SVG mit img laden"
                         width="50"
                         height="50"
-                        className="dark:invert inline-block"
+                        className="inline-block dark:invert"
                     />
                     <ContactButton />
                 </div>
@@ -63,7 +66,7 @@ const NavItem = (props: { name: string }) => {
         <a
             href={`#${props.name != "Home" ? props.name : ""}`}
             className={
-                "leading-none text-gray-700 dark:text-white px-10 py-6 text-2xl hidden sm:block"
+                "hidden px-10 py-6 text-2xl leading-none text-gray-700 dark:text-white sm:block"
             }
         >
             {props.name}
@@ -74,8 +77,8 @@ const NavItem = (props: { name: string }) => {
 const ContactButton = () => {
     return (
         <button
-            className="leading-none	background bg-transparent px-2.5 py-2.5 rounded border-solid border-2 
-            text-xl	font-normal	text-black border-black	ml-5 dark:text-white dark:border-white"
+            className="background	ml-5 rounded border-2 border-solid border-black bg-transparent px-2.5 
+            py-2.5	text-xl	font-normal leading-none	text-black dark:border-white dark:text-white"
             onClick={() =>
                 (window.location.href =
                     "mailto:hey@nico.so?subject=Hey&body=Let%20us%20talk%20:)")

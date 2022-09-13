@@ -2,7 +2,6 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
 import SayHello from "../components/SayHello";
-import SectionHeader from "../components/SectionHeader";
 import Skills from "../components/Skills";
 import WhatIDo from "../components/WhatIDo/WhatIDo";
 import styles from "../styles/Home.module.css";
@@ -22,6 +21,10 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "react-in-viewport";
 import { classNames } from "../lib/tailwind";
+import { useAnimation, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import useIsMobile from "../hooks/useIsMobile";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getRecentTracks();
@@ -160,29 +163,44 @@ const Home = (props: { age: number; tracks: any[] }) => {
     );
 };
 
+const squareVariants = {
+    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+    hidden: { opacity: 0, scale: 0.8 },
+};
+
 const Music = (props: { tracks: any[] }) => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        }
+    }, [controls, inView]);
+
     return (
-        <div
-            key={+new Date()}
-            className={classNames(
-                "z-50 mt-24 mb-10 animate-fade-in-up transition duration-200"
-            )}
+        <motion.div
+            animate={controls}
+            initial="hidden"
+            variants={squareVariants}
         >
-            <div className="align-start mb-4 flex justify-start">
-                <a href="https://open.spotify.com/user/funforstarax">
-                    <BsSpotify size={30} />
-                </a>
-                <h1 className="normal pl-3 text-2xl sm:text-3xl">
-                    What I have been coding to ...
-                </h1>
+            <div className={classNames("z-50 mt-24 mb-10")}>
+                <div className="align-start mb-4 flex justify-start">
+                    <a href="https://open.spotify.com/user/funforstarax">
+                        <BsSpotify size={30} />
+                    </a>
+                    <h1 className="normal pl-3 text-2xl sm:text-3xl">
+                        What I have been coding to ...
+                    </h1>
+                </div>
+                <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1">
+                    {props.tracks.slice(0, 4).map((track: any, index) => (
+                        <Track key={index} track={track} />
+                    ))}
+                </div>
+                <div ref={ref} className=" h-10 w-full bg-transparent"></div>
             </div>
-            <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1">
-                {props.tracks.slice(0, 4).map((track: any, index) => (
-                    <Track key={index} track={track} />
-                ))}
-            </div>
-            <div className="h-10 w-full bg-transparent"></div>
-        </div>
+        </motion.div>
     );
 };
 
