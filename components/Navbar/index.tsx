@@ -1,26 +1,59 @@
+import { animated, useSpring } from "@react-spring/web";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { classNames } from "../../lib/tailwind";
 
 const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isShown, setIsShown] = useState(false);
+
+    useEffect(() => {
+        window.onscroll = () => setIsScrolled(window.pageYOffset > 400);
+
+        return () => {
+            window.onscroll = null;
+            return;
+        };
+    });
+
+    // Use Spring Hook to make Card "wiggly"
+    const [styles, api] = useSpring(() => ({
+        y: "0px",
+        config: { mass: 1, tension: 280, friction: 70 },
+    }));
+
+    useEffect(() => {
+        api.start({ y: isScrolled || isShown ? "0px" : "-100px" });
+    }, [isScrolled, isShown]);
+
     return (
-        <div className="relative">
+        <div>
             <div
-                className="z-50 bg-none dark:bg-white fixed top-0 inset-x-0 sm:inset-x-auto 
-            sm:right-0 flex duration-700 justify-around align-center drop-shadow-3xl hover:drop-shadow-4xl 
-            rounded-lg mx-5 my-5 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg"
+                className="fixed top-0 right-0 z-50 h-36 w-full"
+                onMouseEnter={() => setIsShown(true)}
+                onMouseLeave={() => setIsShown(false)}
+            />
+            <animated.div
+                className={classNames(
+                    isScrolled ? "" : "bg-transparent hover:opacity-100",
+                    "fixed top-0 right-0 z-50 py-6 px-6 transition-colors"
+                )}
+                onMouseEnter={() => setIsShown(true)}
+                onMouseLeave={() => setIsShown(false)}
+                style={styles}
             >
-                <div className="flex justify-between align-center w-full px-6 py-4 sm:px-6 max max-w-screen-2xl">
+                <div className="flex align-center max-w-5xl px-6 sm:px-12 xl:px-0">
                     <Image
                         src="/logo.svg"
                         alt="SVG mit img laden"
                         width="50"
                         height="50"
-                        className="dark:invert"
+                        className="dark:invert inline-block"
                     />
-                    <div className="flex justify-center align-center">
-                        <ContactButton />
-                    </div>
+                    <ContactButton />
                 </div>
-            </div>
+            </animated.div>
         </div>
     );
 };
