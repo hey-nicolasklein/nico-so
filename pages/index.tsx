@@ -15,7 +15,7 @@ import {
     BsSpotify,
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
-import { getRecentTracks } from "../lib/spotify";
+import { getRecentTracks, getTopTracks } from "../lib/spotify";
 import Track from "../components/Track";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -27,7 +27,7 @@ import { useInView } from "react-intersection-observer";
 import useIsMobile from "../hooks/useIsMobile";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const tracks = await getRecentTracks();
+    const tracks = await getTopTracks();
 
     let birthday = new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
@@ -37,13 +37,13 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {
             age: Math.floor(i.length("years")),
             tracks,
+            refreshed: DateTime.now().valueOf(),
         },
         revalidate: 600,
     };
 };
 
-const Home = (props: { age: number; tracks: any[] }) => {
-    console.log(props.age);
+const Home = (props: { age: number; tracks: any[]; refreshed: number }) => {
     return (
         <>
             <Head>
@@ -157,7 +157,7 @@ const Home = (props: { age: number; tracks: any[] }) => {
                         </div>
                     </div>
                 </div>
-                <Music tracks={props.tracks} />
+                <Music tracks={props.tracks} refreshed={props.refreshed} />
             </Layout>
         </>
     );
@@ -168,7 +168,9 @@ const squareVariants = {
     hidden: { opacity: 0, scale: 0.8 },
 };
 
-const Music = (props: { tracks: any[] }) => {
+const Music = (props: { tracks: any[]; refreshed: number }) => {
+    const refreshed = DateTime.fromMillis(props.refreshed);
+
     const controls = useAnimation();
     const [ref, inView] = useInView();
 
@@ -185,13 +187,19 @@ const Music = (props: { tracks: any[] }) => {
             variants={squareVariants}
         >
             <div className={classNames("z-50 mt-24 mb-10")}>
-                <div className="align-start mb-4 flex justify-start">
-                    <a href="https://open.spotify.com/user/funforstarax">
-                        <BsSpotify size={30} />
-                    </a>
-                    <h1 className="normal pl-3 text-2xl sm:text-3xl">
-                        What I have been coding to ...
-                    </h1>
+                <div className="align-start mb-4 flex justify-between">
+                    <div className="align-start flex justify-start">
+                        <a href="https://open.spotify.com/user/funforstarax">
+                            <BsSpotify size={30} />
+                        </a>
+                        <h1 className="normal pl-3 text-2xl sm:text-3xl">
+                            What I have been coding to ...
+                        </h1>
+                    </div>
+
+                    <p className="pr-4 opacity-30">
+                        last refreshed {refreshed.hour}:{refreshed.minute}Uhr
+                    </p>
                 </div>
                 <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1">
                     {props.tracks.slice(0, 4).map((track: any, index) => (
