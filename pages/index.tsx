@@ -187,17 +187,20 @@ const Music = (props: { tracks: any[]; refreshed: number }) => {
             variants={squareVariants}
         >
             <div className={classNames("z-50 mt-24 mb-10")}>
-                <div className="align-start mb-4 flex justify-between">
-                    <div className="align-start flex justify-start">
-                        <a href="https://open.spotify.com/user/funforstarax">
+                <div className="mb-4 flex items-center justify-between">
+                    <div className="flex items-center justify-start">
+                        <a
+                            href="https://open.spotify.com/user/funforstarax"
+                            className="pb-2"
+                        >
                             <BsSpotify size={30} />
                         </a>
-                        <h1 className="normal pl-3 text-2xl sm:text-3xl">
+                        <h1 className="normal pl-3 text-2xl leading-none sm:text-3xl">
                             What I have been coding to ...
                         </h1>
                     </div>
 
-                    <p className="pr-4 opacity-30">
+                    <p className="m-0 p-0 pr-4 font-thin leading-none opacity-30	">
                         last refreshed {refreshed.hour}:{refreshed.minute}Uhr
                     </p>
                 </div>
