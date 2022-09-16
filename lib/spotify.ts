@@ -1,3 +1,5 @@
+import ITrack from "../interfaces/ITrack";
+
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
@@ -39,7 +41,7 @@ export const getRecentTracks = async () => {
         { headers: { Authorization: `Bearer ${access_token}` } }
     ).then((res) => res.json());
 
-    const tracks = items.map((track: any) => {
+    const tracks: ITrack[] = items.map((track: any) => {
         let song = track.track;
 
         return {

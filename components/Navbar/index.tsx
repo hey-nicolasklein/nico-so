@@ -26,12 +26,12 @@ const Navbar = () => {
 
     useEffect(() => {
         api.start({ y: isScrolled || isShown ? "0px" : "-100px" });
-    }, [isScrolled, isShown]);
+    }, [isScrolled, isShown, api]);
 
     return (
         <div>
             <div
-                className="fixed top-0 right-0 z-50 h-36 w-full"
+                className="w-100 h-50 z-12 fixed top-0 right-0 bg-red-500"
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
             />

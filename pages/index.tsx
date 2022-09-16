@@ -25,6 +25,7 @@ import { useAnimation, useMotionValue, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import useIsMobile from "../hooks/useIsMobile";
+import ITrack from "../interfaces/ITrack";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -43,7 +44,7 @@ export const getStaticProps: GetStaticProps = async () => {
     };
 };
 
-const Home = (props: { age: number; tracks: any[]; refreshed: number }) => {
+const Home = (props: { age: number; tracks: ITrack[]; refreshed: number }) => {
     return (
         <>
             <Head>
@@ -168,7 +169,7 @@ const squareVariants = {
     hidden: { opacity: 0, scale: 0.8 },
 };
 
-const Music = (props: { tracks: any[]; refreshed: number }) => {
+const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
     const refreshed = DateTime.fromMillis(props.refreshed);
 
     const controls = useAnimation();
@@ -201,11 +202,16 @@ const Music = (props: { tracks: any[]; refreshed: number }) => {
                     </div>
 
                     <p className="m-0 p-0 pr-4 font-thin leading-none opacity-30	">
-                        last refreshed {refreshed.hour}:{refreshed.minute}Uhr
+                        last refreshed{" "}
+                        {refreshed.toLocaleString({
+                            hour: "numeric",
+                            minute: "2-digit",
+                        })}
+                        Uhr
                     </p>
                 </div>
                 <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1">
-                    {props.tracks.slice(0, 4).map((track: any, index) => (
+                    {props.tracks.slice(0, 4).map((track: ITrack, index) => (
                         <Track key={index} track={track} />
                     ))}
                 </div>

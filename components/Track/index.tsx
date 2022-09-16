@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { BsPlay, BsTwitter } from "react-icons/bs";
+import ITrack from "../../interfaces/ITrack";
 
-const Track = (props: { track: any }) => {
+const Track = (props: { track: ITrack }) => {
     const handleClick = (event: { detail: number }) => {
         console.log("blick");
         if (event.detail === 2) window.open(props.track.url, "_blank");
@@ -10,29 +11,30 @@ const Track = (props: { track: any }) => {
     return (
         <div className="group relative flex-col" onClick={handleClick}>
             <div className="relative">
-                <div className="z-30 hover:scale-110 absolute translate-y-[-50%] translate-x-[-50%] top-1/2 left-1/2 transtion duration-300	ease-in-out opacity-0 group-hover:opacity-100">
+                <div className="transtion absolute top-1/2 left-1/2 z-30 translate-y-[-50%] translate-x-[-50%] opacity-0 duration-300	ease-in-out hover:scale-110 group-hover:opacity-100">
                     <a
                         href={props.track.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="transition"
                     >
-                        <BsPlay size={50} className="opacity-90 text-white" />
+                        <BsPlay size={50} className="text-white opacity-90" />
                     </a>
                 </div>
                 <div
-                    className="z-20 absolute translate-y-[-50%] translate-x-[-50%] 
-                top-1/2 left-1/2 w-[70px] h-[70px] transition duration-300 backdrop-blur opacity-0 
-                group-hover:opacity-100 rounded-full"
+                    className="absolute top-1/2 left-1/2 z-20 
+                h-[70px] w-[70px] translate-y-[-50%] translate-x-[-50%] rounded-full opacity-0 backdrop-blur transition 
+                duration-300 group-hover:opacity-100"
                 ></div>
                 <a
                     href={props.track.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="block rounded-lg transition group-hover:drop-shadow-3xl duration-500"
+                    className="block rounded-lg transition duration-500 group-hover:drop-shadow-3xl"
                 >
                     <Image
-                        className="transition group-hover:brightness-100 ease-in-out rounded-lg"
+                        className="rounded-lg transition ease-in-out group-hover:brightness-100"
+                        alt={props.track.title}
                         src={props.track.cover}
                         width={200}
                         height={200}
@@ -44,7 +46,7 @@ const Track = (props: { track: any }) => {
                     href={props.track.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-lg font-bold pt-2 max-w-[190px] truncate block"
+                    className="block max-w-[190px] truncate pt-2 text-lg font-bold"
                 >
                     {props.track.title}
                 </a>
@@ -52,7 +54,7 @@ const Track = (props: { track: any }) => {
                     href={props.track.artists[0].url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-base font-thin max-w-[190px] truncate block"
+                    className="block max-w-[190px] truncate text-base font-thin"
                 >
                     {props.track.artists[0].name}
                 </a>

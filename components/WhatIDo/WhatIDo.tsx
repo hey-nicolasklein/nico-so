@@ -11,7 +11,13 @@ const WhatIDo = () => {
             <Card
                 icon={<AiOutlineMobile size={50} />}
                 title="Mobile"
-                highlight={<Image src="/assets/phoneFaded.png" width={250} />}
+                highlight={
+                    <Image
+                        alt="phoneFaded"
+                        src="/assets/phoneFaded.png"
+                        width={250}
+                    />
+                }
             >
                 <p>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
