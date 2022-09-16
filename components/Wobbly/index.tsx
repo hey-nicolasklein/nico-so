@@ -6,17 +6,20 @@ const Wobbly = (props: {
     children: ReactNode;
     factor?: number;
 }): JSX.Element => {
+    const modifier = props.factor ?? 1;
+
     // Use Spring Hook to make Card "wiggly"
     const [styles, api] = useSpring(() => ({
         x: 0,
         y: 0,
         transform: "rotate(0deg)",
-        config: { mass: 2, tension: 300, friction: 5 },
+        config: { mass: 2, tension: 300, friction: 5 * modifier },
     }));
 
     const [isHovered, setHovered] = useState(false);
 
     useEffect(() => {
+        console.log(modifier);
         if (!isHovered) return;
 
         const timeout = setTimeout(() => {

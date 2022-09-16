@@ -31,6 +31,7 @@ import Footer from "../components/Footer";
 import Wobbly from "../components/Wobbly";
 import Pophead from "../components/Wiggle";
 import Wiggle from "../components/Wiggle";
+import Zoomed from "../components/Zoomed";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -111,25 +112,32 @@ const Home = (props: {
                         </div>
 
                         <div className="relative z-20 flex w-full flex-col items-center justify-center sm:flex-row">
-                            <a href="https://www.instagram.com/hey.nicolasklein/">
-                                <Image
-                                    src="/assets/me.jpg"
-                                    alt="SVG mit img laden"
-                                    width="200"
-                                    height="200"
-                                    className="mr-3 mb-5 rounded-full transition duration-500 ease-in-out sm:visible sm:mb-0"
-                                />
-                            </a>
+                            <Zoomed scale={1.2}>
+                                <Wobbly factor={5}>
+                                    <a href="https://www.instagram.com/hey.nicolasklein/">
+                                        <Image
+                                            src="/assets/me.jpg"
+                                            alt="SVG mit img laden"
+                                            width="200"
+                                            height="200"
+                                            className="mr-3 mb-5 rounded-full transition duration-500 ease-in-out sm:visible sm:mb-0"
+                                        />
+                                    </a>
+                                </Wobbly>
+                            </Zoomed>
 
                             <div className="ml-5">
                                 <h2 className="m-0 mb-2 mt-6 text-3xl font-normal sm:mt-0 sm:mb-2 sm:text-8xl">
                                     Hey, I&apos;m
                                 </h2>
-                                <Wobbly>
-                                    <h1 className="m-0 text-6xl font-bold sm:text-9xl">
-                                        Nicolas
-                                    </h1>
-                                </Wobbly>
+                                <Zoomed scale={1.08} factor={2}>
+                                    <Wobbly factor={2}>
+                                        <h1 className="m-0 text-6xl font-bold sm:text-9xl">
+                                            Nicolas
+                                        </h1>
+                                    </Wobbly>
+                                </Zoomed>
+
                                 <h3 className="m-0 hidden text-2xl font-normal sm:block sm:text-4xl">
                                     Frontend developer by{" "}
                                     <span className="dark:hidden">🖤</span>
