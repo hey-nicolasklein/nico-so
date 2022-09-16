@@ -31,7 +31,7 @@ const Navbar = () => {
     return (
         <div>
             <div
-                className="w-100 h-50 z-12 fixed top-0 right-0 bg-red-500"
+                className="fixed top-0 right-0 z-30 h-20 w-96"
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
             />
