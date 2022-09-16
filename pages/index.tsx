@@ -18,7 +18,7 @@ import { IconContext } from "react-icons";
 import { getRecentTracks, getTopTracks } from "../lib/spotify";
 import Track from "../components/Track";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInViewport } from "react-in-viewport";
 import { classNames } from "../lib/tailwind";
 import { useAnimation, useMotionValue, useTransform } from "framer-motion";
@@ -32,6 +32,8 @@ import Wobbly from "../components/Wobbly";
 import Pophead from "../components/Wiggle";
 import Wiggle from "../components/Wiggle";
 import Zoomed from "../components/Zoomed";
+import { animated, useSpring } from "react-spring";
+import { useGesture } from "@use-gesture/react";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -112,7 +114,7 @@ const Home = (props: {
                         </div>
 
                         <div className="relative z-20 flex w-full flex-col items-center justify-center sm:flex-row">
-                            <Zoomed scale={1.2}>
+                            <Zoomed scale={1.1}>
                                 <Wobbly factor={5}>
                                     <a href="https://www.instagram.com/hey.nicolasklein/">
                                         <Image
@@ -237,9 +239,78 @@ const Home = (props: {
                     </p>
                 </div>
                 <Music tracks={props.tracks} refreshed={props.refreshed} />
+                <div className="flex items-center justify-start">
+                    <h1 className="normal text-xl leading-none sm:text-4xl">
+                        Things I love
+                    </h1>
+                </div>
+                <BoopedItem />
+
                 <Footer year={2022} />
             </Layout>
         </>
+    );
+};
+
+const BoopedItem = () => {
+    const [booped, setBooped] = useState(false);
+    const [styles, api] = useSpring(() => ({
+        x: 0,
+        y: 0,
+        transform: "rotate(0deg)",
+        config: { mass: 1, tension: 180, friction: 16 },
+    }));
+
+    const bind: any = useGesture({
+        onHover: () => {
+            api.start({
+                x: 0,
+                y: -160,
+                transform: "scale(0.95)",
+            });
+        },
+        onMouseLeave: () => {
+            api.start({
+                x: 0,
+                y: 0,
+                transform: "scale(1)",
+            });
+        },
+    });
+
+    return (
+        <div className="mt-10 flex">
+            <div
+                {...bind()}
+                className="group relative h-[250px] w-[250px] overflow-hidden rounded-lg bg-slate-200 text-center shadow-inner"
+            >
+                <animated.div style={styles} className="mt-[20px]">
+                    <Image
+                        className="rounded-lg transition duration-500 group-hover:opacity-60"
+                        alt="test"
+                        src="/assets/me.jpg"
+                        width={210}
+                        height={210}
+                    />
+                    <div className="flex justify-center">
+                        <div className="absolute top-[260px] w-[210px] pt-0">
+                            <p className="truncate pt-2 text-left text-lg font-bold">
+                                Astronaut
+                            </p>
+                            <p className="truncate text-left text-base font-thin">
+                                Blender3D
+                            </p>
+                            <p
+                                className="truncate bg-gradient-to-br from-orange-500 to-pink-500 bg-clip-text
+                                text-left font-mono text-base font-thin text-transparent"
+                            >
+                                Instagram
+                            </p>
+                        </div>
+                    </div>
+                </animated.div>
+            </div>
+        </div>
     );
 };
 
