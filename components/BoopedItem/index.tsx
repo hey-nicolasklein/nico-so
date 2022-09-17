@@ -36,47 +36,54 @@ const BoopedItem = (props: {
         },
     });
 
+    const handleClick = (event: { detail: number }) => {
+        if (event.detail === 1) window.open(props.source, "_blank");
+    };
+
     return (
-        <a href={props.source}>
-            <div
-                {...bind()}
-                className="dark:opacity-2 group relative flex h-[250px] w-[250px] flex-col justify-center overflow-hidden rounded-lg bg-slate-100 text-center shadow-inner first-line:h-[250px] dark:bg-slate-900 "
-            >
-                <animated.div style={styles} className="">
-                    <Image
-                        className="absolute top-0 bottom-0 ml-auto mr-auto rounded-lg transition duration-500 group-hover:opacity-60"
-                        alt="test"
-                        src={props.href}
-                        width={160}
-                        height={210}
-                    />
-                    <div className="flex justify-evenly">
-                        <div className="absolute top-[250px] w-[210px] pt-0">
-                            <p className="truncate text-lg font-bold">
-                                {props.title}
-                            </p>
-                            <p className="truncate text-base font-thin">
-                                {props.subtitle}
-                            </p>
-                            <div className="flex flex-col items-center justify-center">
+        <div
+            {...bind()}
+            onClick={handleClick}
+            className="dark:opacity-2 group relative flex h-[250px] w-[250px] cursor-pointer flex-col justify-center overflow-hidden rounded-lg bg-slate-100 text-center shadow-inner first-line:h-[250px] dark:bg-slate-900 "
+        >
+            <animated.div style={styles} className="">
+                <Image
+                    className="absolute top-0 bottom-0 ml-auto mr-auto rounded-lg transition duration-500 group-hover:opacity-60"
+                    alt="test"
+                    src={props.href}
+                    width={160}
+                    height={210}
+                />
+                <div className="flex justify-evenly">
+                    <div className="absolute top-[250px] w-[210px] pt-0">
+                        <p className="truncate text-lg font-bold">
+                            {props.title}
+                        </p>
+                        <p className="truncate text-base font-thin">
+                            {props.subtitle}
+                        </p>
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="pt-7">
                                 <Zoomed>
                                     <Wobbly>
-                                        <a href="https://blender.org">
-                                            <p
-                                                className="mt-2 w-min truncate rounded-full bg-gradient-to-br from-orange-500 to-pink-500 px-[8px] py-[2px] text-center
+                                        <a
+                                            href="https://blender.org"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="mt-2 w-min truncate rounded-full 
+                                                bg-gradient-to-br from-orange-500 to-pink-500 px-[8px] py-[2px] text-center
                                  font-mono text-sm font-thin text-white"
-                                            >
-                                                {props.type}
-                                            </p>
+                                        >
+                                            {props.type}
                                         </a>
                                     </Wobbly>
                                 </Zoomed>
                             </div>
                         </div>
                     </div>
-                </animated.div>
-            </div>
-        </a>
+                </div>
+            </animated.div>
+        </div>
     );
 };
 

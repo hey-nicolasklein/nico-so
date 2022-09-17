@@ -67,7 +67,7 @@ const Home = (props: {
                 <title id="title">nicolas klein - nico.so</title>
                 <meta
                     name="Description"
-                    content="👋 Hey I'm Nicolas a UX-Engineer from south-west Germany."
+                    content="👋 Hey I%apos;m Nicolas a UX-Engineer from south-west Germany."
                 />
             </Head>
 
@@ -198,15 +198,15 @@ const Home = (props: {
                     <p className="mt-6">
                         In conjunction with my work at{" "}
                         <Link href="https://ergosign.de">Ergosign</Link>, I am
-                        finishing my Master's degree in Computer Science at{" "}
+                        finishing my Master$apos;s degree in Computer Science at{" "}
                         <Link href="https://htwsaar.de">HTW Saar</Link>.
                     </p>
                     <p className="mt-6">
                         I love to develop native mobile experiences with{" "}
                         <Link href="https://flutter.dev">Flutter</Link>.
                         Offline-first, media playback and real-time
-                        synchronization are just some of the challenges I've
-                        successfully faced with Flutter.
+                        synchronization are just some of the challenges
+                        I%apos;ve successfully faced with Flutter.
                     </p>
                     <p className="mt-6">
                         My web stack includes{" "}

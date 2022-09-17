@@ -30,7 +30,7 @@ const Wobbly = (props: {
         api.start({ transform: "rotate(-1deg" });
 
         return () => clearTimeout(timeout);
-    }, [isHovered]);
+    }, [isHovered, api]);
 
     // Use Gesture Hook to keep track of mouse movement velocity
     const bind: any = useGesture({
