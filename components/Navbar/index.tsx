@@ -77,7 +77,7 @@ const NavItem = (props: { name: string }) => {
 const ContactButton = () => {
     return (
         <button
-            className="background	ml-5 rounded border-2 border-solid border-black bg-transparent px-2.5 
+            className="background	ml-5 rounded-lg border-2 border-solid border-black bg-transparent px-2.5 
             py-2.5	text-xl	font-normal leading-none	text-black dark:border-white dark:text-white"
             onClick={() =>
                 (window.location.href =

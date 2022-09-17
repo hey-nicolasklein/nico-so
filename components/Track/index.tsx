@@ -4,15 +4,10 @@ import ITrack from "../../interfaces/ITrack";
 import Zoomed from "../Zoomed";
 
 const Track = (props: { track: ITrack }) => {
-    const handleClick = (event: { detail: number }) => {
-        console.log("blick");
-        if (event.detail === 2) window.open(props.track.url, "_blank");
-    };
-
     return (
-        <div className="group relative flex-col" onClick={handleClick}>
+        <div className="relative flex-col">
             <Zoomed>
-                <div className="relative">
+                <div className="group relative">
                     <div className="transtion absolute top-1/2 left-1/2 z-30 translate-y-[-50%] translate-x-[-50%] opacity-0 duration-300	ease-in-out hover:scale-110 group-hover:opacity-100">
                         <Zoomed scale={1.06} factor={0.6}>
                             <a

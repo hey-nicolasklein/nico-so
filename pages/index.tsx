@@ -34,6 +34,7 @@ import Wiggle from "../components/Wiggle";
 import Zoomed from "../components/Zoomed";
 import { animated, useSpring } from "react-spring";
 import { useGesture } from "@use-gesture/react";
+import BoopedItem from "../components/BoopedItem";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -239,84 +240,68 @@ const Home = (props: {
                     </p>
                 </div>
                 <Music tracks={props.tracks} refreshed={props.refreshed} />
-                <div className="flex items-center justify-start">
-                    <h1 className="normal text-xl leading-none sm:text-4xl">
-                        Things I love
-                    </h1>
-                </div>
-                <BoopedItem />
-
+                <Art />
                 <Footer year={2022} />
             </Layout>
         </>
     );
 };
 
-const BoopedItem = () => {
-    const [booped, setBooped] = useState(false);
-    const [styles, api] = useSpring(() => ({
-        x: 0,
-        y: 0,
-        transform: "rotate(0deg)",
-        config: { mass: 1, tension: 180, friction: 16 },
-    }));
-
-    const bind: any = useGesture({
-        onHover: () => {
-            api.start({
-                x: 0,
-                y: -160,
-                transform: "scale(0.95)",
-            });
-        },
-        onMouseLeave: () => {
-            api.start({
-                x: 0,
-                y: 0,
-                transform: "scale(1)",
-            });
-        },
-    });
-
-    return (
-        <div className="mt-10 flex">
-            <div
-                {...bind()}
-                className="group relative h-[250px] w-[250px] overflow-hidden rounded-lg bg-slate-200 text-center shadow-inner"
-            >
-                <animated.div style={styles} className="mt-[20px]">
-                    <Image
-                        className="rounded-lg transition duration-500 group-hover:opacity-60"
-                        alt="test"
-                        src="/assets/me.jpg"
-                        width={210}
-                        height={210}
-                    />
-                    <div className="flex justify-center">
-                        <div className="absolute top-[260px] w-[210px] pt-0">
-                            <p className="truncate pt-2 text-left text-lg font-bold">
-                                Astronaut
-                            </p>
-                            <p className="truncate text-left text-base font-thin">
-                                Blender3D
-                            </p>
-                            <p
-                                className="truncate bg-gradient-to-br from-orange-500 to-pink-500 bg-clip-text
-                                text-left font-mono text-base font-thin text-transparent"
-                            >
-                                Instagram
-                            </p>
-                        </div>
-                    </div>
-                </animated.div>
-            </div>
-        </div>
-    );
-};
-
-const squareVariants = {
+const fadeInVariants = {
     visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
     hidden: { opacity: 0, scale: 0.8 },
+};
+
+export const Art = () => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        }
+    }, [controls, inView]);
+
+    return (
+        <motion.div
+            animate={controls}
+            initial="hidden"
+            variants={fadeInVariants}
+        >
+            <div className="flex items-center justify-start">
+                <h1 className="normal text-xl leading-none sm:text-4xl">
+                    Things I love
+                </h1>
+            </div>
+            <div
+                ref={ref}
+                className="mt-8 grid grid-rows-3 justify-center gap-4 sm:grid-cols-3 sm:grid-rows-1"
+            >
+                <BoopedItem
+                    href="/assets/Day91.png"
+                    title="Day 91"
+                    subtitle="Daily Art"
+                    type="Blender3D"
+                    source="https://www.instagram.com/p/CPyES_kBhVQ/"
+                />
+                <BoopedItem
+                    href="/assets/Day88.png"
+                    title="Day 88"
+                    subtitle="Daily Art"
+                    type="Blender3D"
+                    source="https://www.instagram.com/p/CPK9v2VhphV/"
+                />
+                <BoopedItem
+                    href="/assets/Day100.png"
+                    title="Day 100"
+                    subtitle="Daily Art"
+                    type="Blender3D"
+                    source="https://www.instagram.com/p/CR_G-qwsMhL/"
+                />
+            </div>
+            <div className=" h-10 w-full bg-transparent"></div>
+        </motion.div>
+    );
 };
 
 const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
@@ -335,7 +320,7 @@ const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
         <motion.div
             animate={controls}
             initial="hidden"
-            variants={squareVariants}
+            variants={fadeInVariants}
         >
             <div className={classNames("z-50 mt-24 mb-10")}>
                 <div className="flex items-center justify-between">
@@ -360,12 +345,15 @@ const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
                         Uhr
                     </p>
                 </div>
-                <div className="mt-8 grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1">
+                <div
+                    ref={ref}
+                    className="mt-8 grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1"
+                >
                     {props.tracks.slice(0, 4).map((track: ITrack, index) => (
                         <Track key={index} track={track} />
                     ))}
                 </div>
-                <div ref={ref} className=" h-10 w-full bg-transparent"></div>
+                <div className=" h-10 w-full bg-transparent"></div>
             </div>
         </motion.div>
     );
