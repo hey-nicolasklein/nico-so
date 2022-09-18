@@ -35,6 +35,8 @@ import Zoomed from "../components/Zoomed";
 import { animated, useSpring } from "react-spring";
 import { useGesture } from "@use-gesture/react";
 import BoopedItem from "../components/BoopedItem";
+import profilePic from "../public/assets/me.jpg";
+import MediaType from "../interfaces/IMediaType";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -119,10 +121,13 @@ const Home = (props: {
                                 <Wobbly factor={5}>
                                     <a href="https://www.instagram.com/hey.nicolasklein/">
                                         <Image
-                                            src="/assets/me.jpg"
+                                            src={profilePic}
                                             alt="SVG mit img laden"
                                             width="200"
                                             height="200"
+                                            placeholder="blur"
+                                            quality={50}
+                                            priority
                                             className="mr-3 mb-5 rounded-full transition duration-500 ease-in-out sm:visible sm:mb-0"
                                         />
                                     </a>
@@ -268,10 +273,13 @@ export const Art = () => {
             initial="hidden"
             variants={fadeInVariants}
         >
-            <div className="flex items-center justify-start">
+            <div className="flex items-center justify-between">
                 <h1 className="normal text-xl leading-none sm:text-4xl">
                     Things I love
                 </h1>
+                <div className="pr-4">
+                    <Link href="link">More curiosities</Link>
+                </div>
             </div>
             <div
                 ref={ref}
@@ -281,22 +289,25 @@ export const Art = () => {
                     href="/assets/Day91.png"
                     title="Day 91"
                     subtitle="Daily Art"
-                    type="Blender3D"
+                    createdWith="Blender3D"
                     source="https://www.instagram.com/p/CPyES_kBhVQ/"
+                    type={MediaType.Artwork}
                 />
                 <BoopedItem
                     href="/assets/Day88.png"
                     title="Day 88"
                     subtitle="Daily Art"
-                    type="Blender3D"
+                    createdWith="Blender3D"
                     source="https://www.instagram.com/p/CPK9v2VhphV/"
+                    type={MediaType.Artwork}
                 />
                 <BoopedItem
-                    href="/assets/Day100.png"
+                    href="/assets/drake.jpg"
                     title="Day 100"
                     subtitle="Daily Art"
-                    type="Blender3D"
+                    createdWith="Blender3D"
                     source="https://www.instagram.com/p/CR_G-qwsMhL/"
+                    type={MediaType.Music}
                 />
             </div>
             <div className=" h-10 w-full bg-transparent"></div>

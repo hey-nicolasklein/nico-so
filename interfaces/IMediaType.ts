@@ -1,8 +1,8 @@
-interface IMediaType {
-    name: string;
-    url: string;
-    color1: string;
-    color2: string;
+enum MediaType {
+    Artwork,
+    Music,
+    Movie,
+    Other,
 }
 
-export default IMediaType;
+export default MediaType;
