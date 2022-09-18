@@ -37,6 +37,7 @@ import { useGesture } from "@use-gesture/react";
 import BoopedItem from "../components/BoopedItem";
 import profilePic from "../public/assets/me.jpg";
 import MediaType from "../interfaces/IMediaType";
+import Perspective from "../components/Perspecitive";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -117,7 +118,7 @@ const Home = (props: {
                         </div>
 
                         <div className="relative z-20 flex w-full flex-col items-center justify-center sm:flex-row">
-                            <Zoomed scale={1.1}>
+                            <Perspective>
                                 <Wobbly factor={5}>
                                     <a href="https://www.instagram.com/hey.nicolasklein/">
                                         <Image
@@ -132,35 +133,33 @@ const Home = (props: {
                                         />
                                     </a>
                                 </Wobbly>
-                            </Zoomed>
 
-                            <div className="ml-5">
-                                <h2 className="m-0 mb-2 mt-6 text-3xl font-normal sm:mt-0 sm:mb-2 sm:text-8xl">
-                                    Hey, I&apos;m
-                                </h2>
-                                <Zoomed scale={1.08} factor={2}>
+                                <div className="ml-5">
+                                    <h2 className="m-0 mb-2 mt-6 text-3xl font-normal sm:mt-0 sm:mb-2 sm:text-8xl">
+                                        Hey, I&apos;m
+                                    </h2>
                                     <Wobbly factor={2}>
                                         <h1 className="m-0 text-6xl font-bold sm:text-9xl">
                                             Nicolas
                                         </h1>
                                     </Wobbly>
-                                </Zoomed>
 
-                                <h3 className="m-0 hidden text-2xl font-normal sm:block sm:text-4xl">
-                                    Frontend developer by{" "}
-                                    <span className="dark:hidden">🖤</span>
-                                    <span className="hidden dark:inline-block">
-                                        🤍
-                                    </span>
-                                </h3>
-                                <h3 className="m-0 text-2xl font-normal sm:hidden sm:text-4xl">
-                                    Developer by{" "}
-                                    <span className="dark:hidden">🖤</span>
-                                    <span className="hidden dark:inline-block">
-                                        🤍
-                                    </span>
-                                </h3>
-                            </div>
+                                    <h3 className="m-0 hidden text-2xl font-normal sm:block sm:text-4xl">
+                                        Frontend developer by{" "}
+                                        <span className="dark:hidden">🖤</span>
+                                        <span className="hidden dark:inline-block">
+                                            🤍
+                                        </span>
+                                    </h3>
+                                    <h3 className="m-0 text-2xl font-normal sm:hidden sm:text-4xl">
+                                        Developer by{" "}
+                                        <span className="dark:hidden">🖤</span>
+                                        <span className="hidden dark:inline-block">
+                                            🤍
+                                        </span>
+                                    </h3>
+                                </div>
+                            </Perspective>
                         </div>
 
                         <div className="absolute bottom-20 flex w-full justify-center">
@@ -277,18 +276,15 @@ export const Art = () => {
                 <h1 className="normal text-xl leading-none sm:text-4xl">
                     Things I love
                 </h1>
-                <div className="pr-4">
-                    <Link href="link">More curiosities</Link>
-                </div>
             </div>
             <div
                 ref={ref}
-                className="mt-8 grid grid-rows-3 justify-center gap-4 sm:grid-cols-3 sm:grid-rows-1"
+                className=" mt-8 grid grid-rows-3 content-between items-center justify-center gap-4 sm:grid-cols-3 sm:grid-rows-1"
             >
                 <BoopedItem
                     href="/assets/Day91.png"
                     title="Day 91"
-                    subtitle="Daily Art"
+                    subtitle="Made during my 100days of art challenge."
                     createdWith="Blender3D"
                     source="https://www.instagram.com/p/CPyES_kBhVQ/"
                     type={MediaType.Artwork}
@@ -296,16 +292,16 @@ export const Art = () => {
                 <BoopedItem
                     href="/assets/Day88.png"
                     title="Day 88"
-                    subtitle="Daily Art"
+                    subtitle="Made during my 100days of art challenge."
                     createdWith="Blender3D"
                     source="https://www.instagram.com/p/CPK9v2VhphV/"
                     type={MediaType.Artwork}
                 />
                 <BoopedItem
                     href="/assets/drake.jpg"
-                    title="Day 100"
-                    subtitle="Daily Art"
-                    createdWith="Blender3D"
+                    title="Nothing was the same"
+                    subtitle="One of my favorite records of all time. Drake at his peak."
+                    createdWith="Music"
                     source="https://www.instagram.com/p/CR_G-qwsMhL/"
                     type={MediaType.Music}
                 />

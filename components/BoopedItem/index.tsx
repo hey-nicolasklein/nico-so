@@ -114,13 +114,13 @@ const BoopedItem = (props: {
                 </div>
 
                 <div className="flex justify-evenly">
-                    <div className="absolute top-[250px] w-[210px] pt-0">
+                    <div className="absolute top-[225px] w-[210px] pt-0">
                         <p className="truncate text-lg font-bold">
                             {props.title}
                         </p>
-                        <p className="truncate text-base font-thin">
+                        <div className=" text-base font-thin">
                             {props.subtitle}
-                        </p>
+                        </div>
                         <div className="flex flex-col items-center justify-center">
                             <div className="pt-7">
                                 <Zoomed>
