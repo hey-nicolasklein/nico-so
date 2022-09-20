@@ -2,7 +2,7 @@
 
 My personal website, written in ReactJS using the Next.JS framework. <br> The site is live at [nico.so](https://nico.so). <br> Animations have been made with FramerMotion and ReactSpring.
 The website utilizes the Spotify Api to show songs I've recently listened to. The raw-data can be accessed through
-the NextJS API entpoints `api/spotify/recent` or `api/spotify/top`.
+the NextJS API endpoints `api/spotify/recent` or `api/spotify/top`.
 
 ## Installation
 
@@ -25,7 +25,3 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
