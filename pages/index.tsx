@@ -145,7 +145,7 @@ const Home = (props: {
                             </div>
                             <div className="pb-48 md:pb-0">
                                 <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mt-0 sm:mb-2 sm:text-6xl">
-                                    Hey I'm
+                                    Hey I&apos;m
                                 </h2>
                                 <h1
                                     className="m-0 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text 
