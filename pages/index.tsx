@@ -37,6 +37,7 @@ import { useGesture } from "@use-gesture/react";
 import BoopedItem from "../components/BoopedItem";
 import profilePic from "../public/assets/me.jpg";
 import memoji from "../public/assets/memoji.png";
+import memojiDark from "../public/assets/memoji_dark.png";
 
 import MediaType from "../interfaces/IMediaType";
 import Perspective from "../components/Perspecitive";
@@ -85,18 +86,18 @@ const Home = (props: {
                         <div className="animate-pulse-slow-3">
                             <div
                                 style={{ filter: "saturate(2)" }}
-                                className=" dark:opacity-1000 absolute top-80 right-0 left-0 z-0 ml-auto mr-auto h-80 w-72 origin-center animate-spin-slow opacity-50"
+                                className=" dark:opacity-1000 top-90 absolute right-0 left-0 z-0 ml-auto mr-auto h-80 w-72 origin-center animate-spin-slow opacity-30 dark:opacity-50"
                             >
                                 <div
-                                    className="absolute -top-36 -left-36 h-96 w-96 animate-pulse-slow-3 rounded-full bg-primary-500 opacity-80"
+                                    className="absolute -top-36 -left-36 h-96 w-96 animate-pulse-slow-3 rounded-full bg-primary-500 opacity-90"
                                     style={{ filter: "blur(180px)" }}
                                 />
                                 <div
-                                    className="absolute top-36 -left-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-emerald-300 opacity-70"
+                                    className="absolute top-36 -left-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-emerald-300 opacity-80"
                                     style={{ filter: "blur(120px)" }}
                                 />
                                 <div
-                                    className="absolute top-12 left-44 h-72 w-72 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-50"
+                                    className="absolute top-12 left-44 h-72 w-72 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-60"
                                     style={{ filter: "blur(120px)" }}
                                 />
                             </div>
@@ -104,74 +105,54 @@ const Home = (props: {
 
                         <div
                             style={{ filter: "saturate(2)" }}
-                            className="dark:opacity-1000 absolute top-0 right-0 z-0 h-72 w-72 origin-center animate-spin-slow opacity-50"
+                            className="top-90 dark:opacity:50 absolute right-10 z-0 h-72 w-72 origin-center animate-spin-slow opacity-30 dark:opacity-80"
                         >
                             <div
-                                className="absolute -top-36 -right-36 h-96 w-96 animate-pulse-slow-7 rounded-full bg-orange-500 opacity-80"
+                                className="absolute -top-36 -right-36 h-96 w-96 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-90"
                                 style={{ filter: "blur(180px)" }}
                             />
                             <div
-                                className="absolute top-36 -right-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-primary-500 opacity-70"
+                                className="absolute top-36 -right-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-primary-500 opacity-80"
                                 style={{ filter: "blur(120px)" }}
                             />
                             <div
-                                className="absolute top-0 right-64 h-72 w-72 animate-pulse-slow-3 rounded-full bg-pink-500 opacity-50"
+                                className="absolute top-0 right-20 h-72 w-72 animate-pulse-slow-3 rounded-full bg-emerald-500 opacity-60"
                                 style={{ filter: "blur(120px)" }}
                             />
                         </div>
 
-                        <div className="absolute top-20 flex w-full justify-center sm:hidden">
-                            <Wobbly factor={5}>
-                                <a
-                                    href="https://www.instagram.com/hey.nicolasklein/"
-                                    className=""
-                                >
-                                    <Image
-                                        src={memoji}
-                                        alt="SVG mit img laden"
-                                        width="180"
-                                        height="180"
-                                        placeholder="blur"
-                                        quality={50}
-                                        priority
-                                        className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
-                                    />
-                                </a>
-                            </Wobbly>
-                        </div>
-
-                        <div className="relative z-20 flex h-full flex-col items-center justify-center sm:flex-row">
-                            <div className="hidden sm:block">
-                                <Wobbly factor={1}>
-                                    <a
-                                        href="https://www.instagram.com/hey.nicolasklein/"
-                                        className=""
-                                    >
-                                        <Image
-                                            src={memoji}
-                                            alt="SVG mit img laden"
-                                            width="250"
-                                            height="250"
-                                            placeholder="blur"
-                                            quality={50}
-                                            priority
-                                            className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
-                                        />
-                                    </a>
-                                </Wobbly>
+                        <div className="relative z-20 flex h-full flex-col items-center justify-center md:flex-row">
+                            <div className="">
+                                <Zoomed>
+                                    <Wobbly factor={1}>
+                                        <a
+                                            href="https://www.instagram.com/hey.nicolasklein/"
+                                            className=""
+                                        >
+                                            <Image
+                                                src={memoji}
+                                                alt="SVG mit img laden"
+                                                width="250"
+                                                height="250"
+                                                placeholder="blur"
+                                                quality={50}
+                                                priority
+                                                className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:mb-0"
+                                            />
+                                        </a>
+                                    </Wobbly>
+                                </Zoomed>
                             </div>
-                            <div className="ml-0">
+                            <div className="pb-48 md:pb-0">
                                 <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mt-0 sm:mb-2 sm:text-6xl">
                                     Hey I'm
                                 </h2>
-                                <Wobbly factor={2}>
-                                    <h1
-                                        className="m-0 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text 
+                                <h1
+                                    className="m-0 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text 
                                         text-6xl font-bold text-transparent sm:text-[130px]"
-                                    >
-                                        Nicolas
-                                    </h1>
-                                </Wobbly>
+                                >
+                                    Nicolas
+                                </h1>
 
                                 <h3 className="ml-2 hidden text-4xl font-normal opacity-80 sm:block sm:text-4xl">
                                     Frontend developer by{" "}
@@ -219,23 +200,26 @@ const Home = (props: {
                     <Heading>About me</Heading>
                 </div>
                 <div className="align-center mt-8 flex flex-col items-center sm:flex-row">
-                    <Wobbly factor={5}>
-                        <a
-                            href="https://www.instagram.com/hey.nicolasklein/"
-                            className=""
-                        >
-                            <Image
-                                src={profilePic}
-                                alt="SVG mit img laden"
-                                width="150"
-                                height="150"
-                                placeholder="blur"
-                                quality={50}
-                                priority
-                                className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
-                            />
-                        </a>
-                    </Wobbly>
+                    <Zoomed factor={2}>
+                        <Wobbly factor={4}>
+                            <a
+                                href="https://www.instagram.com/hey.nicolasklein/"
+                                className=""
+                            >
+                                <Image
+                                    src={profilePic}
+                                    alt="SVG mit img laden"
+                                    width="150"
+                                    height="150"
+                                    placeholder="blur"
+                                    quality={50}
+                                    priority
+                                    className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
+                                />
+                            </a>
+                        </Wobbly>
+                    </Zoomed>
+
                     <div className="mt-5 text-lg text-black dark:text-white sm:ml-10 sm:mt-0">
                         <p>
                             I am Nicolas, a 23 years old Software Engineer from
@@ -346,19 +330,16 @@ const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
         >
             <div className={classNames("z-50 mt-24 mb-10")}>
                 <div className="flex items-center justify-between">
-                    <Heading className="hidden sm:block">
-                        What I have been coding to
-                    </Heading>
-                    <Heading className="sm:hidden">Music I love</Heading>
+                    <Heading>Music I love</Heading>
 
-                    <div className="flex items-center">
+                    <div className="flex items-center opacity-50">
                         <a
                             href="https://open.spotify.com/user/funforstarax"
-                            className="mr-2 pb-1 opacity-30"
+                            className="mr-2 pb-1"
                         >
                             <BsSpotify size={20} />
                         </a>
-                        <p className="m-0 hidden p-0 pr-4 font-thin leading-none opacity-30 md:block">
+                        <p className="m-0 hidden p-0 pr-4 font-thin leading-none md:block">
                             last refreshed{" "}
                             {refreshed.toLocaleString({
                                 hour: "numeric",

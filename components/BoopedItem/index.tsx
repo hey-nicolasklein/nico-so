@@ -89,7 +89,7 @@ const BoopedItem = (props: {
             onClick={handleClick}
             className="dark:opacity-2 group relative flex h-[250px] w-[250px] 
             cursor-pointer flex-col justify-center overflow-hidden rounded-lg 
-            bg-slate-100 text-center shadow-inner first-line:h-[250px] dark:bg-slate-900 "
+            bg-slate-100 text-center shadow-inner first-line:h-[250px] dark:bg-[#08070C] "
         >
             {renderAnimatedVinyl()}
             <animated.div

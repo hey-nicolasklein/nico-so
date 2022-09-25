@@ -18,7 +18,7 @@ export default function Document() {
             </Head>
             <body
                 className="bg-grid-slate-400/[0.05] bg-grid-slate-900/[0.04] dark:bg-grid-slate-400/[0.05] bg-slate-50 
-             bg-bottom  bg-no-repeat dark:border-b dark:border-slate-100/5 dark:bg-[#0B1120] dark:bg-bottom"
+             bg-bottom  bg-no-repeat dark:border-b dark:border-slate-100/5 dark:bg-[#08070C] dark:bg-bottom"
             >
                 <Main />
                 <NextScript />
