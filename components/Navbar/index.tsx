@@ -2,8 +2,6 @@ import { animated, useSpring } from "@react-spring/web";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import useCheckMobileScreen from "../../hooks/useIsMobile";
-import useIsMobile from "../../hooks/useIsMobile";
 import { classNames } from "../../lib/tailwind";
 
 const Navbar = () => {

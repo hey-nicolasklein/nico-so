@@ -1,5 +1,6 @@
 // pages/_document.js
 import { Html, Head, Main, NextScript } from "next/document";
+import Navbar from "../components/Navbar";
 
 export default function Document() {
     return (
@@ -15,6 +16,7 @@ export default function Document() {
                     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap"
                     rel="stylesheet"
                 ></link>
+                <link rel="icon" href="/favicon.ico" />
             </Head>
             <body
                 className="bg-grid-slate-400/[0.05] bg-grid-slate-900/[0.04] dark:bg-grid-slate-400/[0.05] bg-slate-50 

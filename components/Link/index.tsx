@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-const Link = (props: { href: string; children?: any }) => {
+const Link = (props: {
+    href: string;
+    children?: any;
+    rotateAmmount?: "string";
+}) => {
     return (
         <a className="group" href={props.href} target="_blank" rel="noreferrer">
             <span

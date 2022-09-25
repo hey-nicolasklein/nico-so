@@ -41,7 +41,8 @@ import memojiDark from "../public/assets/memoji_dark.png";
 
 import MediaType from "../interfaces/IMediaType";
 import Perspective from "../components/Perspecitive";
-import Heading from "../components/Heading";
+import Heading, { HeadingDescription } from "../components/Heading";
+import BackgroundGrid from "../components/BackgroundGrid";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -77,7 +78,6 @@ const Home = (props: {
                     content="👋 Hey I%apos;m Nicolas a UX-Engineer from south-west Germany."
                 />
             </Head>
-
             <Navbar />
 
             <Layout>
@@ -199,7 +199,12 @@ const Home = (props: {
                 <div className="flex items-center justify-start">
                     <Heading>About me</Heading>
                 </div>
-                <div className="align-center mt-8 flex flex-col items-center sm:flex-row">
+                <div className="align-center relative mt-8 flex flex-col items-center sm:flex-row">
+                    <BackgroundGrid
+                        className="absolute top-20 right-0 left-0 z-0 flex items-center justify-center opacity-80"
+                        size="60%"
+                    />
+
                     <Zoomed factor={2}>
                         <Wobbly factor={4}>
                             <a
@@ -276,6 +281,13 @@ export const Art = () => {
             <div className="flex items-center justify-between">
                 <Heading>Things I love</Heading>
             </div>
+            <HeadingDescription className="opacity-1 mt-3">
+                My personal{" "}
+                <Link href="https://de.wikipedia.org/wiki/Wunderkammer">
+                    <i>cabinet of curiosities</i>
+                </Link>{" "}
+                with both digital and physical items in it.
+            </HeadingDescription>
             <div
                 ref={ref}
                 className=" mt-8 grid grid-rows-3 content-between items-center justify-center gap-4 sm:grid-cols-3 sm:grid-rows-1"
@@ -349,6 +361,9 @@ const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
                         </p>
                     </div>
                 </div>
+                <HeadingDescription className="mt-3">
+                    My most listened to songs in the last week on spotify.
+                </HeadingDescription>
                 <div
                     ref={ref}
                     className="mt-8 grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1"

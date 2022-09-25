@@ -10,4 +10,17 @@ const Heading = (props: { children: ReactNode; className?: string }) => {
     );
 };
 
+export const HeadingDescription = (props: {
+    children: ReactNode;
+    className?: string;
+}) => {
+    return (
+        <div className={props.className ?? ""}>
+            <h2 className="normal hidden text-lg font-normal leading-none text-white sm:block">
+                {props.children}
+            </h2>
+        </div>
+    );
+};
+
 export default Heading;
