@@ -70,7 +70,7 @@ export const getTopTracks = async () => {
 
     const { items } = await fetch(
         `${TOP_TRACKS_ENDPOINT}?${new URLSearchParams({
-            time_range: "short_term",
+            time_range: "medium_term",
             limit: "10",
         })}`,
         {

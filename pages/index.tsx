@@ -36,6 +36,8 @@ import { animated, useSpring } from "react-spring";
 import { useGesture } from "@use-gesture/react";
 import BoopedItem from "../components/BoopedItem";
 import profilePic from "../public/assets/me.jpg";
+import memoji from "../public/assets/memoji.png";
+
 import MediaType from "../interfaces/IMediaType";
 import Perspective from "../components/Perspecitive";
 
@@ -67,7 +69,7 @@ const Home = (props: {
         <>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
-                <title id="title">nicolas klein - nico.so</title>
+                <title id="title">nico.so</title>
                 <meta
                     name="Description"
                     content="👋 Hey I%apos;m Nicolas a UX-Engineer from south-west Germany."
@@ -117,52 +119,77 @@ const Home = (props: {
                             />
                         </div>
 
-                        <div className="relative z-20 flex w-full flex-col items-center justify-center sm:flex-row">
-                            <Perspective>
-                                <Wobbly factor={5}>
-                                    <a href="https://www.instagram.com/hey.nicolasklein/">
+                        <div className="absolute top-20 flex w-full justify-center sm:hidden">
+                            <Wobbly factor={5}>
+                                <a
+                                    href="https://www.instagram.com/hey.nicolasklein/"
+                                    className=""
+                                >
+                                    <Image
+                                        src={memoji}
+                                        alt="SVG mit img laden"
+                                        width="180"
+                                        height="180"
+                                        placeholder="blur"
+                                        quality={50}
+                                        priority
+                                        className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
+                                    />
+                                </a>
+                            </Wobbly>
+                        </div>
+
+                        <div className="relative z-20 flex h-full flex-col items-center justify-center sm:flex-row">
+                            <div className="hidden sm:block">
+                                <Wobbly factor={1}>
+                                    <a
+                                        href="https://www.instagram.com/hey.nicolasklein/"
+                                        className=""
+                                    >
                                         <Image
-                                            src={profilePic}
+                                            src={memoji}
                                             alt="SVG mit img laden"
-                                            width="200"
-                                            height="200"
+                                            width="250"
+                                            height="250"
                                             placeholder="blur"
                                             quality={50}
                                             priority
-                                            className="mr-3 mb-5 rounded-full transition duration-500 ease-in-out sm:visible sm:mb-0"
+                                            className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
                                         />
                                     </a>
                                 </Wobbly>
+                            </div>
+                            <div className="ml-0">
+                                <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mt-0 sm:mb-2 sm:text-6xl">
+                                    Hey I'm
+                                </h2>
+                                <Wobbly factor={2}>
+                                    <h1
+                                        className="m-0 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text 
+                                        text-6xl font-bold text-transparent sm:text-[130px]"
+                                    >
+                                        Nicolas
+                                    </h1>
+                                </Wobbly>
 
-                                <div className="ml-5">
-                                    <h2 className="m-0 mb-2 mt-6 text-3xl font-normal sm:mt-0 sm:mb-2 sm:text-8xl">
-                                        Hey, I&apos;m
-                                    </h2>
-                                    <Wobbly factor={2}>
-                                        <h1 className="m-0 text-6xl font-bold sm:text-9xl">
-                                            Nicolas
-                                        </h1>
-                                    </Wobbly>
-
-                                    <h3 className="m-0 hidden text-2xl font-normal sm:block sm:text-4xl">
-                                        Frontend developer by{" "}
-                                        <span className="dark:hidden">🖤</span>
-                                        <span className="hidden dark:inline-block">
-                                            🤍
-                                        </span>
-                                    </h3>
-                                    <h3 className="m-0 text-2xl font-normal sm:hidden sm:text-4xl">
-                                        Developer by{" "}
-                                        <span className="dark:hidden">🖤</span>
-                                        <span className="hidden dark:inline-block">
-                                            🤍
-                                        </span>
-                                    </h3>
-                                </div>
-                            </Perspective>
+                                <h3 className="ml-2 hidden text-4xl font-normal opacity-80 sm:block sm:text-4xl">
+                                    Frontend developer by{" "}
+                                    <span className="dark:hidden">🖤</span>
+                                    <span className="hidden dark:inline-block">
+                                        🤍
+                                    </span>
+                                </h3>
+                                <h3 className="m-0 text-3xl font-normal sm:hidden sm:text-4xl">
+                                    Developer by{" "}
+                                    <span className="dark:hidden">🖤</span>
+                                    <span className="hidden dark:inline-block">
+                                        🤍
+                                    </span>
+                                </h3>
+                            </div>
                         </div>
 
-                        <div className="absolute bottom-20 flex w-full justify-center">
+                        <div className="absolute bottom-32 flex w-full justify-center sm:bottom-20">
                             <IconContext.Provider
                                 value={{
                                     className:
@@ -188,61 +215,52 @@ const Home = (props: {
                     </div>
                 </div>
                 <div className="flex items-center justify-start">
-                    <h1 className="normal text-xl leading-none sm:text-4xl">
+                    <h1 className="normal text-2xl font-bold leading-none sm:text-4xl">
                         About me
                     </h1>
                 </div>
-                <div className="mt-8 text-lg text-black dark:text-white">
-                    <p>
-                        I am Nicolas, a 22 years old Software Engineer from
-                        Germany.<br></br> Currently I am building cross-platform
-                        Mobile-Experiences at{" "}
-                        <Link href="https://ergosign.de">Ergosign GmbH</Link>.
-                    </p>
-                    <p className="mt-6">
-                        In conjunction with my work at{" "}
-                        <Link href="https://ergosign.de">Ergosign</Link>, I am
-                        finishing my Master$apos;s degree in Computer Science at{" "}
-                        <Link href="https://htwsaar.de">HTW Saar</Link>.
-                    </p>
-                    <p className="mt-6">
-                        I love to develop native mobile experiences with{" "}
-                        <Link href="https://flutter.dev">Flutter</Link>.
-                        Offline-first, media playback and real-time
-                        synchronization are just some of the challenges
-                        I%apos;ve successfully faced with Flutter.
-                    </p>
-                    <p className="mt-6">
-                        My web stack includes{" "}
-                        <Link href="https://reactjs.org">React</Link> and{" "}
-                        <Link href="https://nextjs.org">Next.js</Link> - with a
-                        focus on strictly typed TypeScript. For the structured
-                        implementation of design systems I am skilled with{" "}
-                        <Link href="https://tailwindcss.com/">
-                            Tailwind CSS
-                        </Link>
-                        .
-                    </p>
-                    <p className="mt-6">
-                        Alongside the shindy frontend I have also experience
-                        with Backend technologies such as{" "}
-                        <Link href="https://dotnet.microsoft.com/">
-                            Microsoft dotNet
-                        </Link>{" "}
-                        and <Link href="https://appwrite.io/">Appwrite</Link>.
-                    </p>
-                    <p className="mt-6">
-                        Beyond programming, I have a passion for{" "}
-                        <Link href="https://www.instagram.com/hey.nicolasklein/">
-                            photography
-                        </Link>{" "}
-                        and{" "}
-                        <Link href="https://www.instagram.com/3d.nicolasklein/">
-                            digital art
-                        </Link>
-                        .
-                    </p>
+                <div className="align-center mt-8 flex flex-col items-center sm:flex-row">
+                    <Wobbly factor={5}>
+                        <a
+                            href="https://www.instagram.com/hey.nicolasklein/"
+                            className=""
+                        >
+                            <Image
+                                src={profilePic}
+                                alt="SVG mit img laden"
+                                width="150"
+                                height="150"
+                                placeholder="blur"
+                                quality={50}
+                                priority
+                                className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
+                            />
+                        </a>
+                    </Wobbly>
+                    <div className="mt-5 text-lg text-black dark:text-white sm:ml-10 sm:mt-0">
+                        <p>
+                            I am Nicolas, a 23 years old Software Engineer from
+                            Germany.<br></br> Currently I am building
+                            cross-platform Mobile-Experiences at{" "}
+                            <Link href="https://ergosign.de">
+                                Ergosign GmbH
+                            </Link>
+                            .
+                        </p>
+                        <p className="mt-2">
+                            Beyond programming, I have a passion for{" "}
+                            <Link href="https://www.instagram.com/hey.nicolasklein/">
+                                photography
+                            </Link>{" "}
+                            and{" "}
+                            <Link href="https://www.instagram.com/3d.nicolasklein/">
+                                digital art
+                            </Link>
+                            .
+                        </p>
+                    </div>
                 </div>
+
                 <Music tracks={props.tracks} refreshed={props.refreshed} />
                 <Art />
                 <Footer year={2022} />
