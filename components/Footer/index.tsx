@@ -4,20 +4,21 @@ import Link from "../Link";
 
 const Footer = (props: { year: number }) => {
     return (
-        <div className="w-full py-16">
-            <div className="gap4 xl:px0 mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-1">
-                <div>
-                    <h1 className="tex-tblack text-3xl leading-tight dark:text-white">
-                        Let&apos;s build a better future together!
-                    </h1>
-                    <p>
-                        Feel free to reach out to me over at {""}
-                        <Link href="mailto:hey@nico.so">hey@nico.so</Link>
-                    </p>
-                    <p className="mt-6 text-base text-black opacity-30 dark:text-white">
-                        © {2022} Nicolas Klein
-                    </p>
-                </div>
+        <div className="flex w-full flex-col justify-between py-8">
+            <div className="flex flex-col items-center">
+                <p className="text-base text-black opacity-30 dark:text-white">
+                    created with
+                </p>
+                <p>
+                    <Link href="https://nextjs.org">NextJS</Link>,{" "}
+                    <Link href="https://tailwindcss.com">Tailwind CSS</Link>,{" "}
+                    <Link href="https://react-spring.dev">ReactSpring</Link>
+                </p>
+            </div>
+            <div className="flex flex-col items-center pt-5">
+                <p className="text-base text-black opacity-30 dark:text-white">
+                    © {props.year} Nicolas Klein
+                </p>
             </div>
         </div>
     );
