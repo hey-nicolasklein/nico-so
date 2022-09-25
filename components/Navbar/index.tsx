@@ -40,7 +40,7 @@ const Navbar = () => {
                     isScrolled
                         ? " bg-white/80 shadow-2xl shadow-black/5 backdrop-blur-md backdrop-saturate-150 backdrop-filter dark:bg-gray-900/80 sm:bg-transparent sm:shadow-none sm:backdrop-filter-none"
                         : "bg-transparent hover:opacity-100 ",
-                    "fixed top-0 right-0 z-50 w-full py-6 px-6 transition-colors sm:w-fit"
+                    "fixed top-0 right-0 z-50 w-full py-4 px-6 transition-colors sm:w-fit"
                 )}
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
@@ -77,8 +77,8 @@ const NavItem = (props: { name: string }) => {
 const ContactButton = () => {
     return (
         <button
-            className="background	ml-5 rounded-lg border-2 border-solid border-black bg-transparent px-2.5 
-            py-2.5	text-xl	font-normal leading-none	text-black dark:border-white dark:text-white"
+            className="ml-5 rounded-lg border-2 border-solid border-black bg-transparent py-1 pb-1 pt-2 pl-2 pr-2 
+            text-lg	font-normal	leading-none text-black	opacity-90 dark:border-white dark:text-white"
             onClick={() =>
                 (window.location.href =
                     "mailto:hey@nico.so?subject=Hey&body=Let%20us%20talk%20:)")

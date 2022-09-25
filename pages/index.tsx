@@ -40,6 +40,7 @@ import memoji from "../public/assets/memoji.png";
 
 import MediaType from "../interfaces/IMediaType";
 import Perspective from "../components/Perspecitive";
+import Heading from "../components/Heading";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -215,9 +216,7 @@ const Home = (props: {
                     </div>
                 </div>
                 <div className="flex items-center justify-start">
-                    <h1 className="normal text-2xl font-bold leading-none sm:text-4xl">
-                        About me
-                    </h1>
+                    <Heading>About me</Heading>
                 </div>
                 <div className="align-center mt-8 flex flex-col items-center sm:flex-row">
                     <Wobbly factor={5}>
@@ -291,9 +290,7 @@ export const Art = () => {
             variants={fadeInVariants}
         >
             <div className="flex items-center justify-between">
-                <h1 className="normal text-xl leading-none sm:text-4xl">
-                    Things I love
-                </h1>
+                <Heading>Things I love</Heading>
             </div>
             <div
                 ref={ref}
@@ -349,26 +346,27 @@ const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
         >
             <div className={classNames("z-50 mt-24 mb-10")}>
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center justify-start">
+                    <Heading className="hidden sm:block">
+                        What I have been coding to
+                    </Heading>
+                    <Heading className="sm:hidden">Music I love</Heading>
+
+                    <div className="flex items-center">
                         <a
                             href="https://open.spotify.com/user/funforstarax"
-                            className="pb-2"
+                            className="mr-2 pb-1 opacity-30"
                         >
-                            <BsSpotify size={30} />
+                            <BsSpotify size={20} />
                         </a>
-                        <h1 className="normal pl-3 text-xl leading-none sm:text-4xl">
-                            What I have been coding to ...
-                        </h1>
+                        <p className="m-0 hidden p-0 pr-4 font-thin leading-none opacity-30 md:block">
+                            last refreshed{" "}
+                            {refreshed.toLocaleString({
+                                hour: "numeric",
+                                minute: "2-digit",
+                            })}
+                            Uhr
+                        </p>
                     </div>
-
-                    <p className="m-0 hidden p-0 pr-4 font-thin leading-none opacity-30 md:block">
-                        last refreshed{" "}
-                        {refreshed.toLocaleString({
-                            hour: "numeric",
-                            minute: "2-digit",
-                        })}
-                        Uhr
-                    </p>
                 </div>
                 <div
                     ref={ref}
