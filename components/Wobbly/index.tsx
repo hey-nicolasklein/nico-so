@@ -2,10 +2,12 @@ import { animated, useSpring } from "@react-spring/web";
 import { useGesture } from "@use-gesture/react";
 import { ReactNode, useEffect, useState } from "react";
 
-const Wobbly = (props: {
+interface Props {
     children: ReactNode;
     factor?: number;
-}): JSX.Element => {
+}
+
+const Wobbly: React.FC<Props> = (props: Props): JSX.Element => {
     const modifier = props.factor ?? 1;
 
     // Use Spring Hook to make Card "wiggly"

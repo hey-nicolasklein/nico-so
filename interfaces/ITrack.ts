@@ -1,7 +1,8 @@
-import IArtist from "./IArtist";
-
 interface ITrack {
-    artists: IArtist[];
+    artists: {
+        name: string;
+        url: string;
+    };
     url: string;
     cover: string;
     title: string;

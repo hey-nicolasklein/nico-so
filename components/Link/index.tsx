@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-
-const Link = (props: {
+interface Props {
     href: string;
     children?: any;
     rotateAmmount?: "string";
-}) => {
+}
+
+const Link: React.FC<Props> = ({ href, children, rotateAmmount }) => {
     return (
-        <a className="group" href={props.href} target="_blank" rel="noreferrer">
+        <a className="group" href={href} target="_blank" rel="noreferrer">
             <span
                 className="relative inline-block cursor-pointer 
             select-none bg-gradient-to-br from-emerald-500 to-green-300 
@@ -14,7 +14,7 @@ const Link = (props: {
             drop-shadow-xl transition group-hover:-translate-y-0.5 
             group-hover:-rotate-6 group-hover:scale-90"
             >
-                {props.children}
+                {children}
             </span>
         </a>
     );

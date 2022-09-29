@@ -1,39 +1,66 @@
 import ITrack from "../interfaces/ITrack";
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN;
 
 const REFRESH_ENDPOINT = "https://accounts.spotify.com/api/token";
 const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;
 const RECENT_TRACKS_ENTPOINT =
     "https://api.spotify.com/v1/me/player/recently-played";
 
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+const idAndSecretBase64 = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
+    "base64"
+);
 
+/**
+ * The return type of the {@constant REFRESH_ENDPOINT} route.
+ */
+interface RefreshResponse {
+    access_token: string;
+    token_type: string;
+    expires_in: string;
+    scope: string;
+}
+
+/**
+ * Converts the current millies to the format hh:mm
+ */
 const getDuration = (ms: number): string => {
     const minutes = Math.floor(ms / 60000);
     const seconds = ((ms % 60000) / 1000).toFixed(0);
     return `${minutes}:${seconds.length === 1 ? "0" : ""}${seconds}`;
 };
 
-const getAccessToken = async () => {
-    const response = await fetch(REFRESH_ENDPOINT, {
+/**
+ * Transacts the {@constant REFRESH_TOKEN} for an access-token
+ * as defined in the spotify developer docs.
+ */
+const getAccessToken = async (): Promise<RefreshResponse> => {
+    const response: Response = await fetch(REFRESH_ENDPOINT, {
         method: "POST",
         headers: {
-            Authorization: `Basic ${basic}`,
+            Authorization: `Basic ${idAndSecretBase64}`,
             "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
             grant_type: "refresh_token",
-            refresh_token,
+            refresh_token: REFRESH_TOKEN,
         }).toString(),
     });
 
-    return response.json();
+    let body: RefreshResponse = await response.json();
+
+    return body;
 };
 
-export const getRecentTracks = async () => {
+/**
+ * Fetches the most recently listened songs by the user, which is
+ * identified through {@constant REFRESH_TOKEN}.
+ *
+ * Limits the results to 10 by default.
+ */
+export const getRecentTracks = async (): Promise<ITrack[]> => {
     const { access_token } = await getAccessToken();
 
     const { items } = await fetch(
@@ -65,7 +92,14 @@ export const getRecentTracks = async () => {
     return tracks;
 };
 
-export const getTopTracks = async () => {
+/**
+ * Fetches the current top-tracks of the user, which is
+ * identified through {@constant REFRESH_TOKEN}.
+ *
+ * Uses the {medium_term} timerange by default.
+ * Limits the results to 10 by default.
+ */
+export const getTopTracks = async (): Promise<ITrack[]> => {
     const { access_token } = await getAccessToken();
 
     const { items } = await fetch(

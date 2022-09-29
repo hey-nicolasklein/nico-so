@@ -2,11 +2,13 @@ import { animated, useSpring } from "@react-spring/web";
 import { useGesture } from "@use-gesture/react";
 import { ReactNode, useEffect, useState } from "react";
 
-const Wiggle = (props: {
+interface Props {
     children: ReactNode;
     factor?: number;
-}): JSX.Element => {
-    const [isWiggling, setWiggling] = useState(false);
+}
+
+const Wiggle: React.FC<Props> = (props: Props): JSX.Element => {
+    const [isWiggling, setWiggling] = useState<boolean>(false);
 
     const [styles, api] = useSpring(() => ({
         x: 0,

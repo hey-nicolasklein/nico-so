@@ -1,10 +1,6 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import SayHello from "../components/SayHello";
-import Skills from "../components/Skills";
-import WhatIDo from "../components/WhatIDo/WhatIDo";
-import styles from "../styles/Home.module.css";
 import { DateTime, Interval } from "luxon";
 import Layout from "../components/Layout";
 import {
@@ -16,33 +12,18 @@ import {
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { getRecentTracks, getTopTracks } from "../lib/spotify";
-import Track from "../components/Track";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { useInViewport } from "react-in-viewport";
-import { classNames } from "../lib/tailwind";
-import { useAnimation, useMotionValue, useTransform } from "framer-motion";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import useIsMobile from "../hooks/useIsMobile";
 import ITrack from "../interfaces/ITrack";
 import Link from "../components/Link";
 import Footer from "../components/Footer";
 import Wobbly from "../components/Wobbly";
-import Pophead from "../components/Wiggle";
-import Wiggle from "../components/Wiggle";
 import Zoomed from "../components/Zoomed";
-import { animated, useSpring } from "react-spring";
-import { useGesture } from "@use-gesture/react";
-import BoopedItem from "../components/BoopedItem";
 import profilePic from "../public/assets/me.jpg";
 import memoji from "../public/assets/memoji.png";
-import memojiDark from "../public/assets/memoji_dark.png";
-
-import MediaType from "../interfaces/IMediaType";
-import Perspective from "../components/Perspecitive";
-import Heading, { HeadingDescription } from "../components/Heading";
+import Heading from "../components/Heading";
 import BackgroundGrid from "../components/BackgroundGrid";
+import RowArt from "../components/RowArt";
+import RowMusic from "../components/RowMusic";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -62,12 +43,14 @@ export const getStaticProps: GetStaticProps = async () => {
     };
 };
 
-const Home = (props: {
+interface Props {
     age: number;
     tracks: ITrack[];
     refreshed: number;
     year: number;
-}) => {
+}
+
+const Home: React.FC<Props> = (props: Props) => {
     return (
         <>
             <Head>
@@ -249,132 +232,11 @@ const Home = (props: {
                     </div>
                 </div>
 
-                <Music tracks={props.tracks} refreshed={props.refreshed} />
-                <Art />
+                <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
+                <RowArt />
                 <Footer year={2022} />
             </Layout>
         </>
-    );
-};
-
-const fadeInVariants = {
-    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
-    hidden: { opacity: 0, scale: 0.8 },
-};
-
-export const Art = () => {
-    const controls = useAnimation();
-    const [ref, inView] = useInView();
-
-    useEffect(() => {
-        if (inView) {
-            controls.start("visible");
-        }
-    }, [controls, inView]);
-
-    return (
-        <motion.div
-            animate={controls}
-            initial="hidden"
-            variants={fadeInVariants}
-        >
-            <div className="flex items-center justify-between">
-                <Heading>Things I love</Heading>
-            </div>
-            <HeadingDescription className="opacity-1 mt-3">
-                My personal{" "}
-                <Link href="https://de.wikipedia.org/wiki/Wunderkammer">
-                    <i>cabinet of curiosities</i>
-                </Link>{" "}
-                with both digital and physical items in it.
-            </HeadingDescription>
-            <div
-                ref={ref}
-                className=" mt-8 grid grid-rows-3 content-between items-center justify-center gap-4 sm:grid-cols-3 sm:grid-rows-1"
-            >
-                <BoopedItem
-                    href="/assets/Day91.png"
-                    title="Day 91"
-                    subtitle="Made during my 100days of art challenge."
-                    createdWith="Blender3D"
-                    source="https://www.instagram.com/p/CPyES_kBhVQ/"
-                    type={MediaType.Artwork}
-                />
-                <BoopedItem
-                    href="/assets/Day88.png"
-                    title="Day 88"
-                    subtitle="Made during my 100days of art challenge."
-                    createdWith="Blender3D"
-                    source="https://www.instagram.com/p/CPK9v2VhphV/"
-                    type={MediaType.Artwork}
-                />
-                <BoopedItem
-                    href="/assets/drake.jpg"
-                    title="Nothing was the same"
-                    subtitle="One of my favorite records of all time. Drake at his peak."
-                    createdWith="Music"
-                    source="https://www.instagram.com/p/CR_G-qwsMhL/"
-                    type={MediaType.Music}
-                />
-            </div>
-            <div className=" h-10 w-full bg-transparent"></div>
-        </motion.div>
-    );
-};
-
-const Music = (props: { tracks: ITrack[]; refreshed: number }) => {
-    const refreshed = DateTime.fromMillis(props.refreshed);
-
-    const controls = useAnimation();
-    const [ref, inView] = useInView();
-
-    useEffect(() => {
-        if (inView) {
-            controls.start("visible");
-        }
-    }, [controls, inView]);
-
-    return (
-        <motion.div
-            animate={controls}
-            initial="hidden"
-            variants={fadeInVariants}
-        >
-            <div className={classNames("z-50 mt-24 mb-10")}>
-                <div className="flex items-center justify-between">
-                    <Heading>Music I love</Heading>
-
-                    <div className="flex items-center opacity-50">
-                        <a
-                            href="https://open.spotify.com/user/funforstarax"
-                            className="mr-2 pb-1"
-                        >
-                            <BsSpotify size={20} />
-                        </a>
-                        <p className="m-0 hidden p-0 pr-4 font-thin leading-none md:block">
-                            last refreshed{" "}
-                            {refreshed.toLocaleString({
-                                hour: "numeric",
-                                minute: "2-digit",
-                            })}
-                            Uhr
-                        </p>
-                    </div>
-                </div>
-                <HeadingDescription className="mt-3">
-                    My most listened to songs in the last week on spotify.
-                </HeadingDescription>
-                <div
-                    ref={ref}
-                    className="mt-8 grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1"
-                >
-                    {props.tracks.slice(0, 4).map((track: ITrack, index) => (
-                        <Track key={index} track={track} />
-                    ))}
-                </div>
-                <div className=" h-10 w-full bg-transparent"></div>
-            </div>
-        </motion.div>
     );
 };
 
