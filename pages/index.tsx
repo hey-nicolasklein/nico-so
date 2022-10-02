@@ -24,6 +24,8 @@ import Heading from "../components/Heading";
 import BackgroundGrid from "../components/BackgroundGrid";
 import RowArt from "../components/RowArt";
 import RowMusic from "../components/RowMusic";
+import MotionNavbar from "../components/MotionNavbar";
+import CV from "../components/CV";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -61,9 +63,10 @@ const Home: React.FC<Props> = (props: Props) => {
                     content="👋 Hey I%apos;m Nicolas a UX-Engineer from south-west Germany."
                 />
             </Head>
-            <Navbar />
 
             <Layout>
+                <MotionNavbar />
+
                 <div className="relative flex min-h-screen animate-fade-in-up items-center">
                     <div className="w-full">
                         <div className="animate-pulse-slow-3">
@@ -137,7 +140,7 @@ const Home: React.FC<Props> = (props: Props) => {
                                     Nicolas
                                 </h1>
 
-                                <h3 className="ml-2 hidden text-4xl font-normal opacity-80 sm:block sm:text-4xl">
+                                <h3 className="ml-2 hidden text-4xl font-normal opacity-90 sm:block sm:text-4xl">
                                     Frontend developer by{" "}
                                     <span className="dark:hidden">🖤</span>
                                     <span className="hidden dark:inline-block">
@@ -231,7 +234,7 @@ const Home: React.FC<Props> = (props: Props) => {
                         </p>
                     </div>
                 </div>
-
+                <CV />
                 <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
                 <RowArt />
                 <Footer year={2022} />

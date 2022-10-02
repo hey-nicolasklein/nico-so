@@ -16,7 +16,7 @@ export const HeadingDescription = (props: {
 }) => {
     return (
         <div className={props.className ?? ""}>
-            <h2 className="normal hidden text-lg font-normal leading-none text-white sm:block">
+            <h2 className="normal hidden text-lg font-normal leading-none text-black dark:text-white sm:block">
                 {props.children}
             </h2>
         </div>

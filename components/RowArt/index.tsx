@@ -30,7 +30,7 @@ const RowArt: React.FC = () => {
             <div className="flex items-center justify-between">
                 <Heading>Things I love</Heading>
             </div>
-            <HeadingDescription className="opacity-1 mt-3">
+            <HeadingDescription className="opacity-1 dark:font-white mt-3 font-black">
                 My personal{" "}
                 <Link href="https://de.wikipedia.org/wiki/Wunderkammer">
                     <i>cabinet of curiosities</i>

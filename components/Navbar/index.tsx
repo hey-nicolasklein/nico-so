@@ -52,6 +52,9 @@ const Navbar = () => {
                         height="50"
                         className="inline-block dark:invert"
                     />
+                    <div className="flex">
+                        <NavItem name="Art"></NavItem>
+                    </div>
                     <ContactButton />
                 </div>
             </animated.div>
@@ -67,7 +70,7 @@ const NavItem = (props: { name: string }) => {
                 "hidden px-10 py-6 text-2xl leading-none text-gray-700 dark:text-white sm:block"
             }
         >
-            {props.name}
+            'Hi'
         </a>
     );
 };
