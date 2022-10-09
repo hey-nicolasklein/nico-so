@@ -13,7 +13,7 @@ const CV = () => {
 
     return (
         <div className="mt-24 mb-10">
-            <div className="flex justify-between gap-x-10">
+            <div className="flex flex-col justify-between gap-x-10 gap-y-10 md:flex-row md:gap-y-0">
                 <CVElement
                     heading="Education"
                     entries={cvItems.education}
@@ -44,38 +44,32 @@ const CVElement = (props: {
     icon: IconType;
 }) => {
     return (
-        <div className="grow">
+        <div className="">
             <div className="flex">
-                <Heading className="mb-5 flex">{props.heading}</Heading>
+                <Heading className="mb-8 flex">{props.heading}</Heading>
             </div>
-            <div className="flex">
-                <div className="flex flex-col">
-                    {props.entries.map((entry) => {
-                        const hoveredTitle = `${props.hovered.toLowerCase()}`;
-                        const currentEntryTitle = `${entry.title.toLowerCase()}`;
+            <div className="flex flex-col gap-y-8">
+                {props.entries.map((entry) => {
+                    const hoveredTitle = `${props.hovered.toLowerCase()}`;
+                    const currentEntryTitle = `${entry.title.toLowerCase()}`;
 
-                        const isHovered = hoveredTitle === currentEntryTitle;
+                    const isHovered = hoveredTitle === currentEntryTitle;
 
-                        if (isHovered) {
-                            console.log(
-                                hoveredTitle + " -- " + currentEntryTitle
-                            );
-                        }
+                    if (isHovered) {
+                        console.log(hoveredTitle + " -- " + currentEntryTitle);
+                    }
 
-                        return (
-                            <CVElementEntryComponent
-                                key={entry.title}
-                                entry={entry}
-                                onHoverStart={() =>
-                                    props.onHoverStart(entry.title)
-                                }
-                                onHoverEnd={() => props.onHoverEnd()}
-                                hovered={isHovered}
-                                icon={props.icon}
-                            />
-                        );
-                    })}
-                </div>
+                    return (
+                        <CVElementEntryComponent
+                            key={entry.title}
+                            entry={entry}
+                            onHoverStart={() => props.onHoverStart(entry.title)}
+                            onHoverEnd={() => props.onHoverEnd()}
+                            hovered={isHovered}
+                            icon={props.icon}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
@@ -92,10 +86,10 @@ const CVElementEntryComponent = (props: {
         <motion.div
             onHoverStart={props.onHoverStart}
             onHoverEnd={props.onHoverEnd}
-            className="pb-8"
+            className="md:pb-8"
         >
             <a href={props.entry.link} target="_blank" rel="noreferrer">
-                <div className="relative h-48">
+                <div className="relative md:h-48">
                     <div className="w-full pl-5">
                         <div className="mb-2 flex items-start">
                             <props.icon size={20} className="mt-1 mr-2" />
