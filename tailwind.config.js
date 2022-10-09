@@ -130,6 +130,7 @@ module.exports = {
                 orange: colors.orange,
                 pink: colors.pink,
                 slate: colors.slate,
+                background: "#08070b",
             },
         },
     },

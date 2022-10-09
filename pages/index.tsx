@@ -65,8 +65,6 @@ const Home: React.FC<Props> = (props: Props) => {
             </Head>
 
             <Layout>
-                <MotionNavbar />
-
                 <div className="relative flex min-h-screen animate-fade-in-up items-center">
                     <div className="w-full">
                         <div className="animate-pulse-slow-3">
@@ -187,7 +185,7 @@ const Home: React.FC<Props> = (props: Props) => {
                 </div>
                 <div className="align-center relative mt-8 flex flex-col items-center sm:flex-row">
                     <BackgroundGrid
-                        className="absolute top-20 right-0 left-0 z-0 flex items-center justify-center opacity-80"
+                        className="absolute top-20 right-0 left-0 -z-20 flex items-center justify-center opacity-80"
                         size="60%"
                     />
 

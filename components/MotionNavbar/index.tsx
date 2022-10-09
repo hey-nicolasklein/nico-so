@@ -24,7 +24,7 @@ const MotionNavbar = () => {
                     return (
                         <li key={page} className="">
                             <Link href={path} passHref>
-                                <a className=" relative border-0 opacity-100 duration-200 ease-in-out hover:opacity-100 focus:opacity-100">
+                                <a className=" relative border-0">
                                     <NavContainer
                                         onHoverStart={() => setHovered(page)}
                                         onHoverEnd={() => setHovered("")}
@@ -84,7 +84,7 @@ const NavHovered = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute top-[-13px] left-0 right-0 -z-10 rounded-xl bg-slate-200 p-[20px]"
+            className="absolute top-[-13px] left-0 right-0 -z-10 rounded-lg border-2 border-teal-300 pb-[15px] pt-[20px]"
         ></motion.span>
     );
 };

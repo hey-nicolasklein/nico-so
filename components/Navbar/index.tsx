@@ -70,7 +70,7 @@ const NavItem = (props: { name: string }) => {
                 "hidden px-10 py-6 text-2xl leading-none text-gray-700 dark:text-white sm:block"
             }
         >
-            'Hi'
+            Hi
         </a>
     );
 };
