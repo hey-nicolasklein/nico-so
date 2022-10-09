@@ -71,7 +71,7 @@ const BoopedItem = (props: {
                     className="absolute top-5 right-0 left-0 bottom-0 z-0 m-auto"
                 >
                     <Image
-                        className="group-hover:opacity-1 box-shadow-4xl rounded-lg  transition duration-1000"
+                        className="box-shadow-4xl rounded-lg dark:invert"
                         alt="test"
                         src="/assets/vinyl.png"
                         width={100}
