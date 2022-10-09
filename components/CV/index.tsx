@@ -104,7 +104,7 @@ const CVElementEntryComponent = (props: {
                         <p className="mb-2 text-lg">{props.entry.time}</p>
                         <p className="opacity-90">{props.entry.description}</p>
                     </div>
-                    <div className="absolute -left-0 top-0 bottom-5 w-[5px] rounded-full bg-emerald-200 opacity-10"></div>
+                    <div className="absolute -left-0 top-0 bottom-5 w-[5px] rounded-full bg-gray-200 opacity-50 dark:opacity-10"></div>
                     <AnimatePresence>
                         {props.hovered && <CVElementEntryHovered />}
                     </AnimatePresence>
