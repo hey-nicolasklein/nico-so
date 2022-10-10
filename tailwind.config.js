@@ -46,6 +46,8 @@ module.exports = {
                 "scale-in": "scale 1s ease-in-out",
                 "twist-in": "twist-in 1s ease-in-out",
                 "fade-in-up": "fade-in-up 2000ms ease-in-out",
+                rotations: "rotations 120s linear infinite",
+                rotationsRev: "rotationsRev 120s linear infinite",
             },
             keyframes: {
                 sideways: {
@@ -102,6 +104,16 @@ module.exports = {
                     },
                     "100%": {
                         transform: "rotate(0)",
+                    },
+                },
+                rotations: {
+                    to: {
+                        transform: "rotate(360deg)",
+                    },
+                },
+                rotationsRev: {
+                    to: {
+                        transform: "rotate(-360deg)",
                     },
                 },
             },

@@ -24,8 +24,10 @@ import Heading from "../components/Heading";
 import BackgroundGrid from "../components/BackgroundGrid";
 import RowArt from "../components/RowArt";
 import RowMusic from "../components/RowMusic";
-import MotionNavbar from "../components/MotionNavbar";
 import CV from "../components/CV";
+import Skills from "../components/Skills";
+import Perspective from "../components/Perspecitive";
+import Wiggle from "../components/Wiggle";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -233,6 +235,7 @@ const Home: React.FC<Props> = (props: Props) => {
                     </div>
                 </div>
                 <CV />
+                <Skills />
                 <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
                 <RowArt />
                 <Footer year={2022} />
