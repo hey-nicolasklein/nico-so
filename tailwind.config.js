@@ -144,6 +144,9 @@ module.exports = {
                 slate: colors.slate,
                 background: "#08070b",
             },
+            backgroundImage: {
+                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+            },
         },
     },
     plugins: [],
