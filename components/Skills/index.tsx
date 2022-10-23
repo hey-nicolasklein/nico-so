@@ -17,6 +17,7 @@ import { IconContext, IconType } from "react-icons";
 import Zoomed from "../Zoomed";
 import Skill from "./Skill";
 import BackgroundGrid from "../BackgroundGrid";
+import AnimateInView from "../AnimateInView";
 
 interface ISkillElement {
     title: string;
@@ -58,7 +59,7 @@ const Skills = () => {
     ];
 
     return (
-        <div>
+        <AnimateInView>
             <Heading>Skills</Heading>
             <div className="relative flex justify-center p-20">
                 <div className="relative">
@@ -138,8 +139,8 @@ const Skills = () => {
                             <div className="absolute top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[145px] opacity-10 "></div>
                         </div>
                     </div>
-                    <div className="pointer-events-none relative h-[380px] w-[380px] animate-rotationsRev">
-                        <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[240px] opacity-10"></div>
+                    <div className="pointer-events-none relative h-[380px] w-[380px] animate-rotationsRev rounded-full ">
+                        <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[220px] opacity-10"></div>
                         <Skill
                             className="pointer-events-auto absolute top-[5px] left-[35px]"
                             IconData={SiFigma}
@@ -178,7 +179,7 @@ const Skills = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </AnimateInView>
     );
 };
 
@@ -192,10 +193,20 @@ const SelectedInformation = (props: { element: ISkillElement }) => {
         >
             <div className="flex flex-col items-center justify-center">
                 <IconContext.Provider value={{}}>
-                    <props.element.icon
-                        size={50}
-                        className="white"
-                    ></props.element.icon>
+                    <motion.div
+                        initial={{
+                            opacity: 0,
+                            rotate: 20,
+                        }}
+                        animate={{ opacity: 1, rotate: 0 }}
+                        exit={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <props.element.icon
+                            size={50}
+                            className="white"
+                        ></props.element.icon>
+                    </motion.div>
                 </IconContext.Provider>
 
                 <p className="max-w-[100px] pt-1 text-center font-light text-black dark:text-white">

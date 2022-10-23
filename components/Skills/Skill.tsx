@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { IconType } from "react-icons";
 import styles from "../../styles/components/Skill.module.css";
@@ -39,12 +40,17 @@ const Skill = ({
             className={`z-20 ${className}`}
         >
             <Zoomed>
-                <div
+                <motion.div
+                    initial={{
+                        scale: 1,
+                    }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.5 }}
                     className="
 absolute top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full bg-gradient-to-br from-emerald-500 to-green-300 p-[20px] drop-shadow-2xl duration-300 ease-in-out"
                 >
                     <IconData size={small ? 30 : 50}></IconData>
-                </div>
+                </motion.div>
             </Zoomed>
         </div>
     );

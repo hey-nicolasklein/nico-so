@@ -28,6 +28,7 @@ import CV from "../components/CV";
 import Skills from "../components/Skills";
 import Perspective from "../components/Perspecitive";
 import Wiggle from "../components/Wiggle";
+import SayHello from "../components/SayHello";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -238,6 +239,7 @@ const Home: React.FC<Props> = (props: Props) => {
                 <Skills />
                 <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
                 <RowArt />
+                <SayHello />
                 <Footer year={2022} />
             </Layout>
         </>

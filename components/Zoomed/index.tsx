@@ -18,16 +18,12 @@ const Zoomed = (props: {
         config: { mass: 1, tension: 300, friction: 10 * modifier },
     }));
 
-    const [isHovered, setHovered] = useState(false);
-
     // Use Gesture Hook to keep track of mouse movement velocity
     const bind: any = useGesture({
         onHover: () => {
-            setHovered(true);
             api.start({ transform: `rotate(2deg) scale(${modifierScale})` });
         },
         onMouseLeave: () => {
-            setHovered(false);
             api.start({ transform: "rotate(0deg) scale(1)" });
         },
     });
