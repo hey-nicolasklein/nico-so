@@ -61,7 +61,7 @@ const Skills = () => {
     return (
         <AnimateInView>
             <Heading>Skills</Heading>
-            <div className="relative m-10 mb-0 flex justify-center">
+            <div className="relative flex justify-center">
                 <div className="relative">
                     <div className=" absolute top-[50%] left-[50%] -z-50 h-[270px] w-[270px] -translate-x-2/4 -translate-y-2/4  rounded-full bg-gradient-radial from-emerald-300 via-transparent blur-xl drop-shadow-4xl"></div>
                     <div className="absolute top-[50%] left-[50%] z-40 -translate-x-2/4 -translate-y-2/4">
