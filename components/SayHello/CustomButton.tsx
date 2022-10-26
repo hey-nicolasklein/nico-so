@@ -6,7 +6,7 @@ import Perspective from "../Perspecitive";
 import Wobbly from "../Wobbly";
 import Zoomed from "../Zoomed";
 import { FiGithub } from "react-icons/fi";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiFillMessage, AiOutlineArrowRight } from "react-icons/ai";
 
 const CustomButton = (props: {
     secondary: boolean;
@@ -28,15 +28,20 @@ const CustomButton = (props: {
         ref: buttonSpringRef,
         from: {
             scale: 1,
-            x: -10,
+            x: 0,
         },
         config: { mass: 1, tension: 100, friction: 10 },
     }));
 
+    const widthStyle = useSpring({
+        config: { mass: 1, tension: 200, friction: 10 },
+        display: isShown ? "none" : "block",
+    });
+
     useChain([iconSpringRef, buttonSpringRef]);
 
     const stylesGithubIcon = useSpring({
-        config: { mass: 1, tension: 200, friction: 10 },
+        config: { mass: 1, tension: 100, friction: 10 },
         opacity: isShown ? 1 : 0,
         scale: isShown ? 1.2 : 1,
     });
@@ -51,8 +56,8 @@ const CustomButton = (props: {
             setShown(true);
             apiButton.start({
                 to: {
-                    scale: 1.0,
-                    x: 2,
+                    scale: 1.05,
+                    x: 0,
                 },
             });
         },
@@ -61,7 +66,7 @@ const CustomButton = (props: {
             apiButton.start({
                 to: {
                     scale: 1,
-                    x: -15,
+                    x: 0,
                 },
             });
             hovered = false;
@@ -70,34 +75,55 @@ const CustomButton = (props: {
 
     if (props.secondary) {
         return (
-            <div className="flex items-center">
-                <animated.div style={stylesGithubIcon}>
-                    <FiGithub scale={20} />
-                </animated.div>
-                <animated.a
-                    href="https://github.com/hey-nicolasklein"
-                    target="_blank"
-                    className="p-2"
-                    {...bind()}
-                    style={stylesButton}
-                >
-                    <div className="flex">{props.title}</div>
-                </animated.a>
+            <div className="transtion group relative duration-200 hover:text-purple-700 dark:hover:text-purple-300">
+                <div className="flex items-center justify-center">
+                    <animated.a
+                        href="https://github.com/hey-nicolasklein"
+                        target="_blank"
+                        className="p-2"
+                        {...bind()}
+                        style={stylesButton}
+                    >
+                        <div className="flex">
+                            {props.title}
+
+                            <animated.div
+                                className="pl-2 pt-[2px]"
+                                style={stylesGithubIcon}
+                            >
+                                <FiGithub />
+                            </animated.div>
+                        </div>
+                    </animated.a>
+                </div>
+                <div
+                    className="absolute top-[50.0%] left-[50%] -z-10 block h-[5px] w-44 -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
+                    style={{ filter: "blur(20px)" }}
+                />
             </div>
         );
     }
 
     return (
-        <Zoomed>
-            <button
-                className="rounded-[30px] bg-white px-6 py-2 text-base text-black"
-                onClick={() =>
-                    (window.location.href =
-                        "mailto:hey@nico.so?subject=Hey&body=Let%20us%20talk%20:)")
-                }
-            >
-                {props.title}
-            </button>
+        <Zoomed factor={2} scale={1.05} rotate={-1}>
+            <div className="group relative w-[130px] rounded-[30px] bg-gradient-to-br from-emerald-500 to-green-300 p-[2px] hover:cursor-pointer">
+                <div
+                    className="transtion flex items-center justify-center rounded-[30px] bg-gradient-radial from-[#1c1c1c] to-[#08070C] pt-2 pb-2 text-base text-white duration-200 group-hover:text-emerald-200"
+                    onClick={() =>
+                        (window.location.href =
+                            "mailto:hey@nico.so?subject=Hey&body=Let%20us%20talk%20:)")
+                    }
+                >
+                    <AiFillMessage size={20} className="mr-2" />
+                    <div className="mt-1 text-sm leading-[8px]">
+                        {props.title}
+                    </div>
+                </div>
+                <div
+                    className="absolute top-[50.0%] left-[50%] -z-10 block h-[10px] w-[130px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
+                    style={{ filter: "blur(25px)" }}
+                ></div>
+            </div>
         </Zoomed>
     );
 };

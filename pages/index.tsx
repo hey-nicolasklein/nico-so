@@ -29,6 +29,7 @@ import Skills from "../components/Skills";
 import Perspective from "../components/Perspecitive";
 import Wiggle from "../components/Wiggle";
 import SayHello from "../components/SayHello";
+import CustomButton from "../components/SayHello/CustomButton";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getTopTracks();
@@ -155,6 +156,18 @@ const Home: React.FC<Props> = (props: Props) => {
                                         🤍
                                     </span>
                                 </h3>
+                                <div className="flex flex-col items-start justify-start gap-2 pt-4 pb-10 sm:flex-row sm:pl-2">
+                                    <CustomButton
+                                        title="Contact"
+                                        secondary={false}
+                                    />
+                                    <div className="hidden sm:block">
+                                        <CustomButton
+                                            title={"Go to my Github"}
+                                            secondary={true}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

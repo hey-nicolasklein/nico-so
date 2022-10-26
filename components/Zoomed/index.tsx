@@ -6,9 +6,11 @@ const Zoomed = (props: {
     children: ReactNode;
     factor?: number;
     scale?: number;
+    rotate?: number;
 }): JSX.Element => {
     const modifier = props.factor ?? 1;
     const modifierScale = props.scale ?? 1.08;
+    const rotateVal = props.rotate ?? 2;
 
     // Use Spring Hook to make Card "wiggly"
     const [styles, api] = useSpring(() => ({
@@ -21,7 +23,9 @@ const Zoomed = (props: {
     // Use Gesture Hook to keep track of mouse movement velocity
     const bind: any = useGesture({
         onHover: () => {
-            api.start({ transform: `rotate(2deg) scale(${modifierScale})` });
+            api.start({
+                transform: `rotate(${rotateVal}deg) scale(${modifierScale})`,
+            });
         },
         onMouseLeave: () => {
             api.start({ transform: "rotate(0deg) scale(1)" });
