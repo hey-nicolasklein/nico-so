@@ -61,7 +61,7 @@ const Skills = () => {
     return (
         <AnimateInView>
             <Heading>Skills</Heading>
-            <div className="relative flex justify-center p-20">
+            <div className="relative m-10 mb-0 flex justify-center">
                 <div className="relative">
                     <div className=" absolute top-[50%] left-[50%] -z-50 h-[270px] w-[270px] -translate-x-2/4 -translate-y-2/4  rounded-full bg-gradient-radial from-emerald-300 via-transparent blur-xl drop-shadow-4xl"></div>
                     <div className="absolute top-[50%] left-[50%] z-40 -translate-x-2/4 -translate-y-2/4">
@@ -108,10 +108,10 @@ const Skills = () => {
                         </Zoomed>
                     </div>
 
-                    <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4">
+                    <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 ">
                         <div className="relative h-[140px] w-[140px] animate-rotations">
                             <Skill
-                                className="absolute -top-[55px] -left-[15px]"
+                                className="absolute -top-[55px] -left-[90px]"
                                 IconData={SiFlutter}
                                 title="Flutter"
                                 setSelected={(title: string) => {
@@ -120,7 +120,7 @@ const Skills = () => {
                             ></Skill>
 
                             <Skill
-                                className="absolute bottom-[100px] -right-[75px]"
+                                className="absolute bottom-[160px] -right-[22px]"
                                 IconData={SiReact}
                                 title="React"
                                 setSelected={(title: string) => {
@@ -128,7 +128,7 @@ const Skills = () => {
                                 }}
                             ></Skill>
                             <Skill
-                                className="absolute -bottom-[70px] left-[20px]"
+                                className="absolute -bottom-[110px] left-[20px]"
                                 IconData={SiNextdotjs}
                                 title="NextJS"
                                 small
@@ -136,13 +136,13 @@ const Skills = () => {
                                     setSelected(title);
                                 }}
                             ></Skill>
-                            <div className="absolute top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[145px] opacity-10 "></div>
+                            <div className="absolute top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[150px] opacity-10 "></div>
                         </div>
                     </div>
-                    <div className="pointer-events-none relative h-[380px] w-[380px] animate-rotationsRev rounded-full ">
-                        <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[220px] opacity-10"></div>
+                    <div className="pointer-events-none relative h-[420px] w-[420px] animate-rotationsRev rounded-full  p-[300px]">
+                        <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[240px] opacity-10"></div>
                         <Skill
-                            className="pointer-events-auto absolute top-[5px] left-[35px]"
+                            className="pointer-events-auto absolute top-[70px] left-[90px]"
                             IconData={SiFigma}
                             title="Figma"
                             setSelected={(title: string) => {
@@ -150,7 +150,7 @@ const Skills = () => {
                             }}
                         ></Skill>
                         <Skill
-                            className="pointer-events-auto absolute top-[15px] right-[15px]"
+                            className="pointer-events-auto absolute top-[30px] right-[220px]"
                             IconData={SiDotnet}
                             small
                             title="Microsoft"
@@ -159,7 +159,7 @@ const Skills = () => {
                             }}
                         ></Skill>
                         <Skill
-                            className="pointer-events-auto absolute bottom-[30px] right-[5px]"
+                            className="pointer-events-auto absolute bottom-[300px] right-[25px]"
                             IconData={SiPostgresql}
                             small
                             title="Postgress"
@@ -168,7 +168,7 @@ const Skills = () => {
                             }}
                         ></Skill>
                         <Skill
-                            className="pointer-events-auto absolute bottom-[30px] left-[5px]"
+                            className="pointer-events-auto absolute bottom-[30px] left-[200px]"
                             IconData={SiAdobeillustrator}
                             title="Illustrator"
                             small

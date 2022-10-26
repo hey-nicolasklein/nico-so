@@ -66,7 +66,7 @@ const RowArt: React.FC = () => {
                     type={MediaType.Music}
                 />
             </div>
-            <div className=" h-10 w-full bg-transparent"></div>
+            <div className=" h-12 w-full bg-transparent"></div>
         </motion.div>
     );
 };

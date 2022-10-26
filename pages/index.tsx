@@ -110,7 +110,7 @@ const Home: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div className="relative z-20 flex h-full flex-col items-center justify-center md:flex-row">
-                            <div className="">
+                            <div className="pt-4 sm:p-0">
                                 <Zoomed>
                                     <Wobbly factor={1}>
                                         <a
@@ -227,9 +227,9 @@ const Home: React.FC<Props> = (props: Props) => {
 
                     <div className="mt-5 text-lg text-black dark:text-white sm:ml-10 sm:mt-0">
                         <p>
-                            I am Nicolas, a 23 years old Software Engineer from
-                            Germany.<br></br> Currently I am building
-                            cross-platform Mobile-Experiences at{" "}
+                            I am Nicolas, a {props.age} years old Software
+                            Engineer from Germany.<br></br> Currently I am
+                            building cross-platform Mobile-Experiences at{" "}
                             <Link href="https://ergosign.de">
                                 Ergosign GmbH
                             </Link>
@@ -253,7 +253,7 @@ const Home: React.FC<Props> = (props: Props) => {
                 <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
                 <RowArt />
                 <SayHello />
-                <Footer year={2022} />
+                <Footer year={props.year} />
             </Layout>
         </>
     );

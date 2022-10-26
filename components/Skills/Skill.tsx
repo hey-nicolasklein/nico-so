@@ -36,6 +36,7 @@ const Skill = ({
                 boxShadow: "inset -25px -15px 40px rgba(0,0,0,.3)",
                 animation: "inherit",
                 animationDirection: "reverse",
+                borderRadius: "999px",
             }}
             className={`z-20 ${className}`}
         >
@@ -47,7 +48,7 @@ const Skill = ({
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.5 }}
                     className="
-absolute top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full bg-gradient-to-br from-emerald-500 to-green-300 p-[20px] drop-shadow-2xl duration-300 ease-in-out"
+ top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full bg-gradient-to-br from-emerald-500 to-green-300 p-[20px] duration-300 ease-in-out"
                 >
                     <IconData size={small ? 30 : 50}></IconData>
                 </motion.div>

@@ -25,18 +25,13 @@ const SayHello = () => {
                     </p>
                     <div className="flex gap-4 pt-4">
                         <CustomButton secondary={false} title="CONTACT" />
-                        <CustomButton
-                            secondary={true}
-                            title="Go to my Github"
-                            icon={<AiOutlineArrowRight size={20} />}
-                        />
-                    </div>
-                    <div className="absolute right-10 top-0">
-                        <IconContext.Provider
-                            value={{ className: "text-white opacity-0" }}
-                        >
-                            <SiFlutter size={200}></SiFlutter>
-                        </IconContext.Provider>
+                        <div className="hidden sm:block">
+                            <CustomButton
+                                secondary={true}
+                                title="Go to my Github"
+                                icon={<AiOutlineArrowRight size={20} />}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

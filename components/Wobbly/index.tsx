@@ -32,7 +32,7 @@ const Wobbly: React.FC<Props> = (props: Props): JSX.Element => {
         api.start({ transform: "rotate(-1deg" });
 
         return () => clearTimeout(timeout);
-    }, [isHovered, api]);
+    }, [isHovered, api, modifier]);
 
     // Use Gesture Hook to keep track of mouse movement velocity
     const bind: any = useGesture({
