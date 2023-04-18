@@ -120,8 +120,6 @@ const Home: React.FC<Props> = (props: Props) => {
                                             <Image
                                                 src={memoji}
                                                 alt="SVG mit img laden"
-                                                width="250"
-                                                height="250"
                                                 placeholder="blur"
                                                 quality={50}
                                                 priority

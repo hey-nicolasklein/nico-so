@@ -8,6 +8,7 @@ import {
     SiFlutter,
     SiNextdotjs,
     SiPostgresql,
+    SiQt,
     SiReact,
 } from "react-icons/si";
 import Heading from "../Heading";
@@ -41,8 +42,8 @@ const Skills = () => {
             icon: SiNextdotjs,
         },
         {
-            title: "Illustrator",
-            icon: SiAdobeillustrator,
+            title: "Framework",
+            icon: SiQt,
         },
         {
             title: "Figma",
@@ -169,8 +170,8 @@ const Skills = () => {
                         ></Skill>
                         <Skill
                             className="pointer-events-auto absolute bottom-[30px] left-[200px]"
-                            IconData={SiAdobeillustrator}
-                            title="Illustrator"
+                            IconData={SiQt}
+                            title="Framework"
                             small
                             setSelected={(title: string) => {
                                 setSelected(title);

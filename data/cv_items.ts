@@ -17,17 +17,17 @@ const cvItems = {
     ],
     experience: [
         {
-            title: "Master Thesis @ Ergosign",
-            time: "2020 - now",
+            title: "UX Engineer @ Ergosign",
+            time: "2021 - now",
             description:
-                "Master Thesis in industry with focus on Flutter front-end development, real-time synchronization and user experience research. Technologies utilized included Flutter, Bloc, Bloc-Hydrated, Appwrite and Gitlab-CI.",
+                "As a UX Engineer I work side by side with UX Designers creating tailormade solutions. Lately Design Systems have been a big part of my work. Technologies utilized included Figma, Qt-Framework, Flutter, Appwrite and CI/CD through Gitlab-CI.",
             link: "https://www.ergosign.de/de/",
         },
         {
-            title: "UX Engineer @ Ergosign",
-            time: "2021 - 2022",
+            title: "Master Thesis @ Ergosign",
+            time: "2020-2021",
             description:
-                "Working student position in which I worked side by side with UX designers. Among others, I worked with the technologies REST, Postgres, Swagger, Entity Framework and Flutter Web.",
+                "Master Thesis in industry with focus on Flutter front-end development, real-time synchronization and user experience research. Technologies utilized included Flutter, Bloc, Bloc-Hydrated, Appwrite and Gitlab-CI.",
             link: "https://www.ergosign.de/de/",
         },
     ],

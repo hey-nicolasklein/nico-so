@@ -15,20 +15,20 @@ const CV = () => {
         <div className="mt-24 mb-10">
             <div className="flex flex-col justify-between gap-x-10 gap-y-10 md:flex-row md:gap-y-0">
                 <CVElement
-                    heading="Education"
-                    entries={cvItems.education}
-                    onHoverStart={(page: string) => setHovered(page)}
-                    onHoverEnd={() => setHovered("")}
-                    hovered={hovered}
-                    icon={BsFillSignpostSplitFill}
-                />
-                <CVElement
                     heading="Experience"
                     entries={cvItems.experience}
                     onHoverStart={(page: string) => setHovered(page)}
                     onHoverEnd={() => setHovered("")}
                     hovered={hovered}
                     icon={BiBuildings}
+                />
+                <CVElement
+                    heading="Education"
+                    entries={cvItems.education}
+                    onHoverStart={(page: string) => setHovered(page)}
+                    onHoverEnd={() => setHovered("")}
+                    hovered={hovered}
+                    icon={BsFillSignpostSplitFill}
                 />
             </div>
         </div>
