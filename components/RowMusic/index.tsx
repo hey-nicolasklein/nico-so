@@ -53,12 +53,11 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
                                 hour: "numeric",
                                 minute: "2-digit",
                             })}
-                            Uhr
                         </p>
                     </div>
                 </div>
                 <HeadingDescription className="mt-3">
-                    My most listened to songs in the last week on spotify.
+                    My most listened to songs in the last week on Spotify.
                 </HeadingDescription>
                 <div
                     ref={ref}

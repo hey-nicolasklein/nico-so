@@ -227,7 +227,7 @@ const Home: React.FC<Props> = (props: Props) => {
                         <p>
                             I am Nicolas, a {props.age} years old Software
                             Engineer from Germany.<br></br> Currently I am
-                            building cross-platform Mobile-Experiences at{" "}
+                            building Design Systems at{" "}
                             <Link href="https://ergosign.de">
                                 Ergosign GmbH
                             </Link>
