@@ -1,6 +1,6 @@
 import { animated, useSpring } from "@react-spring/web";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 import { classNames } from "../../lib/tailwind";
 

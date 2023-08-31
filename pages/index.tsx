@@ -12,7 +12,7 @@ import {
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { getRecentTracks, getTopTracks } from "../lib/spotify";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import ITrack from "../interfaces/ITrack";
 import Link from "../components/Link";
 import Footer from "../components/Footer";

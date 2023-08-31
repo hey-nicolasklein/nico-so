@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { BsPlay, BsTwitter } from "react-icons/bs";
 import ITrack from "../../interfaces/ITrack";
 import Zoomed from "../Zoomed";

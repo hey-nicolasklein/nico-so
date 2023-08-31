@@ -3,7 +3,7 @@ import styles from "../../styles/WhatIDo.module.css";
 import { AiFillDatabase, AiOutlineMobile } from "react-icons/ai";
 
 import Card from "../Card";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const WhatIDo = () => {
     return (

@@ -13,7 +13,7 @@ import {
 } from "react-icons/si";
 import Heading from "../Heading";
 import memoji from "../../public/assets/memoji_dark.png";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { IconContext, IconType } from "react-icons";
 import Zoomed from "../Zoomed";
 import Skill from "./Skill";
@@ -64,8 +64,8 @@ const Skills = () => {
             <Heading>Skills</Heading>
             <div className="relative flex justify-center">
                 <div className="relative">
-                    <div className=" absolute top-[50%] left-[50%] -z-50 h-[270px] w-[270px] -translate-x-2/4 -translate-y-2/4  rounded-full bg-gradient-radial from-emerald-300 via-transparent blur-xl drop-shadow-4xl"></div>
-                    <div className="absolute top-[50%] left-[50%] z-40 -translate-x-2/4 -translate-y-2/4">
+                    <div className=" absolute left-[50%] top-[50%] -z-50 h-[270px] w-[270px] -translate-x-2/4 -translate-y-2/4  rounded-full bg-gradient-radial from-emerald-300 via-transparent blur-xl drop-shadow-4xl"></div>
+                    <div className="absolute left-[50%] top-[50%] z-40 -translate-x-2/4 -translate-y-2/4">
                         <Zoomed>
                             <AnimatePresence>
                                 {selected != "" && (
@@ -79,7 +79,7 @@ const Skills = () => {
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             exit={{ opacity: 0 }}
-                                            className="absolute top-[50%] left-[50%] z-40 h-[150px] w-[150px] -translate-x-2/4 -translate-y-2/4 rounded-full backdrop-blur-lg"
+                                            className="absolute left-[50%] top-[50%] z-40 h-[150px] w-[150px] -translate-x-2/4 -translate-y-2/4 rounded-full backdrop-blur-lg"
                                         ></motion.div>
                                     </div>
                                 )}
@@ -90,18 +90,15 @@ const Skills = () => {
                                     boxShadow:
                                         "inset -25px -15px 40px rgba(0,0,0,.3)",
                                 }}
-                                className={`absolute top-[50.0%] left-[50%] h-[150px] w-[150px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-gradient-to-t from-transparent to-emerald-300`}
+                                className={`absolute left-[50%] top-[50.0%] h-[150px] w-[150px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-gradient-to-t from-transparent to-emerald-300`}
                             >
                                 <Image
                                     src={memoji}
                                     alt="SVG mit img laden"
-                                    layout="fill"
-                                    width="150"
-                                    height="150"
                                     placeholder="blur"
                                     quality={50}
                                     priority
-                                    className={`mr-20 mb-5 rounded-full p-0 transition duration-500 ease-in-out sm:mb-0 ${
+                                    className={`mb-5 mr-20 rounded-full p-0 transition duration-500 ease-in-out sm:mb-0 ${
                                         selected != "" ? "opacity-80" : ""
                                     }`}
                                 />
@@ -109,10 +106,10 @@ const Skills = () => {
                         </Zoomed>
                     </div>
 
-                    <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 ">
+                    <div className="absolute left-[50%] top-[50%] -translate-x-2/4 -translate-y-2/4 ">
                         <div className="relative h-[140px] w-[140px] animate-rotations">
                             <Skill
-                                className="absolute -top-[55px] -left-[90px]"
+                                className="absolute -left-[90px] -top-[55px]"
                                 IconData={SiFlutter}
                                 title="Flutter"
                                 setSelected={(title: string) => {
@@ -121,7 +118,7 @@ const Skills = () => {
                             ></Skill>
 
                             <Skill
-                                className="absolute bottom-[160px] -right-[22px]"
+                                className="absolute -right-[22px] bottom-[160px]"
                                 IconData={SiReact}
                                 title="React"
                                 setSelected={(title: string) => {
@@ -137,13 +134,13 @@ const Skills = () => {
                                     setSelected(title);
                                 }}
                             ></Skill>
-                            <div className="absolute top-[50%] left-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[150px] opacity-10 "></div>
+                            <div className="absolute left-[50%] top-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[150px] opacity-10 "></div>
                         </div>
                     </div>
                     <div className="pointer-events-none relative h-[420px] w-[420px] animate-rotationsRev rounded-full  p-[300px]">
-                        <div className="absolute top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[240px] opacity-10"></div>
+                        <div className="absolute left-[50%] top-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[240px] opacity-10"></div>
                         <Skill
-                            className="pointer-events-auto absolute top-[70px] left-[90px]"
+                            className="pointer-events-auto absolute left-[90px] top-[70px]"
                             IconData={SiFigma}
                             title="Figma"
                             setSelected={(title: string) => {
@@ -151,7 +148,7 @@ const Skills = () => {
                             }}
                         ></Skill>
                         <Skill
-                            className="pointer-events-auto absolute top-[30px] right-[220px]"
+                            className="pointer-events-auto absolute right-[220px] top-[30px]"
                             IconData={SiDotnet}
                             small
                             title="Microsoft"
@@ -190,7 +187,7 @@ const SelectedInformation = (props: { element: ISkillElement }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute top-[50%] left-[50%] z-50 -translate-x-2/4 -translate-y-2/4 text-xl"
+            className="absolute left-[50%] top-[50%] z-50 -translate-x-2/4 -translate-y-2/4 text-xl"
         >
             <div className="flex flex-col items-center justify-center">
                 <IconContext.Provider value={{}}>

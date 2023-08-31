@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import { animated, useSpring } from "react-spring";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Wobbly from "../Wobbly";
 import Zoomed from "../Zoomed";
 import MediaType from "../../interfaces/IMediaType";
