@@ -1,6 +1,6 @@
 import { animated, useSpring } from "@react-spring/web";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { classNames } from "../../lib/tailwind";
 
@@ -29,7 +29,7 @@ const Navbar = () => {
     return (
         <div>
             <div
-                className="fixed top-0 right-0 z-30 h-20 w-96"
+                className="fixed right-0 top-0 z-30 h-20 w-96"
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
             />
@@ -38,7 +38,7 @@ const Navbar = () => {
                     isScrolled
                         ? " bg-white/80 shadow-2xl shadow-black/5 backdrop-blur-md backdrop-saturate-150 backdrop-filter dark:bg-gray-900/80 sm:bg-transparent sm:shadow-none sm:backdrop-filter-none"
                         : "bg-transparent hover:opacity-100 ",
-                    "fixed top-0 right-0 z-50 w-full py-4 px-6 transition-colors sm:w-fit"
+                    "fixed right-0 top-0 z-50 w-full px-6 py-4 transition-colors sm:w-fit"
                 )}
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
@@ -78,7 +78,7 @@ const NavItem = (props: { name: string }) => {
 const ContactButton = () => {
     return (
         <button
-            className="ml-5 rounded-lg border-2 border-solid border-black bg-transparent py-1 pb-1 pt-2 pl-2 pr-2 
+            className="ml-5 rounded-lg border-2 border-solid border-black bg-transparent py-1 pb-1 pl-2 pr-2 pt-2 
             text-lg	font-normal	leading-none text-black	opacity-90 dark:border-white dark:text-white"
             onClick={() =>
                 (window.location.href =

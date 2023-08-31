@@ -1,5 +1,5 @@
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
@@ -15,7 +15,7 @@ const MotionNavbar = () => {
     }, [hovered]);
 
     return (
-        <div className="fixed top-0 right-0 z-30 h-20 pr-6">
+        <div className="fixed right-0 top-0 z-30 h-20 pr-6">
             <List>
                 {pages.map((page) => {
                     const path = `${page.toLowerCase()}`;
@@ -84,7 +84,7 @@ const NavHovered = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute top-[-13px] left-0 right-0 -z-10 rounded-lg border-2 border-teal-300 pb-[15px] pt-[20px]"
+            className="absolute left-0 right-0 top-[-13px] -z-10 rounded-lg border-2 border-teal-300 pb-[15px] pt-[20px]"
         ></motion.span>
     );
 };

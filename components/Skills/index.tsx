@@ -13,7 +13,7 @@ import {
 } from "react-icons/si";
 import Heading from "../Heading";
 import memoji from "../../public/assets/memoji_dark.png";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { IconContext, IconType } from "react-icons";
 import Zoomed from "../Zoomed";
 import Skill from "./Skill";
@@ -98,7 +98,8 @@ const Skills = () => {
                                     placeholder="blur"
                                     quality={50}
                                     priority
-                                    className={`mb-5 mr-20 rounded-full p-0 transition duration-500 ease-in-out sm:mb-0 ${
+                                    fill
+                                    className={`mb-5 mr-20 rounded-full object-cover p-0 transition duration-500 ease-in-out sm:mb-0 ${
                                         selected != "" ? "opacity-80" : ""
                                     }`}
                                 />

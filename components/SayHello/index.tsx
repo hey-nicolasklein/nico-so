@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import CustomButton from "./CustomButton";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { SiFlutter } from "react-icons/si";
 import { IconContext } from "react-icons";
 import Heading from "../Heading";

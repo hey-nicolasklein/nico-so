@@ -12,7 +12,7 @@ import {
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { getRecentTracks, getTopTracks } from "../lib/spotify";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import ITrack from "../interfaces/ITrack";
 import Link from "../components/Link";
 import Footer from "../components/Footer";
@@ -74,18 +74,18 @@ const Home: React.FC<Props> = (props: Props) => {
                         <div className="animate-pulse-slow-3">
                             <div
                                 style={{ filter: "saturate(2)" }}
-                                className=" dark:opacity-1000 top-90 absolute right-0 left-0 z-0 ml-auto mr-auto h-80 w-72 origin-center animate-spin-slow opacity-30 dark:opacity-50"
+                                className=" dark:opacity-1000 top-90 absolute left-0 right-0 z-0 ml-auto mr-auto h-80 w-72 origin-center animate-spin-slow opacity-30 dark:opacity-50"
                             >
                                 <div
-                                    className="absolute -top-36 -left-36 h-96 w-96 animate-pulse-slow-3 rounded-full bg-primary-500 opacity-90"
+                                    className="absolute -left-36 -top-36 h-96 w-96 animate-pulse-slow-3 rounded-full bg-primary-500 opacity-90"
                                     style={{ filter: "blur(180px)" }}
                                 />
                                 <div
-                                    className="absolute top-36 -left-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-emerald-300 opacity-80"
+                                    className="absolute -left-12 top-36 h-64 w-64 animate-pulse-slow-5 rounded-full bg-emerald-300 opacity-80"
                                     style={{ filter: "blur(120px)" }}
                                 />
                                 <div
-                                    className="absolute top-12 left-44 h-72 w-72 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-60"
+                                    className="absolute left-44 top-12 h-72 w-72 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-60"
                                     style={{ filter: "blur(120px)" }}
                                 />
                             </div>
@@ -96,15 +96,15 @@ const Home: React.FC<Props> = (props: Props) => {
                             className="top-90 dark:opacity:50 absolute right-10 z-0 h-72 w-72 origin-center animate-spin-slow opacity-30 dark:opacity-80"
                         >
                             <div
-                                className="absolute -top-36 -right-36 h-96 w-96 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-90"
+                                className="absolute -right-36 -top-36 h-96 w-96 animate-pulse-slow-7 rounded-full bg-sky-500 opacity-90"
                                 style={{ filter: "blur(180px)" }}
                             />
                             <div
-                                className="absolute top-36 -right-12 h-64 w-64 animate-pulse-slow-5 rounded-full bg-primary-500 opacity-80"
+                                className="absolute -right-12 top-36 h-64 w-64 animate-pulse-slow-5 rounded-full bg-primary-500 opacity-80"
                                 style={{ filter: "blur(120px)" }}
                             />
                             <div
-                                className="absolute top-0 right-20 h-72 w-72 animate-pulse-slow-3 rounded-full bg-emerald-500 opacity-60"
+                                className="absolute right-20 top-0 h-72 w-72 animate-pulse-slow-3 rounded-full bg-emerald-500 opacity-60"
                                 style={{ filter: "blur(120px)" }}
                             />
                         </div>
@@ -123,14 +123,14 @@ const Home: React.FC<Props> = (props: Props) => {
                                                 placeholder="blur"
                                                 quality={50}
                                                 priority
-                                                className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:mb-0"
+                                                className="mb-5 mr-20 rounded-full transition duration-500 ease-in-out sm:mb-0"
                                             />
                                         </a>
                                     </Wobbly>
                                 </Zoomed>
                             </div>
                             <div className="pb-48 md:pb-0">
-                                <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mt-0 sm:mb-2 sm:text-6xl">
+                                <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mb-2 sm:mt-0 sm:text-6xl">
                                     Hey I&apos;m
                                 </h2>
                                 <h1
@@ -154,7 +154,7 @@ const Home: React.FC<Props> = (props: Props) => {
                                         🤍
                                     </span>
                                 </h3>
-                                <div className="flex flex-col items-start justify-start gap-2 pt-4 pb-10 sm:flex-row sm:pl-2">
+                                <div className="flex flex-col items-start justify-start gap-2 pb-10 pt-4 sm:flex-row sm:pl-2">
                                     <CustomButton
                                         title="Contact"
                                         secondary={false}
@@ -199,10 +199,9 @@ const Home: React.FC<Props> = (props: Props) => {
                 </div>
                 <div className="align-center relative mt-8 flex flex-col items-center sm:flex-row">
                     <BackgroundGrid
-                        className="absolute top-20 right-0 left-0 -z-20 flex items-center justify-center opacity-80"
+                        className="absolute left-0 right-0 top-20 -z-20 flex items-center justify-center opacity-80"
                         size="60%"
                     />
-
                     <Zoomed factor={2}>
                         <Wobbly factor={4}>
                             <a
@@ -212,12 +211,10 @@ const Home: React.FC<Props> = (props: Props) => {
                                 <Image
                                     src={profilePic}
                                     alt="SVG mit img laden"
-                                    width="150"
-                                    height="150"
-                                    placeholder="blur"
-                                    quality={50}
+                                    width={200}
+                                    height={200}
                                     priority
-                                    className="mr-20 mb-5 rounded-full p-24 transition duration-500 ease-in-out sm:visible sm:mb-0"
+                                    className="mb-5 mr-20 rounded-full transition duration-500 ease-in-out sm:visible sm:mb-0"
                                 />
                             </a>
                         </Wobbly>
