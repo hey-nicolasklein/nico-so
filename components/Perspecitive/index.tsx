@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import React, { ReactNode, useEffect, useRef } from "react";
-import { animated, to, useSpring } from "react-spring";
+import { animated, to, useSpring } from "@react-spring/web";
 
 const calcX = (y: number, ly: number) =>
     -(y - ly - window.innerHeight / 2) / 20;

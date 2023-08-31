@@ -1,5 +1,5 @@
 import { useGesture } from "@use-gesture/react";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 import Image from "next/image";
 import Wobbly from "../Wobbly";
 import Zoomed from "../Zoomed";
