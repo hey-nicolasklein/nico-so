@@ -8,7 +8,7 @@ const Track = (props: { track: ITrack }) => {
         <div className="relative flex-col">
             <Zoomed>
                 <div className="group relative">
-                    <div className="transtion absolute top-1/2 left-1/2 z-30 translate-y-[-50%] translate-x-[-50%] opacity-0 duration-300	ease-in-out hover:scale-110 group-hover:opacity-100">
+                    <div className="transtion absolute left-1/2 top-1/2 z-30 translate-x-[-50%] translate-y-[-50%] opacity-0 duration-300	ease-in-out hover:scale-110 group-hover:opacity-100">
                         <Zoomed scale={1.06} factor={0.6}>
                             <a
                                 href={props.track.url}
@@ -24,8 +24,8 @@ const Track = (props: { track: ITrack }) => {
                         </Zoomed>
                     </div>
                     <div
-                        className="absolute top-1/2 left-1/2 z-20 
-                h-[70px] w-[70px] translate-y-[-50%] translate-x-[-50%] rounded-full opacity-0 backdrop-blur transition 
+                        className="absolute left-1/2 top-1/2 z-20 
+                h-[70px] w-[70px] translate-x-[-50%] translate-y-[-50%] rounded-full opacity-0 backdrop-blur transition 
                 duration-300 group-hover:opacity-100"
                     ></div>
                     <a

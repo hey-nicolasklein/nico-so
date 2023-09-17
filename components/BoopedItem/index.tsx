@@ -1,5 +1,5 @@
 import { useGesture } from "@use-gesture/react";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 import Image from "next/image";
 import Wobbly from "../Wobbly";
 import Zoomed from "../Zoomed";
@@ -24,7 +24,7 @@ const BoopedItem = (props: {
         x: 0,
         y: 0,
         transform: "rotate(0deg)",
-        config: { mass: 1, tension: 350, friction: 20 },
+        config: { mass: 1, tension: 200, friction: 20 },
     }));
 
     const bind: any = useGesture({
@@ -68,14 +68,14 @@ const BoopedItem = (props: {
             return (
                 <animated.div
                     style={vinylStyles}
-                    className="absolute top-5 right-0 left-0 bottom-0 z-0 m-auto"
+                    className="left-25 absolute top-5 z-0 m-auto group-hover:opacity-0"
                 >
                     <Image
                         className="box-shadow-4xl rounded-lg dark:invert"
                         alt="test"
                         src="/assets/vinyl.png"
-                        width={100}
-                        height={100}
+                        width={120}
+                        height={120}
                     />
                 </animated.div>
             );
@@ -88,8 +88,8 @@ const BoopedItem = (props: {
             {...bind()}
             onClick={handleClick}
             className="dark:opacity-2 group relative flex h-[250px] w-[250px] 
-            cursor-pointer flex-col justify-center overflow-hidden rounded-lg 
-            bg-slate-100 text-center shadow-inner first-line:h-[250px] dark:bg-[#08070C] "
+            cursor-pointer flex-col items-center justify-center overflow-hidden 
+            rounded-lg bg-slate-100 text-center shadow-inner first-line:h-[250px] dark:bg-[#08070C] "
         >
             {renderAnimatedVinyl()}
             <animated.div
@@ -98,18 +98,16 @@ const BoopedItem = (props: {
             >
                 <div
                     className={
-                        props.type == MediaType.Music
+                        props.type !== MediaType.Music
                             ? "relative h-[200px] w-[150px]"
-                            : "relative h-[200px] w-[200px]"
+                            : "relative h-[150px] w-[150px]"
                     }
                 >
                     <Image
-                        className="group-hover:opacity-1 absolute top-0 bottom-0 z-10 ml-auto mr-auto rounded-lg transition duration-500"
+                        className="group-hover:opacity-1 absolute bottom-0 top-0 z-10 ml-auto mr-auto rounded-lg object-cover transition duration-500"
                         alt="test"
                         src={props.href}
-                        layout="fill"
-                        objectFit="contain"
-                        object-position="50% 50%"
+                        fill
                     />
                 </div>
 

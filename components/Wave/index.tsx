@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import React, { ReactNode, useState } from "react";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 
 const Wavy: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [styles, api] = useSpring(() => ({

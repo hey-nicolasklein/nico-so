@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import React, { ReactComponentElement, useState } from "react";
-import { animated, useChain, useSpring, useSpringRef } from "react-spring";
+import { animated, useChain, useSpring, useSpringRef } from "@react-spring/web";
 import styles from "../../styles/components/CustomButton.module.css";
 import Perspective from "../Perspecitive";
 import Wobbly from "../Wobbly";
@@ -97,7 +97,7 @@ const CustomButton = (props: {
                     </animated.a>
                 </div>
                 <div
-                    className="absolute top-[50.0%] left-[50%] -z-10 block h-[5px] w-44 -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
+                    className="absolute left-[50%] top-[50.0%] -z-10 block h-[5px] w-44 -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
                     style={{ filter: "blur(20px)" }}
                 />
             </div>
@@ -108,7 +108,7 @@ const CustomButton = (props: {
         <Zoomed factor={2} scale={1.05} rotate={-1}>
             <div className="group relative w-[130px] rounded-[30px] bg-gradient-to-br from-emerald-500 to-green-300 p-[2px] hover:cursor-pointer">
                 <div
-                    className="transtion flex items-center justify-center rounded-[30px] bg-gradient-radial from-[#1c1c1c] to-[#08070C] pt-2 pb-2 text-base text-white duration-200 group-hover:text-emerald-200"
+                    className="transtion flex items-center justify-center rounded-[30px] bg-gradient-radial from-[#1c1c1c] to-[#08070C] pb-2 pt-2 text-base text-white duration-200 group-hover:text-emerald-200"
                     onClick={() =>
                         (window.location.href =
                             "mailto:hey@nico.so?subject=Hey&body=Let%20us%20talk%20:)")
@@ -120,7 +120,7 @@ const CustomButton = (props: {
                     </div>
                 </div>
                 <div
-                    className="absolute top-[50.0%] left-[50%] -z-10 block h-[10px] w-[130px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
+                    className="absolute left-[50%] top-[50.0%] -z-10 block h-[10px] w-[130px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
                     style={{ filter: "blur(25px)" }}
                 ></div>
             </div>

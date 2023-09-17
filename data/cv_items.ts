@@ -2,7 +2,7 @@ const cvItems = {
     education: [
         {
             title: "Master of Science",
-            time: "2020 - now",
+            time: "2020 - 2022",
             description:
                 "Consolidation of the knowledge gained in the Bachelor's degree. Topics such as machine learning, software development processes and data warehouses are covered.",
             link: "https://www.htwsaar.de/studium-und-lehre/studienangebot/studiengaenge/praktische-informatik_master",
