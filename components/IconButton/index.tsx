@@ -72,9 +72,9 @@ const IconButton = (props: { icon: JSX.Element }) => {
 
     return (
         <Zoomed factor={2} scale={1.05} rotate={-1}>
-            <div className="group relative rounded-full bg-gradient-to-br from-emerald-500 to-green-300 p-[2px] hover:cursor-pointer">
+            <div className="group/button relative rounded-full bg-white p-[2px] hover:cursor-pointer">
                 <div
-                    className="transtion relative h-[45px] w-[45px] rounded-full bg-gradient-radial from-[#1c1c1c] to-[#08070C] p-0 text-base text-white duration-200 group-hover:text-emerald-200"
+                    className="transtion relative h-[45px] w-[45px] rounded-full bg-gradient-radial from-[#1c1c1c] to-[#08070C] p-0 text-base text-white duration-200 group-hover/button:text-emerald-200"
                     onClick={() =>
                         (window.location.href =
                             "https://open.spotify.com/playlist/0OUDJBUwyJ9YQ8J0tFmA9p?si=fce55f7a7c63499a")
@@ -83,7 +83,7 @@ const IconButton = (props: { icon: JSX.Element }) => {
                     <div className="absolute left-[2px]">{props.icon}</div>
                 </div>
                 <div
-                    className="absolute left-[50%] top-[50.0%] -z-10 block h-[10px] w-[130px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200 group-hover:opacity-60"
+                    className="group-hover:opacity-60/group absolute left-[50%] top-[50.0%] -z-10 block h-[10px] w-[130px] -translate-x-2/4 -translate-y-2/4 rounded-full bg-white opacity-10 transition-all duration-200"
                     style={{ filter: "blur(25px)" }}
                 ></div>
             </div>

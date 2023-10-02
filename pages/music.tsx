@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DateTime, Interval } from "luxon";
 import { getRecentTracks, getTopTracks } from "../lib/spotify";
 import { GetStaticProps } from "next";
@@ -10,11 +10,14 @@ import Zoomed from "../components/Zoomed";
 import Wobbly from "../components/Wobbly";
 import Image from "next/image";
 import memoji from "../public/assets/memoji.png";
+import profilePhoto from "../public/assets/spotify_profile_photo.jpeg";
+import spotifyQrCode from "../public/assets/spotify_qr_colored.png";
 import TrackSmall from "../components/TrackSmall";
 import SecondaryIconTextButton from "../components/SecondaryTextIconButton";
 import { FiGithub, FiMusic, FiPlay, FiSave } from "react-icons/fi";
 import IconButton from "../components/IconButton";
 import { BiPlay } from "react-icons/bi";
+import SpotifyProfileCard from "../components/SpotifyProfileCard";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getRecentTracks();
@@ -36,6 +39,8 @@ interface Props {
 }
 
 const Music = (props: Props) => {
+    const [codeVisible, setCodeVisible] = useState(false);
+
     return (
         <>
             <Head>
@@ -106,12 +111,12 @@ const Music = (props: Props) => {
                                 style={{ filter: "blur(120px)" }}
                             />
                         </div>
-                        <div className="relative z-20 flex h-full flex-col-reverse items-center justify-center sm:flex-col md:flex-row">
-                            <div className="pt-4 sm:mr-24 sm:p-0">
+                        <div className="group relative z-20 flex h-full flex-col-reverse items-center justify-center sm:flex-col md:flex-row">
+                            <div className="group pt-4 sm:mr-24 sm:p-0">
                                 <Zoomed scale={1.05} rotate={0.5}>
                                     <h1
-                                        className="mb-2 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text text-5xl
-                                        font-bold text-transparent opacity-60"
+                                        className="mb-2 text-5xl font-bold text-white transition-opacity duration-200 sm:opacity-70
+                                        sm:group-hover:opacity-100"
                                     >
                                         Recents
                                     </h1>
@@ -127,7 +132,7 @@ const Music = (props: Props) => {
                                     </div>
                                 </Zoomed>
                             </div>
-                            <div className="sm:pb-48 md:pb-0">
+                            <div className="mt-10 flex flex-col justify-around gap-2 sm:mt-20 sm:pb-48 md:pb-0">
                                 <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mb-2 sm:mt-0 sm:text-6xl">
                                     Hey this is my
                                 </h2>
@@ -137,17 +142,11 @@ const Music = (props: Props) => {
                                 >
                                     Spotify
                                 </h1>
-                                <div className="flex flex-col items-center justify-start gap-2 pb-10 pt-4 sm:flex-row sm:pl-2">
-                                    <IconButton icon={<BiPlay size={45} />} />
-                                    <div className="hidden sm:block">
-                                        <SecondaryIconTextButton
-                                            title={"Go to my Spotify"}
-                                            link={
-                                                "https://open.spotify.com/user/funforstarax?si=08f2e85dc0e84bd9"
-                                            }
-                                            icon={<FiMusic />}
-                                        />
-                                    </div>
+                                <div className="hidden lg:block">
+                                    <SpotifyProfileCard expanded={false} />
+                                </div>
+                                <div className="lg:hidden">
+                                    <SpotifyProfileCard expanded={true} />
                                 </div>
                             </div>
                         </div>
