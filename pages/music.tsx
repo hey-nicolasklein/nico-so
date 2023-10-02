@@ -11,6 +11,10 @@ import Wobbly from "../components/Wobbly";
 import Image from "next/image";
 import memoji from "../public/assets/memoji.png";
 import TrackSmall from "../components/TrackSmall";
+import SecondaryIconTextButton from "../components/SecondaryTextIconButton";
+import { FiGithub, FiMusic, FiPlay, FiSave } from "react-icons/fi";
+import IconButton from "../components/IconButton";
+import { BiPlay } from "react-icons/bi";
 
 export const getStaticProps: GetStaticProps = async () => {
     const tracks = await getRecentTracks();
@@ -104,19 +108,24 @@ const Music = (props: Props) => {
                         </div>
                         <div className="relative z-20 flex h-full flex-col items-center justify-center md:flex-row">
                             <div className="mr-24 pt-4 sm:p-0">
-                                <h1 className="mb-2 text-5xl font-bold text-emerald-200 opacity-60">
-                                    Recents
-                                </h1>
-                                <div className="z-0 flex w-80 flex-col gap-4 rounded-xl bg-emerald-200 bg-opacity-20 bg-clip-padding p-2 backdrop-blur-2xl backdrop-filter">
-                                    {props.top_tracks
-                                        .slice(0, 6)
-                                        .map((track: ITrack, index) => (
-                                            <TrackSmall
-                                                key={index}
-                                                track={track}
-                                            />
-                                        ))}
-                                </div>
+                                <Zoomed scale={1.05} rotate={0.5}>
+                                    <h1
+                                        className="mb-2 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text text-5xl
+                                        font-bold text-transparent opacity-60"
+                                    >
+                                        Recents
+                                    </h1>
+                                    <div className="z-0 flex w-80 flex-col gap-4 rounded-xl bg-emerald-200 bg-opacity-20 bg-clip-padding p-2 backdrop-blur-2xl backdrop-filter">
+                                        {props.top_tracks
+                                            .slice(0, 6)
+                                            .map((track: ITrack, index) => (
+                                                <TrackSmall
+                                                    key={index}
+                                                    track={track}
+                                                />
+                                            ))}
+                                    </div>
+                                </Zoomed>
                             </div>
                             <div className="pb-48 md:pb-0">
                                 <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mb-2 sm:mt-0 sm:text-6xl">
@@ -128,15 +137,15 @@ const Music = (props: Props) => {
                                 >
                                     Spotify
                                 </h1>
-                                <div className="flex flex-col items-start justify-start gap-2 pb-10 pt-4 sm:flex-row sm:pl-2">
-                                    <CustomButton
-                                        title="Contact"
-                                        secondary={false}
-                                    />
+                                <div className="flex flex-col items-center justify-start gap-2 pb-10 pt-4 sm:flex-row sm:pl-2">
+                                    <IconButton icon={<BiPlay size={45} />} />
                                     <div className="hidden sm:block">
-                                        <CustomButton
-                                            title={"Go to my Github"}
-                                            secondary={true}
+                                        <SecondaryIconTextButton
+                                            title={"Go to my Spotify"}
+                                            link={
+                                                "https://github.com/hey-nicolasklein"
+                                            }
+                                            icon={<FiMusic />}
                                         />
                                     </div>
                                 </div>

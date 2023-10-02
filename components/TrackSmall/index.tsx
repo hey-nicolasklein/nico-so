@@ -7,11 +7,13 @@ const TrackSmall = (props: { track: ITrack }) => {
     return (
         <div className="group flex gap-2 rounded-xl transition ease-in-out hover:scale-110 hover:bg-white">
             <Image
-                className="rounded-xl transition ease-in-out group-hover:rounded-none group-hover:rounded-l-lg group-hover:brightness-100"
+                className="rounded-xl object-cover transition ease-in-out group-hover:rounded-none group-hover:rounded-l-lg group-hover:brightness-100"
                 alt={props.track.title}
                 src={props.track.cover}
                 width={64}
                 height={64}
+                quality={80}
+                fill={true}
             />
             <div className="flex flex-col justify-center">
                 <a
