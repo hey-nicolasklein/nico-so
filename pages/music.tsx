@@ -18,13 +18,18 @@ import { FiGithub, FiMusic, FiPlay, FiSave } from "react-icons/fi";
 import IconButton from "../components/IconButton";
 import { BiPlay } from "react-icons/bi";
 import SpotifyProfileCard from "../components/SpotifyProfileCard";
+import RowMusic from "../components/RowMusic";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const tracks = await getRecentTracks();
+    const recentTracks = await getRecentTracks();
+    const topTracks = await getTopTracks();
+
+    console.log(recentTracks);
 
     return {
         props: {
-            top_tracks: tracks,
+            recent_tracks: recentTracks,
+            top_tracks: topTracks,
             refreshed: DateTime.now().valueOf(),
             year: DateTime.now().year,
         },
@@ -34,6 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 interface Props {
     top_tracks: ITrack[];
+    recent_tracks: ITrack[];
     refreshed: number;
     year: number;
 }
@@ -112,13 +118,33 @@ const Music = (props: Props) => {
                             />
                         </div>
                         <div className="group relative z-20 flex h-full flex-col-reverse items-center justify-center sm:flex-col md:flex-row">
-                            <div className="group pt-4 sm:mr-24 sm:p-0">
+                            <div className="group mt-8 pt-4 sm:mr-24 sm:p-0">
                                 <Zoomed scale={1.05} rotate={0.5}>
                                     <h1
                                         className="mb-2 text-5xl font-bold text-white transition-opacity duration-200 sm:opacity-70
                                         sm:group-hover:opacity-100"
                                     >
                                         Recents
+                                    </h1>
+                                    <div className="z-0 flex w-80 flex-col gap-4 rounded-xl bg-emerald-200 bg-opacity-20 bg-clip-padding p-2 backdrop-blur-2xl backdrop-filter">
+                                        {props.recent_tracks
+                                            .slice(0, 6)
+                                            .map((track: ITrack, index) => (
+                                                <TrackSmall
+                                                    key={index}
+                                                    track={track}
+                                                />
+                                            ))}
+                                    </div>
+                                </Zoomed>
+                            </div>
+                            <div className="group pt-4 sm:mr-24 sm:hidden sm:p-0">
+                                <Zoomed scale={1.05} rotate={0.5}>
+                                    <h1
+                                        className="mb-2 text-5xl font-bold text-white transition-opacity duration-200 sm:opacity-70
+                                        sm:group-hover:opacity-100"
+                                    >
+                                        Top
                                     </h1>
                                     <div className="z-0 flex w-80 flex-col gap-4 rounded-xl bg-emerald-200 bg-opacity-20 bg-clip-padding p-2 backdrop-blur-2xl backdrop-filter">
                                         {props.top_tracks
@@ -150,6 +176,14 @@ const Music = (props: Props) => {
                                 </div>
                             </div>
                         </div>
+                        <RowMusic
+                            title={"Music I love"}
+                            subtitle={
+                                "My most listened to songs in the last week on Spotify."
+                            }
+                            tracks={props.recent_tracks}
+                            refreshed={props.refreshed}
+                        />
                     </div>
                 </div>
             </Layout>
