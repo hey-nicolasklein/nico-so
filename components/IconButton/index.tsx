@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import React, { ReactComponentElement, useState } from "react";
-import { animated, useChain, useSpring, useSpringRef } from "react-spring";
+import { animated, useChain, useSpring, useSpringRef } from "@react-spring/web";
 import styles from "../../styles/components/CustomButton.module.css";
 import Perspective from "../Perspecitive";
 import Wobbly from "../Wobbly";
@@ -77,7 +77,7 @@ const IconButton = (props: { icon: JSX.Element }) => {
                     className="transtion relative h-[45px] w-[45px] rounded-full bg-gradient-radial from-[#1c1c1c] to-[#08070C] p-0 text-base text-white duration-200 group-hover:text-emerald-200"
                     onClick={() =>
                         (window.location.href =
-                            "mailto:hey@nico.so?subject=Hey&body=Let%20us%20talk%20:)")
+                            "https://open.spotify.com/playlist/0OUDJBUwyJ9YQ8J0tFmA9p?si=fce55f7a7c63499a")
                     }
                 >
                     <div className="absolute left-[2px]">{props.icon}</div>

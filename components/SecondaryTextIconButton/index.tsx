@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import React, { ReactComponentElement, useState } from "react";
-import { animated, useChain, useSpring, useSpringRef } from "react-spring";
+import { animated, useChain, useSpring, useSpringRef } from "@react-spring/web";
 import styles from "../../styles/components/CustomButton.module.css";
 import Perspective from "../Perspecitive";
 import Wobbly from "../Wobbly";

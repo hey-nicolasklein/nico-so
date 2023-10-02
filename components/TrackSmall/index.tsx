@@ -13,7 +13,6 @@ const TrackSmall = (props: { track: ITrack }) => {
                 width={64}
                 height={64}
                 quality={80}
-                fill={true}
             />
             <div className="flex flex-col justify-center">
                 <a

@@ -106,8 +106,8 @@ const Music = (props: Props) => {
                                 style={{ filter: "blur(120px)" }}
                             />
                         </div>
-                        <div className="relative z-20 flex h-full flex-col items-center justify-center md:flex-row">
-                            <div className="mr-24 pt-4 sm:p-0">
+                        <div className="relative z-20 flex h-full flex-col-reverse items-center justify-center sm:flex-col md:flex-row">
+                            <div className="pt-4 sm:mr-24 sm:p-0">
                                 <Zoomed scale={1.05} rotate={0.5}>
                                     <h1
                                         className="mb-2 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text text-5xl
@@ -127,7 +127,7 @@ const Music = (props: Props) => {
                                     </div>
                                 </Zoomed>
                             </div>
-                            <div className="pb-48 md:pb-0">
+                            <div className="sm:pb-48 md:pb-0">
                                 <h2 className="m-0 mb-2 mt-6 text-4xl font-normal sm:mb-2 sm:mt-0 sm:text-6xl">
                                     Hey this is my
                                 </h2>
@@ -143,7 +143,7 @@ const Music = (props: Props) => {
                                         <SecondaryIconTextButton
                                             title={"Go to my Spotify"}
                                             link={
-                                                "https://github.com/hey-nicolasklein"
+                                                "https://open.spotify.com/user/funforstarax?si=08f2e85dc0e84bd9"
                                             }
                                             icon={<FiMusic />}
                                         />
