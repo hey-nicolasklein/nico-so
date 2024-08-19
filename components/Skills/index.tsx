@@ -10,6 +10,7 @@ import {
     SiPostgresql,
     SiQt,
     SiReact,
+    SiLangchain,
 } from "react-icons/si";
 import Heading from "../Heading";
 import memoji from "../../public/assets/memoji_dark.png";
@@ -56,6 +57,10 @@ const Skills = () => {
         {
             title: "Postgress",
             icon: SiPostgresql,
+        },
+        {
+            title: "LangChain",
+            icon: SiLangchain,
         },
     ];
 
@@ -126,6 +131,7 @@ const Skills = () => {
                                     setSelected(title);
                                 }}
                             ></Skill>
+
                             <Skill
                                 className="absolute -bottom-[110px] left-[20px]"
                                 IconData={SiNextdotjs}
@@ -142,17 +148,17 @@ const Skills = () => {
                         <div className="absolute left-[50%] top-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[240px] opacity-10"></div>
                         <Skill
                             className="pointer-events-auto absolute left-[90px] top-[70px]"
-                            IconData={SiFigma}
-                            title="Figma"
+                            IconData={SiLangchain}
+                            title="LangChain"
                             setSelected={(title: string) => {
                                 setSelected(title);
                             }}
                         ></Skill>
                         <Skill
                             className="pointer-events-auto absolute right-[220px] top-[30px]"
-                            IconData={SiDotnet}
+                            IconData={SiFigma}
                             small
-                            title="Microsoft"
+                            title="Figma"
                             setSelected={(title: string) => {
                                 setSelected(title);
                             }}
