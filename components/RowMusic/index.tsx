@@ -7,6 +7,12 @@ import ITrack from "../../interfaces/ITrack";
 import { classNames } from "../../lib/tailwind";
 import Heading, { HeadingDescription } from "../Heading";
 import Track from "../Track";
+import dynamic from "next/dynamic";
+
+// Only load refresh time on client side
+const RefreshedTime = dynamic(() => import("./RefreshedTime"), {
+    ssr: false,
+});
 
 const fadeInVariants = {
     visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
@@ -36,7 +42,7 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
             initial="hidden"
             variants={fadeInVariants}
         >
-            <div className={classNames("z-50 mt-24 mb-10")}>
+            <div className={classNames("z-50 mb-10 mt-24")}>
                 <div className="flex items-center justify-between">
                     <Heading>Music I love</Heading>
 
@@ -47,13 +53,7 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
                         >
                             <BsSpotify size={20} />
                         </a>
-                        <p className="m-0 hidden p-0 pr-4 font-thin leading-none md:block">
-                            last refreshed{" "}
-                            {refreshedDateTime.toLocaleString({
-                                hour: "numeric",
-                                minute: "2-digit",
-                            })}
-                        </p>
+                        <RefreshedTime refreshed={refreshed} />
                     </div>
                 </div>
                 <HeadingDescription className="mt-3">
