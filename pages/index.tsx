@@ -245,7 +245,14 @@ const Home: React.FC<Props> = (props: Props) => {
                 </div>
                 <CV />
                 <Skills />
-                <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
+                <RowMusic
+                    title={"Music I love"}
+                    subtitle={
+                        "My most listened to songs in the last week on Spotify."
+                    }
+                    tracks={props.tracks}
+                    refreshed={props.refreshed}
+                />
                 <RowArt />
                 <SayHello />
                 <Footer year={props.year} />
