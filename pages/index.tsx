@@ -18,7 +18,7 @@ import Link from "../components/Link";
 import Footer from "../components/Footer";
 import Wobbly from "../components/Wobbly";
 import Zoomed from "../components/Zoomed";
-import profilePic from "../public/assets/me.jpg";
+import profilePic from "../public/assets/nicolas-klein_2024_tiny.png";
 import memoji from "../public/assets/memoji.png";
 import Heading from "../components/Heading";
 import BackgroundGrid from "../components/BackgroundGrid";
@@ -220,11 +220,11 @@ const Home: React.FC<Props> = (props: Props) => {
                         </Wobbly>
                     </Zoomed>
 
-                    <div className="mt-5 text-lg text-black dark:text-white sm:ml-10 sm:mt-0">
+                    <div className="mt-5 text-lg text-black sm:ml-10 sm:mt-0 dark:text-white">
                         <p>
                             I am Nicolas, a {props.age} years old Software
                             Engineer from Germany.<br></br> Currently I am
-                            building Design Systems at{" "}
+                            building AI solutions at{" "}
                             <Link href="https://ergosign.de">
                                 Ergosign GmbH
                             </Link>
@@ -232,7 +232,7 @@ const Home: React.FC<Props> = (props: Props) => {
                         </p>
                         <p className="mt-2">
                             Beyond programming, I have a passion for{" "}
-                            <Link href="https://www.instagram.com/hey.nicolasklein/">
+                            <Link href="https://photos.nico.so">
                                 photography
                             </Link>{" "}
                             and{" "}
