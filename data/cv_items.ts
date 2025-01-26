@@ -20,7 +20,7 @@ const cvItems = {
             title: "UX Engineer @ Ergosign",
             time: "2021 - now",
             description:
-                "As a UX Engineer I work side by side with UX Designers creating tailormade solutions. Lately Design Systems have been a big part of my work. Technologies utilized included Figma, Qt-Framework, Flutter, Appwrite and CI/CD through Gitlab-CI.",
+                "As a UX Engineer I work side by side with UX Designers creating tailormade solutions. Lately AI has been a big part of my work, particulary retrieval-augmented generation pipelines (RAG). Technologies utilized include Langchain, Nuxt, Gitlab-CI, Figma and OpenAI.",
             link: "https://www.ergosign.de/de/",
         },
         {
