@@ -3,19 +3,28 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: ["storage.googleapis.com", "i.scdn.co"],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "storage.googleapis.com",
+            },
+            {
+                protocol: "https",
+                hostname: "i.scdn.co",
+            },
+        ],
     },
     async redirects() {
         return [
             {
-                source: '/:path*',
+                source: "/:path*",
                 has: [
                     {
-                        type: 'host',
-                        value: 'photos.nico.so',
+                        type: "host",
+                        value: "photos.nico.so",
                     },
                 ],
-                destination: 'https://glass.photo/heynico',
+                destination: "https://glass.photo/heynico",
                 permanent: true,
             },
         ];
