@@ -1,6 +1,5 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import Navbar from "../components/Navbar";
 import { DateTime, Interval } from "luxon";
 import Layout from "../components/Layout";
 import {
@@ -8,10 +7,12 @@ import {
     BsLinkedin,
     BsTwitter,
     BsGithub,
+    BsInstagram,
     BsSpotify,
 } from "react-icons/bs";
-import { IconContext } from "react-icons";
-import { getRecentTracks, getTopTracks } from "../lib/spotify";
+import * as ReactIcons from "react-icons/bs";
+import { getTopTracks } from "../lib/spotify";
+import { fetchAllStrapiContent, CvEntry, Skill, PortfolioItem, PageContent, Section, SocialLink, SiteSettings } from "../lib/strapi";
 import Image from "next/image";
 import ITrack from "../interfaces/ITrack";
 import Link from "../components/Link";
@@ -25,15 +26,15 @@ import BackgroundGrid from "../components/BackgroundGrid";
 import RowArt from "../components/RowArt";
 import RowMusic from "../components/RowMusic";
 import CV from "../components/CV";
-import Skills from "../components/Skills";
-import Perspective from "../components/Perspecitive";
-import Wiggle from "../components/Wiggle";
+import Skills from "../components/Skills";  
 import SayHello from "../components/SayHello";
 import CustomButton from "../components/SayHello/CustomButton";
 
 export const getStaticProps: GetStaticProps = async () => {
     let tracks = [];
+    let strapiContent = {};
 
+    // Fetch Spotify tracks
     try {
         tracks = await getTopTracks();
     } catch (error) {
@@ -42,9 +43,28 @@ export const getStaticProps: GetStaticProps = async () => {
         tracks = [];
     }
 
-    let birthday = new Date("10/05/1998");
+    // Fetch all Strapi content
+    try {
+        strapiContent = await fetchAllStrapiContent();
+    } catch (error) {
+        console.warn('Failed to fetch Strapi content during build:', error);
+        // Return empty content if Strapi fails during build
+        strapiContent = {
+            cvEntries: [],
+            skills: [],
+            portfolioItems: [],
+            sections: [],
+            socialLinks: [],
+        };
+    }
+
+    // Calculate age from birthday in Strapi or fallback to hardcoded
+    const pageContent = (strapiContent as any).pageContent;
+    const birthday = pageContent?.birthday
+        ? new Date(pageContent.birthday)
+        : new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
-    let i = Interval.fromDateTimes(birthday, DateTime.now());
+    const i = Interval.fromDateTimes(birthday, DateTime.now());
 
     return {
         props: {
@@ -52,8 +72,8 @@ export const getStaticProps: GetStaticProps = async () => {
             tracks,
             refreshed: DateTime.now().valueOf(),
             year: DateTime.now().year,
+            ...strapiContent,
         },
-        revalidate: 600,
     };
 };
 
@@ -62,6 +82,13 @@ interface Props {
     tracks: ITrack[];
     refreshed: number;
     year: number;
+    cvEntries?: CvEntry[];
+    skills?: Skill[];
+    portfolioItems?: PortfolioItem[];
+    pageContent?: PageContent;
+    sections?: Section[];
+    socialLinks?: SocialLink[];
+    siteSettings?: SiteSettings;
 }
 
 const Home: React.FC<Props> = (props: Props) => {
@@ -178,27 +205,24 @@ const Home: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div className="absolute bottom-32 flex w-full justify-center sm:bottom-20">
-                            <IconContext.Provider
-                                value={{
-                                    className:
-                                        "black dark:white hover:drop-shadow-4xl transtion duration-300 hover:scale-110 hover:-rotate-6 ease-in-out",
-                                }}
-                            >
-                                <div className="flex w-72	justify-around">
-                                    <a href="https://www.linkedin.com/in/heynicolas/">
-                                        <BsLinkedin size={40} />
-                                    </a>
-                                    <a href="https://www.behance.net/hey_nicolasklein">
-                                        <BsBehance size={40} />
-                                    </a>
-                                    <a href="https://github.com/hey-nicolasklein">
-                                        <BsGithub size={40} />
-                                    </a>
-                                    <a href="https://twitter.com/heynicolasklein">
-                                        <BsTwitter size={40} />
-                                    </a>
-                                </div>
-                            </IconContext.Provider>
+                            <div className="flex w-72 justify-around">
+                                {props.socialLinks && props.socialLinks
+                                    .filter(link => link.visible)
+                                    .slice(0, 4)
+                                    .map((link) => {
+                                        const IconComponent = (ReactIcons as any)[link.iconName];
+                                        return (
+                                            <a
+                                                key={link.id}
+                                                href={link.url}
+                                                className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out"
+                                                aria-label={link.platform}
+                                            >
+                                                {IconComponent ? <IconComponent size={40} /> : null}
+                                            </a>
+                                        );
+                                    })}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,10 +275,16 @@ const Home: React.FC<Props> = (props: Props) => {
                         </p>
                     </div>
                 </div>
-                <CV />
-                <Skills />
+                {props.cvEntries && props.cvEntries.length > 0 && (
+                    <CV cvEntries={props.cvEntries} />
+                )}
+                {props.skills && props.skills.length > 0 && (
+                    <Skills skills={props.skills} />
+                )}
                 <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
-                <RowArt />
+                {props.portfolioItems && props.portfolioItems.length > 0 && (
+                    <RowArt portfolioItems={props.portfolioItems} />
+                )}
                 <SayHello />
                 <Footer year={props.year} />
             </Layout>

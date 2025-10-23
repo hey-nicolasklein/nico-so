@@ -11,7 +11,6 @@ const MotionNavbar = () => {
     const [hovered, setHovered] = useState("");
 
     useEffect(() => {
-        console.log(hovered);
     }, [hovered]);
 
     return (

@@ -12,7 +12,8 @@ const Footer = (props: { year: number }) => {
                 <p>
                     <Link href="https://nextjs.org">NextJS</Link>,{" "}
                     <Link href="https://tailwindcss.com">Tailwind CSS</Link>,{" "}
-                    <Link href="https://react-spring.dev">ReactSpring</Link>
+                    <Link href="https://react-spring.dev">ReactSpring</Link>,{" "}
+                    <Link href="https://strapi.io">Strapi</Link>
                 </p>
             </div>
             <div className="flex flex-col items-center pt-5">
