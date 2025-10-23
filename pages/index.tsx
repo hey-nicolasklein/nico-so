@@ -7,7 +7,10 @@ import {
     BsLinkedin,
     BsTwitter,
     BsGithub,
+    BsInstagram,
+    BsSpotify,
 } from "react-icons/bs";
+import * as ReactIcons from "react-icons/bs";
 import { getTopTracks } from "../lib/spotify";
 import { fetchAllStrapiContent, CvEntry, Skill, PortfolioItem, PageContent, Section, SocialLink, SiteSettings } from "../lib/strapi";
 import Image from "next/image";
@@ -203,18 +206,22 @@ const Home: React.FC<Props> = (props: Props) => {
 
                         <div className="absolute bottom-32 flex w-full justify-center sm:bottom-20">
                             <div className="flex w-72 justify-around">
-                                <a href="https://www.linkedin.com/in/heynicolas/" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
-                                    <BsLinkedin size={40} />
-                                </a>
-                                <a href="https://www.behance.net/hey_nicolasklein" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
-                                    <BsBehance size={40} />
-                                </a>
-                                <a href="https://github.com/hey-nicolasklein" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
-                                    <BsGithub size={40} />
-                                </a>
-                                <a href="https://twitter.com/heynicolasklein" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
-                                    <BsTwitter size={40} />
-                                </a>
+                                {props.socialLinks && props.socialLinks
+                                    .filter(link => link.visible)
+                                    .slice(0, 4)
+                                    .map((link) => {
+                                        const IconComponent = (ReactIcons as any)[link.iconName];
+                                        return (
+                                            <a
+                                                key={link.id}
+                                                href={link.url}
+                                                className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out"
+                                                aria-label={link.platform}
+                                            >
+                                                {IconComponent ? <IconComponent size={40} /> : null}
+                                            </a>
+                                        );
+                                    })}
                             </div>
                         </div>
                     </div>
