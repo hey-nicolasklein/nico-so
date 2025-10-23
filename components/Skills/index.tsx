@@ -1,17 +1,9 @@
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
-import {
-    SiAdobeillustrator,
-    SiDotnet,
-    SiFigma,
-    SiFlutter,
-    SiNextdotjs,
-    SiPostgresql,
-    SiQt,
-    SiReact,
-    SiLangchain,
-} from "react-icons/si";
+import * as SimpleIcons from "react-icons/si";
+import * as FontAwesome from "react-icons/fa";
+import { Skill as SkillType } from "../../lib/strapi";
 import Heading from "../Heading";
 import memoji from "../../public/assets/memoji_dark.png";
 import Image from "next/image";
@@ -26,43 +18,34 @@ interface ISkillElement {
     icon: IconType;
 }
 
-const Skills = () => {
+interface SkillsProps {
+    skills: SkillType[];
+}
+
+/**
+ * Helper function to dynamically load icon from react-icons based on icon name
+ */
+const getIconComponent = (iconName: string): IconType => {
+    // Try SimpleIcons (Si prefix)
+    if (SimpleIcons[iconName]) {
+        return SimpleIcons[iconName] as IconType;
+    }
+    // Try FontAwesome (Fa prefix)
+    if (FontAwesome[iconName]) {
+        return FontAwesome[iconName] as IconType;
+    }
+    // Default fallback icon
+    return SimpleIcons.SiReact as IconType;
+};
+
+const Skills = ({ skills }: SkillsProps) => {
     const [selected, setSelected] = useState("");
 
-    const elements: ISkillElement[] = [
-        {
-            title: "Flutter",
-            icon: SiFlutter,
-        },
-        {
-            title: "React",
-            icon: SiReact,
-        },
-        {
-            title: "NextJS",
-            icon: SiNextdotjs,
-        },
-        {
-            title: "Framework",
-            icon: SiQt,
-        },
-        {
-            title: "Figma",
-            icon: SiFigma,
-        },
-        {
-            title: "Microsoft",
-            icon: SiDotnet,
-        },
-        {
-            title: "Postgress",
-            icon: SiPostgresql,
-        },
-        {
-            title: "LangChain",
-            icon: SiLangchain,
-        },
-    ];
+    // Convert Strapi skills to component format
+    const elements: ISkillElement[] = skills.map((skill) => ({
+        title: skill.title,
+        icon: getIconComponent(skill.iconName),
+    }));
 
     return (
         <AnimateInView>
@@ -114,73 +97,87 @@ const Skills = () => {
 
                     <div className="absolute left-[50%] top-[50%] -translate-x-2/4 -translate-y-2/4 ">
                         <div className="relative h-[140px] w-[140px] animate-rotations">
-                            <Skill
-                                className="absolute -left-[90px] -top-[55px]"
-                                IconData={SiFlutter}
-                                title="Flutter"
-                                setSelected={(title: string) => {
-                                    setSelected(title);
-                                }}
-                            ></Skill>
+                            {elements[0] && (
+                                <Skill
+                                    className="absolute -left-[90px] -top-[55px]"
+                                    IconData={elements[0].icon}
+                                    title={elements[0].title}
+                                    setSelected={(title: string) => {
+                                        setSelected(title);
+                                    }}
+                                ></Skill>
+                            )}
 
-                            <Skill
-                                className="absolute -right-[22px] bottom-[160px]"
-                                IconData={SiReact}
-                                title="React"
-                                setSelected={(title: string) => {
-                                    setSelected(title);
-                                }}
-                            ></Skill>
+                            {elements[1] && (
+                                <Skill
+                                    className="absolute -right-[22px] bottom-[160px]"
+                                    IconData={elements[1].icon}
+                                    title={elements[1].title}
+                                    setSelected={(title: string) => {
+                                        setSelected(title);
+                                    }}
+                                ></Skill>
+                            )}
 
-                            <Skill
-                                className="absolute -bottom-[110px] left-[20px]"
-                                IconData={SiNextdotjs}
-                                title="NextJS"
-                                small
-                                setSelected={(title: string) => {
-                                    setSelected(title);
-                                }}
-                            ></Skill>
+                            {elements[2] && (
+                                <Skill
+                                    className="absolute -bottom-[110px] left-[20px]"
+                                    IconData={elements[2].icon}
+                                    title={elements[2].title}
+                                    small
+                                    setSelected={(title: string) => {
+                                        setSelected(title);
+                                    }}
+                                ></Skill>
+                            )}
                             <div className="absolute left-[50%] top-[50%] -z-10 -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[150px] opacity-10 "></div>
                         </div>
                     </div>
                     <div className="pointer-events-none relative h-[420px] w-[420px] animate-rotationsRev rounded-full  p-[300px]">
                         <div className="absolute left-[50%] top-[50%] -translate-x-2/4 -translate-y-2/4 rounded-full border-4 border-emerald-400 p-[240px] opacity-10"></div>
-                        <Skill
-                            className="pointer-events-auto absolute left-[90px] top-[70px]"
-                            IconData={SiLangchain}
-                            title="LangChain"
-                            setSelected={(title: string) => {
-                                setSelected(title);
-                            }}
-                        ></Skill>
-                        <Skill
-                            className="pointer-events-auto absolute right-[220px] top-[30px]"
-                            IconData={SiFigma}
-                            small
-                            title="Figma"
-                            setSelected={(title: string) => {
-                                setSelected(title);
-                            }}
-                        ></Skill>
-                        <Skill
-                            className="pointer-events-auto absolute bottom-[300px] right-[25px]"
-                            IconData={SiPostgresql}
-                            small
-                            title="Postgress"
-                            setSelected={(title: string) => {
-                                setSelected(title);
-                            }}
-                        ></Skill>
-                        <Skill
-                            className="pointer-events-auto absolute bottom-[30px] left-[200px]"
-                            IconData={SiQt}
-                            title="Framework"
-                            small
-                            setSelected={(title: string) => {
-                                setSelected(title);
-                            }}
-                        ></Skill>
+                        {elements[3] && (
+                            <Skill
+                                className="pointer-events-auto absolute left-[90px] top-[70px]"
+                                IconData={elements[3].icon}
+                                title={elements[3].title}
+                                setSelected={(title: string) => {
+                                    setSelected(title);
+                                }}
+                            ></Skill>
+                        )}
+                        {elements[4] && (
+                            <Skill
+                                className="pointer-events-auto absolute right-[220px] top-[30px]"
+                                IconData={elements[4].icon}
+                                small
+                                title={elements[4].title}
+                                setSelected={(title: string) => {
+                                    setSelected(title);
+                                }}
+                            ></Skill>
+                        )}
+                        {elements[5] && (
+                            <Skill
+                                className="pointer-events-auto absolute bottom-[300px] right-[25px]"
+                                IconData={elements[5].icon}
+                                small
+                                title={elements[5].title}
+                                setSelected={(title: string) => {
+                                    setSelected(title);
+                                }}
+                            ></Skill>
+                        )}
+                        {elements[6] && (
+                            <Skill
+                                className="pointer-events-auto absolute bottom-[30px] left-[200px]"
+                                IconData={elements[6].icon}
+                                title={elements[6].title}
+                                small
+                                setSelected={(title: string) => {
+                                    setSelected(title);
+                                }}
+                            ></Skill>
+                        )}
                     </div>
                 </div>
             </div>

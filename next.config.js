@@ -11,6 +11,14 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "i.scdn.co",
             },
+            {
+                protocol: "https",
+                hostname: "*.strapiapp.com",
+            },
+            {
+                protocol: "https",
+                hostname: "*.strapi.cloud",
+            },
         ],
     },
     async redirects() {

@@ -12,6 +12,7 @@ import {
 } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { getRecentTracks, getTopTracks } from "../lib/spotify";
+import { fetchAllStrapiContent, CvEntry, Skill, PortfolioItem, PageContent, Section, SocialLink, SiteSettings } from "../lib/strapi";
 import Image from "next/image";
 import ITrack from "../interfaces/ITrack";
 import Link from "../components/Link";
@@ -33,7 +34,9 @@ import CustomButton from "../components/SayHello/CustomButton";
 
 export const getStaticProps: GetStaticProps = async () => {
     let tracks = [];
+    let strapiContent = {};
 
+    // Fetch Spotify tracks
     try {
         tracks = await getTopTracks();
     } catch (error) {
@@ -42,9 +45,27 @@ export const getStaticProps: GetStaticProps = async () => {
         tracks = [];
     }
 
-    let birthday = new Date("10/05/1998");
+    // Fetch all Strapi content
+    try {
+        strapiContent = await fetchAllStrapiContent();
+    } catch (error) {
+        console.error('Failed to fetch Strapi content during build:', error);
+        // Return empty content if Strapi fails during build
+        strapiContent = {
+            cvEntries: [],
+            skills: [],
+            portfolioItems: [],
+            sections: [],
+            socialLinks: [],
+        };
+    }
+
+    // Calculate age from birthday in Strapi or fallback to hardcoded
+    const birthday = strapiContent.pageContent?.birthday
+        ? new Date(strapiContent.pageContent.birthday)
+        : new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
-    let i = Interval.fromDateTimes(birthday, DateTime.now());
+    const i = Interval.fromDateTimes(birthday, DateTime.now());
 
     return {
         props: {
@@ -52,6 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
             tracks,
             refreshed: DateTime.now().valueOf(),
             year: DateTime.now().year,
+            ...strapiContent,
         },
         revalidate: 600,
     };
@@ -62,6 +84,13 @@ interface Props {
     tracks: ITrack[];
     refreshed: number;
     year: number;
+    cvEntries?: CvEntry[];
+    skills?: Skill[];
+    portfolioItems?: PortfolioItem[];
+    pageContent?: PageContent;
+    sections?: Section[];
+    socialLinks?: SocialLink[];
+    siteSettings?: SiteSettings;
 }
 
 const Home: React.FC<Props> = (props: Props) => {
@@ -251,10 +280,16 @@ const Home: React.FC<Props> = (props: Props) => {
                         </p>
                     </div>
                 </div>
-                <CV />
-                <Skills />
+                {props.cvEntries && props.cvEntries.length > 0 && (
+                    <CV cvEntries={props.cvEntries} />
+                )}
+                {props.skills && props.skills.length > 0 && (
+                    <Skills skills={props.skills} />
+                )}
                 <RowMusic tracks={props.tracks} refreshed={props.refreshed} />
-                <RowArt />
+                {props.portfolioItems && props.portfolioItems.length > 0 && (
+                    <RowArt portfolioItems={props.portfolioItems} />
+                )}
                 <SayHello />
                 <Footer year={props.year} />
             </Layout>

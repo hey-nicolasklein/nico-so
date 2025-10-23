@@ -1,22 +1,30 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { BsTwitter } from "react-icons/bs";
-import cvItems from "../../data/cv_items";
 import Heading from "../Heading";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { BiBuildings } from "react-icons/bi";
 import { BsFillSignpostSplitFill } from "react-icons/bs";
+import { CvEntry } from "../../lib/strapi";
 
 import { IconType } from "react-icons";
 
-const CV = () => {
+interface CVProps {
+    cvEntries: CvEntry[];
+}
+
+const CV = ({ cvEntries }: CVProps) => {
     const [hovered, setHovered] = useState("");
+
+    // Separate entries by category
+    const experienceEntries = cvEntries.filter(entry => entry.category === 'experience');
+    const educationEntries = cvEntries.filter(entry => entry.category === 'education');
 
     return (
         <div className="mt-24 mb-10">
             <div className="flex flex-col justify-between gap-x-10 gap-y-10 md:flex-row md:gap-y-0">
                 <CVElement
                     heading="Experience"
-                    entries={cvItems.experience}
+                    entries={experienceEntries}
                     onHoverStart={(page: string) => setHovered(page)}
                     onHoverEnd={() => setHovered("")}
                     hovered={hovered}
@@ -24,7 +32,7 @@ const CV = () => {
                 />
                 <CVElement
                     heading="Education"
-                    entries={cvItems.education}
+                    entries={educationEntries}
                     onHoverStart={(page: string) => setHovered(page)}
                     onHoverEnd={() => setHovered("")}
                     hovered={hovered}
@@ -37,7 +45,7 @@ const CV = () => {
 
 const CVElement = (props: {
     heading: string;
-    entries: any[];
+    entries: CvEntry[];
     onHoverStart: (element: string) => void;
     onHoverEnd: () => void;
     hovered: string;
@@ -61,7 +69,7 @@ const CVElement = (props: {
 
                     return (
                         <CVElementEntryComponent
-                            key={entry.title}
+                            key={entry.id}
                             entry={entry}
                             onHoverStart={() => props.onHoverStart(entry.title)}
                             onHoverEnd={() => props.onHoverEnd()}
@@ -76,12 +84,14 @@ const CVElement = (props: {
 };
 
 const CVElementEntryComponent = (props: {
-    entry: any;
+    entry: CvEntry;
     onHoverStart: () => void;
     onHoverEnd: () => void;
     hovered: boolean;
     icon: IconType;
 }) => {
+    const timeRange = `${props.entry.timeFrom} - ${props.entry.timeTo}`;
+
     return (
         <motion.div
             onHoverStart={props.onHoverStart}
@@ -95,7 +105,7 @@ const CVElementEntryComponent = (props: {
                             <props.icon size={20} className="mt-1 mr-2" />
                             <h2 className="text-2xl">{props.entry.title}</h2>
                         </div>
-                        <p className="mb-2 text-lg">{props.entry.time}</p>
+                        <p className="mb-2 text-lg">{timeRange}</p>
                         <p className="opacity-90">{props.entry.description}</p>
                     </div>
                     <div className="absolute -left-0 top-0 bottom-5 w-[5px] rounded-full bg-gray-200 opacity-50 dark:opacity-10"></div>
