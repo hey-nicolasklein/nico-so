@@ -7,7 +7,7 @@ interface Props {
     factor?: number;
 }
 
-const Wiggle: React.FC<Props> = (props: Props): JSX.Element => {
+const Wiggle: React.FC<Props> = (props: Props): React.ReactElement => {
     const [isWiggling, setWiggling] = useState<boolean>(false);
 
     const [styles, api] = useSpring(() => ({

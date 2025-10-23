@@ -32,7 +32,15 @@ import SayHello from "../components/SayHello";
 import CustomButton from "../components/SayHello/CustomButton";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const tracks = await getTopTracks();
+    let tracks = [];
+
+    try {
+        tracks = await getTopTracks();
+    } catch (error) {
+        console.warn('Failed to fetch Spotify tracks during build:', error);
+        // Return empty tracks array if Spotify API fails during build
+        tracks = [];
+    }
 
     let birthday = new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);

@@ -3,9 +3,9 @@ import styles from "../../styles/components/Card.module.css";
 const Card = (props: {
     title: string;
     color?: string;
-    icon?: JSX.Element;
+    icon?: React.ReactElement;
     children?: React.ReactElement;
-    highlight?: JSX.Element;
+    highlight?: React.ReactElement;
     secondary?: boolean;
 }) => {
     return (

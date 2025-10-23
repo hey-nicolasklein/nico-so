@@ -7,7 +7,7 @@ interface Props {
     factor?: number;
 }
 
-const Wobbly: React.FC<Props> = (props: Props): JSX.Element => {
+const Wobbly: React.FC<Props> = (props: Props): React.ReactElement => {
     const modifier = props.factor ?? 1;
 
     // Use Spring Hook to make Card "wiggly"
