@@ -56,8 +56,9 @@ export const getStaticProps: GetStaticProps = async () => {
     }
 
     // Calculate age from birthday in Strapi or fallback to hardcoded
-    const birthday = (strapiContent as any).pageContent?.birthday
-        ? new Date((strapiContent as any).pageContent.birthday)
+    const pageContent = (strapiContent as any).pageContent;
+    const birthday = pageContent?.birthday
+        ? new Date(pageContent.birthday)
         : new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
     const i = Interval.fromDateTimes(birthday, DateTime.now());

@@ -385,12 +385,7 @@ export async function fetchPortfolioItems(): Promise<PortfolioItem[]> {
 export async function fetchPageContent(): Promise<PageContent | null> {
   try {
     const response = await fetchStrapi<StrapiResponse<StrapiEntity<PageContentAttributes>>>(
-      '/page-content',
-      { 
-        'populate[profileImage]': '*',
-        'populate[memojiLight]': '*',
-        'populate[memojiDark]': '*'
-      }
+      '/page-content'
     );
 
     if (!response.data) {
