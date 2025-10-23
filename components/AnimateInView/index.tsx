@@ -1,5 +1,5 @@
-import { motion, useAnimation } from "framer-motion";
-import React, { ReactChildren, ReactElement, useEffect } from "react";
+import { motion, useAnimationControls } from "framer-motion";
+import React, { ReactElement, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const fadeInVariants = {
@@ -9,7 +9,7 @@ const fadeInVariants = {
 
 const AnimateInView = (props: { children: ReactElement[] }) => {
     const [ref, inView] = useInView();
-    const controls = useAnimation();
+    const controls = useAnimationControls();
 
     useEffect(() => {
         if (inView) {

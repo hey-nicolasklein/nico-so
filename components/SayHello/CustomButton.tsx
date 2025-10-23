@@ -10,7 +10,7 @@ import { AiFillMessage, AiOutlineArrowRight } from "react-icons/ai";
 
 const CustomButton = (props: {
     secondary: boolean;
-    icon?: JSX.Element;
+    icon?: React.ReactElement;
     title: string;
 }) => {
     const [isShown, setShown] = useState(false);

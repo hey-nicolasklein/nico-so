@@ -7,7 +7,7 @@ const Zoomed = (props: {
     factor?: number;
     scale?: number;
     rotate?: number;
-}): JSX.Element => {
+}): React.ReactElement => {
     const modifier = props.factor ?? 1;
     const modifierScale = props.scale ?? 1.08;
     const rotateVal = props.rotate ?? 2;
