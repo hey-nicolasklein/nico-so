@@ -22,9 +22,11 @@ const fadeInVariants = {
 interface Props {
     tracks: ITrack[];
     refreshed: number;
+    title: string;
+    subtitle: string;
 }
 
-const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
+const RowMusic: React.FC<Props> = ({ tracks, refreshed, title, subtitle }) => {
     const refreshedDateTime = DateTime.fromMillis(refreshed);
 
     const controls = useAnimation();
@@ -44,7 +46,7 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
         >
             <div className={classNames("z-50 mb-10 mt-24")}>
                 <div className="flex items-center justify-between">
-                    <Heading>Music I love</Heading>
+                    <Heading>{title}</Heading>
 
                     <div className="flex items-center opacity-50">
                         <a
@@ -57,7 +59,7 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
                     </div>
                 </div>
                 <HeadingDescription className="mt-3">
-                    My most listened to songs in the last week on Spotify.
+                    {subtitle}
                 </HeadingDescription>
                 <div
                     ref={ref}
