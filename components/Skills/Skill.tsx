@@ -24,7 +24,6 @@ const Skill = ({
     }
 
     function clearCallback() {
-        console.log("leave");
         setSelected("");
     }
 

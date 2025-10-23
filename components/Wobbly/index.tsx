@@ -21,7 +21,6 @@ const Wobbly: React.FC<Props> = (props: Props): React.ReactElement => {
     const [isHovered, setHovered] = useState(false);
 
     useEffect(() => {
-        console.log(modifier);
         if (!isHovered) return;
 
         const timeout = setTimeout(() => {

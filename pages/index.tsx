@@ -1,6 +1,5 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import Navbar from "../components/Navbar";
 import { DateTime, Interval } from "luxon";
 import Layout from "../components/Layout";
 import {
@@ -8,10 +7,8 @@ import {
     BsLinkedin,
     BsTwitter,
     BsGithub,
-    BsSpotify,
 } from "react-icons/bs";
-import { IconContext } from "react-icons";
-import { getRecentTracks, getTopTracks } from "../lib/spotify";
+import { getTopTracks } from "../lib/spotify";
 import { fetchAllStrapiContent, CvEntry, Skill, PortfolioItem, PageContent, Section, SocialLink, SiteSettings } from "../lib/strapi";
 import Image from "next/image";
 import ITrack from "../interfaces/ITrack";
@@ -26,9 +23,7 @@ import BackgroundGrid from "../components/BackgroundGrid";
 import RowArt from "../components/RowArt";
 import RowMusic from "../components/RowMusic";
 import CV from "../components/CV";
-import Skills from "../components/Skills";
-import Perspective from "../components/Perspecitive";
-import Wiggle from "../components/Wiggle";
+import Skills from "../components/Skills";  
 import SayHello from "../components/SayHello";
 import CustomButton from "../components/SayHello/CustomButton";
 
@@ -49,7 +44,7 @@ export const getStaticProps: GetStaticProps = async () => {
     try {
         strapiContent = await fetchAllStrapiContent();
     } catch (error) {
-        console.error('Failed to fetch Strapi content during build:', error);
+        console.warn('Failed to fetch Strapi content during build:', error);
         // Return empty content if Strapi fails during build
         strapiContent = {
             cvEntries: [],
@@ -61,8 +56,8 @@ export const getStaticProps: GetStaticProps = async () => {
     }
 
     // Calculate age from birthday in Strapi or fallback to hardcoded
-    const birthday = strapiContent.pageContent?.birthday
-        ? new Date(strapiContent.pageContent.birthday)
+    const birthday = (strapiContent as any).pageContent?.birthday
+        ? new Date((strapiContent as any).pageContent.birthday)
         : new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
     const i = Interval.fromDateTimes(birthday, DateTime.now());
@@ -75,7 +70,6 @@ export const getStaticProps: GetStaticProps = async () => {
             year: DateTime.now().year,
             ...strapiContent,
         },
-        revalidate: 600,
     };
 };
 
@@ -207,27 +201,20 @@ const Home: React.FC<Props> = (props: Props) => {
                         </div>
 
                         <div className="absolute bottom-32 flex w-full justify-center sm:bottom-20">
-                            <IconContext.Provider
-                                value={{
-                                    className:
-                                        "black dark:white hover:drop-shadow-4xl transtion duration-300 hover:scale-110 hover:-rotate-6 ease-in-out",
-                                }}
-                            >
-                                <div className="flex w-72	justify-around">
-                                    <a href="https://www.linkedin.com/in/heynicolas/">
-                                        <BsLinkedin size={40} />
-                                    </a>
-                                    <a href="https://www.behance.net/hey_nicolasklein">
-                                        <BsBehance size={40} />
-                                    </a>
-                                    <a href="https://github.com/hey-nicolasklein">
-                                        <BsGithub size={40} />
-                                    </a>
-                                    <a href="https://twitter.com/heynicolasklein">
-                                        <BsTwitter size={40} />
-                                    </a>
-                                </div>
-                            </IconContext.Provider>
+                            <div className="flex w-72 justify-around">
+                                <a href="https://www.linkedin.com/in/heynicolas/" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
+                                    <BsLinkedin size={40} />
+                                </a>
+                                <a href="https://www.behance.net/hey_nicolasklein" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
+                                    <BsBehance size={40} />
+                                </a>
+                                <a href="https://github.com/hey-nicolasklein" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
+                                    <BsGithub size={40} />
+                                </a>
+                                <a href="https://twitter.com/heynicolasklein" className="black dark:white hover:drop-shadow-4xl transition duration-300 hover:scale-110 hover:-rotate-6 ease-in-out">
+                                    <BsTwitter size={40} />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -35,10 +35,10 @@ interface StrapiResponse<T> {
   };
 }
 
-interface StrapiEntity<T> {
+// Strapi v5 entity structure (direct properties, no attributes wrapper)
+type StrapiEntity<T> = T & {
   id: number;
-  attributes: T;
-}
+};
 
 // ============================================================================
 // Content Type Interfaces (Strapi Attributes)
@@ -269,6 +269,7 @@ async function fetchStrapi<T>(
   });
 
   if (!response.ok) {
+    console.error(`Strapi API error: ${response.status} ${response.statusText} - ${url}`);
     throw new Error(
       `Strapi API error: ${response.status} ${response.statusText} - ${url}`
     );
@@ -291,16 +292,22 @@ export async function fetchCvEntries(): Promise<CvEntry[]> {
       { 'sort[0]': 'order:asc' }
     );
 
-    return response.data.map((entity) => ({
-      id: entity.id,
-      title: entity.attributes.title,
-      category: entity.attributes.category,
-      timeFrom: entity.attributes.timeFrom,
-      timeTo: entity.attributes.timeTo,
-      description: entity.attributes.description,
-      link: entity.attributes.link,
-      order: entity.attributes.order,
-    }));
+    if (!response.data || !Array.isArray(response.data)) {
+      return [];
+    }
+
+    return response.data.map((entity) => {
+      return {
+        id: entity.id,
+        title: entity.title,
+        category: entity.category,
+        timeFrom: entity.timeFrom,
+        timeTo: entity.timeTo,
+        description: entity.description,
+        link: entity.link,
+        order: entity.order,
+      };
+    });
   } catch (error) {
     console.error('Error fetching CV entries:', error);
     return [];
@@ -317,13 +324,19 @@ export async function fetchSkills(): Promise<Skill[]> {
       { 'sort[0]': 'order:asc' }
     );
 
-    return response.data.map((entity) => ({
-      id: entity.id,
-      title: entity.attributes.title,
-      iconName: entity.attributes.iconName,
-      category: entity.attributes.category,
-      order: entity.attributes.order,
-    }));
+    if (!response.data || !Array.isArray(response.data)) {
+      return [];
+    }
+
+    return response.data.map((entity) => {
+      return {
+        id: entity.id,
+        title: entity.title,
+        iconName: entity.iconName,
+        category: entity.category,
+        order: entity.order,
+      };
+    });
   } catch (error) {
     console.error('Error fetching skills:', error);
     return [];
@@ -340,22 +353,24 @@ export async function fetchPortfolioItems(): Promise<PortfolioItem[]> {
       { 'sort[0]': 'order:asc', 'populate': 'image' }
     );
 
+    if (!response.data || !Array.isArray(response.data)) {
+      return [];
+    }
+
     return response.data.map((entity) => {
-      const imageData = entity.attributes.image?.data;
-      const imageUrl = imageData
-        ? `${STRAPI_API_URL}${imageData.attributes.url}`
-        : '';
+      const imageData = entity.image;
+      const imageUrl = imageData ? getStrapiMediaUrl((imageData as any).url) : '';
 
       return {
         id: entity.id,
-        title: entity.attributes.title,
-        subtitle: entity.attributes.subtitle,
+        title: entity.title,
+        subtitle: entity.subtitle,
         imageUrl,
-        imageAlt: imageData?.attributes.alternativeText,
-        externalLink: entity.attributes.externalLink,
-        createdWith: entity.attributes.createdWith,
-        type: entity.attributes.type,
-        order: entity.attributes.order,
+        imageAlt: (imageData as any)?.alternativeText || null,
+        externalLink: entity.externalLink || null,
+        createdWith: entity.createdWith || null,
+        type: entity.type,
+        order: entity.order,
       };
     });
   } catch (error) {
@@ -371,33 +386,39 @@ export async function fetchPageContent(): Promise<PageContent | null> {
   try {
     const response = await fetchStrapi<StrapiResponse<StrapiEntity<PageContentAttributes>>>(
       '/page-content',
-      { 'populate': 'profileImage,memojiLight,memojiDark' }
+      { 
+        'populate[profileImage]': '*',
+        'populate[memojiLight]': '*',
+        'populate[memojiDark]': '*'
+      }
     );
 
-    const attrs = response.data.attributes;
+    if (!response.data) {
+      return null;
+    }
 
     return {
-      siteName: attrs.siteName,
-      siteTitle: attrs.siteTitle,
-      taglineDesktop: attrs.taglineDesktop,
-      taglineMobile: attrs.taglineMobile,
-      metaDescription: attrs.metaDescription,
-      heroGreeting: attrs.heroGreeting,
-      aboutHeading: attrs.aboutHeading,
-      aboutText: attrs.aboutText,
-      aboutInterests: attrs.aboutInterests,
-      cabinetDescription: attrs.cabinetDescription,
-      email: attrs.email,
-      birthday: attrs.birthday,
-      profileImageUrl: attrs.profileImage?.data
-        ? `${STRAPI_API_URL}${attrs.profileImage.data.attributes.url}`
-        : undefined,
-      memojiLightUrl: attrs.memojiLight?.data
-        ? `${STRAPI_API_URL}${attrs.memojiLight.data.attributes.url}`
-        : undefined,
-      memojiDarkUrl: attrs.memojiDark?.data
-        ? `${STRAPI_API_URL}${attrs.memojiDark.data.attributes.url}`
-        : undefined,
+      siteName: response.data.siteName,
+      siteTitle: response.data.siteTitle,
+      taglineDesktop: response.data.taglineDesktop,
+      taglineMobile: response.data.taglineMobile,
+      metaDescription: response.data.metaDescription,
+      heroGreeting: response.data.heroGreeting,
+      aboutHeading: response.data.aboutHeading,
+      aboutText: response.data.aboutText,
+      aboutInterests: response.data.aboutInterests,
+      cabinetDescription: response.data.cabinetDescription,
+      email: response.data.email,
+      birthday: response.data.birthday,
+      profileImageUrl: response.data.profileImage
+        ? getStrapiMediaUrl((response.data.profileImage as any).url)
+        : null,
+      memojiLightUrl: response.data.memojiLight
+        ? getStrapiMediaUrl((response.data.memojiLight as any).url)
+        : null,
+      memojiDarkUrl: response.data.memojiDark
+        ? getStrapiMediaUrl((response.data.memojiDark as any).url)
+        : null,
     };
   } catch (error) {
     console.error('Error fetching page content:', error);
@@ -415,14 +436,20 @@ export async function fetchSections(): Promise<Section[]> {
       { 'sort[0]': 'order:asc' }
     );
 
-    return response.data.map((entity) => ({
-      id: entity.id,
-      identifier: entity.attributes.identifier,
-      heading: entity.attributes.heading,
-      description: entity.attributes.description,
-      visible: entity.attributes.visible,
-      order: entity.attributes.order,
-    }));
+    if (!response.data || !Array.isArray(response.data)) {
+      return [];
+    }
+
+    return response.data.map((entity) => {
+      return {
+        id: entity.id,
+        identifier: entity.identifier,
+        heading: entity.heading,
+        description: entity.description,
+        visible: entity.visible,
+        order: entity.order,
+      };
+    });
   } catch (error) {
     console.error('Error fetching sections:', error);
     return [];
@@ -439,14 +466,20 @@ export async function fetchSocialLinks(): Promise<SocialLink[]> {
       { 'sort[0]': 'order:asc' }
     );
 
-    return response.data.map((entity) => ({
-      id: entity.id,
-      platform: entity.attributes.platform,
-      url: entity.attributes.url,
-      iconName: entity.attributes.iconName,
-      order: entity.attributes.order,
-      visible: entity.attributes.visible,
-    }));
+    if (!response.data || !Array.isArray(response.data)) {
+      return [];
+    }
+
+    return response.data.map((entity) => {
+      return {
+        id: entity.id,
+        platform: entity.platform,
+        url: entity.url,
+        iconName: entity.iconName,
+        order: entity.order,
+        visible: entity.visible,
+      };
+    });
   } catch (error) {
     console.error('Error fetching social links:', error);
     return [];
@@ -459,18 +492,20 @@ export async function fetchSocialLinks(): Promise<SocialLink[]> {
 export async function fetchSiteSettings(): Promise<SiteSettings | null> {
   try {
     const response = await fetchStrapi<StrapiResponse<StrapiEntity<SiteSettingsAttributes>>>(
-      '/site-settings'
+      '/site-setting'
     );
 
-    const attrs = response.data.attributes;
+    if (!response.data) {
+      return null;
+    }
 
     return {
-      footerText: attrs.footerText,
-      footerCopyright: attrs.footerCopyright,
-      contactHeading: attrs.contactHeading,
-      contactCta: attrs.contactCta,
-      emailSubject: attrs.emailSubject,
-      emailBody: attrs.emailBody,
+      footerText: response.data.footerText,
+      footerCopyright: response.data.footerCopyright,
+      contactHeading: response.data.contactHeading,
+      contactCta: response.data.contactCta,
+      emailSubject: response.data.emailSubject || null,
+      emailBody: response.data.emailBody || null,
     };
   } catch (error) {
     console.error('Error fetching site settings:', error);

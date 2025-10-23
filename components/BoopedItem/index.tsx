@@ -108,6 +108,7 @@ const BoopedItem = (props: {
                         alt="test"
                         src={props.href}
                         fill
+                        sizes="150px"
                     />
                 </div>
 

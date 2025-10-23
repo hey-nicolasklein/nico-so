@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
-import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import * as SimpleIcons from "react-icons/si";
 import * as FontAwesome from "react-icons/fa";
@@ -10,7 +10,6 @@ import Image from "next/image";
 import { IconContext, IconType } from "react-icons";
 import Zoomed from "../Zoomed";
 import Skill from "./Skill";
-import BackgroundGrid from "../BackgroundGrid";
 import AnimateInView from "../AnimateInView";
 
 interface ISkillElement {
@@ -87,6 +86,7 @@ const Skills = ({ skills }: SkillsProps) => {
                                     quality={50}
                                     priority
                                     fill
+                                    sizes="150px"
                                     className={`mb-5 mr-20 rounded-full object-cover p-0 transition duration-500 ease-in-out sm:mb-0 ${
                                         selected != "" ? "opacity-80" : ""
                                     }`}

@@ -64,7 +64,6 @@ const CVElement = (props: {
                     const isHovered = hoveredTitle === currentEntryTitle;
 
                     if (isHovered) {
-                        console.log(hoveredTitle + " -- " + currentEntryTitle);
                     }
 
                     return (
