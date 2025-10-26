@@ -53,7 +53,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
     };
 
     return (
-        <div className="relative group">
+        <div className="relative">
             {/* Left Button */}
             <button
                 onClick={() => scroll("left")}
