@@ -29,3 +29,76 @@ a {
     background: black;
   }
 }
+
+/* Hide scrollbar utility */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Horizontal scroll with fade masks */
+.horizontal-scroller {
+  position: relative;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 2rem,
+    black calc(100% - 2rem),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 2rem,
+    black calc(100% - 2rem),
+    transparent
+  );
+}
+
+/* Progressive enhancement: CSS scroll-driven animations */
+@supports (animation-timeline: scroll()) {
+  .horizontal-scroller {
+    mask-image:
+      linear-gradient(to right, transparent, black),
+      linear-gradient(to right, black, transparent),
+      linear-gradient(black, black);
+    mask-size: 2rem 100%, 2rem 100%, 100% 100%;
+    mask-position: 0 0, 100% 0, 0 0;
+    mask-repeat: no-repeat;
+    mask-composite: exclude;
+    -webkit-mask-composite: exclude;
+    animation: mask-scroll;
+    animation-timeline: scroll(self inline);
+    animation-range: 0 2rem;
+  }
+
+  @keyframes mask-scroll {
+    0% {
+      mask-size: 0 100%, 2rem 100%, 100% 100%;
+    }
+    100% {
+      mask-size: 2rem 100%, 2rem 100%, 100% 100%;
+    }
+  }
+
+  /* Mask for the end of scroll */
+  .horizontal-scroller::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2rem;
+    pointer-events: none;
+    animation: mask-scroll-end;
+    animation-timeline: scroll(self inline);
+    animation-range: calc(100% - 2rem) 100%;
+    animation-direction: reverse;
+  }
+}

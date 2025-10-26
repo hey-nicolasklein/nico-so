@@ -6,6 +6,7 @@ import { PortfolioItem } from "../../lib/strapi";
 import BoopedItem from "../BoopedItem";
 import Heading, { HeadingDescription } from "../Heading";
 import Link from "../Link";
+import HorizontalScroll from "../HorizontalScroll";
 
 const fadeInVariants = {
     visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
@@ -71,21 +72,21 @@ const RowArt: React.FC<RowArtProps> = ({
                     with both digital and physical items in it.
                 </HeadingDescription>
             )}
-            <div
-                ref={ref}
-                className=" mt-8 grid grid-rows-3 content-between items-center justify-center gap-4 sm:grid-cols-3 sm:grid-rows-1"
-            >
-                {portfolioItems.map((item) => (
-                    <BoopedItem
-                        key={item.id}
-                        href={item.imageUrl}
-                        title={item.title}
-                        subtitle={item.subtitle || ""}
-                        createdWith={item.createdWith || ""}
-                        source={item.externalLink || ""}
-                        type={stringToMediaType(item.type)}
-                    />
-                ))}
+            <div ref={ref} className="mt-8">
+                <HorizontalScroll>
+                    {portfolioItems.map((item) => (
+                        <div key={item.id} className="flex-shrink-0">
+                            <BoopedItem
+                                href={item.imageUrl}
+                                title={item.title}
+                                subtitle={item.subtitle || ""}
+                                createdWith={item.createdWith || ""}
+                                source={item.externalLink || ""}
+                                type={stringToMediaType(item.type)}
+                            />
+                        </div>
+                    ))}
+                </HorizontalScroll>
             </div>
             <div className=" h-12 w-full bg-transparent"></div>
         </motion.div>

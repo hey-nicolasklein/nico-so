@@ -7,6 +7,7 @@ import ITrack from "../../interfaces/ITrack";
 import { classNames } from "../../lib/tailwind";
 import Heading, { HeadingDescription } from "../Heading";
 import Track from "../Track";
+import HorizontalScroll from "../HorizontalScroll";
 import dynamic from "next/dynamic";
 
 // Only load refresh time on client side
@@ -59,13 +60,14 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
                 <HeadingDescription className="mt-3">
                     My most listened to songs in the last week on Spotify.
                 </HeadingDescription>
-                <div
-                    ref={ref}
-                    className="mt-8 grid grid-cols-2 grid-rows-2 gap-4 sm:grid-cols-4 sm:grid-rows-1"
-                >
-                    {tracks.slice(0, 4).map((track: ITrack, index: number) => (
-                        <Track key={index} track={track} />
-                    ))}
+                <div ref={ref} className="mt-8">
+                    <HorizontalScroll>
+                        {tracks.slice(0, 4).map((track: ITrack, index: number) => (
+                            <div key={index} className="flex-shrink-0 w-[200px]">
+                                <Track track={track} />
+                            </div>
+                        ))}
+                    </HorizontalScroll>
                 </div>
                 <div className=" h-10 w-full bg-transparent"></div>
             </div>
