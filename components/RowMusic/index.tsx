@@ -62,7 +62,7 @@ const RowMusic: React.FC<Props> = ({ tracks, refreshed }) => {
                 </HeadingDescription>
                 <div ref={ref} className="mt-8">
                     <HorizontalScroll>
-                        {tracks.slice(0, 4).map((track: ITrack, index: number) => (
+                        {tracks.map((track: ITrack, index: number) => (
                             <div key={index} className="flex-shrink-0 w-[200px]">
                                 <Track track={track} />
                             </div>
