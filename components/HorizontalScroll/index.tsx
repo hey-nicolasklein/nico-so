@@ -76,8 +76,9 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
                 ref={scrollContainerRef}
                 onScroll={checkScrollButtons}
                 className={classNames(
-                    "horizontal-scroller overflow-x-auto overflow-y-hidden",
+                    "horizontal-scroller overflow-x-auto overflow-y-visible",
                     "scrollbar-hide scroll-smooth",
+                    "py-4", // Add vertical padding for hover effects
                     className
                 )}
                 style={{
@@ -85,7 +86,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
                     msOverflowStyle: "none",
                 }}
             >
-                <div className={classNames("flex gap-4", itemClassName)}>
+                <div className={classNames("flex gap-4 px-2", itemClassName)}>
                     {children}
                 </div>
             </div>
