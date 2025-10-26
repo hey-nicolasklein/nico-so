@@ -264,7 +264,7 @@ const Home: React.FC<Props> = (props: Props) => {
                         </p>
                         <p className="mt-2">
                             Beyond programming, I have a passion for{" "}
-                            <Link href="https://photos.nico.so">
+                            <Link href="https://nicolasklein.photography">
                                 photography
                             </Link>{" "}
                             and{" "}
