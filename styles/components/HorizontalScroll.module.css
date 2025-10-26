@@ -1,0 +1,51 @@
+/* Scroll masking with fade effects at edges */
+.scrollContainer {
+    --mask-fade-width: 2.5rem;
+    transition: mask-image 0.3s ease-in-out;
+}
+
+/* Only fade right when at the start */
+.scrollContainer.fadeRight {
+    mask-image: linear-gradient(to right, black, black calc(100% - var(--mask-fade-width)), transparent);
+}
+
+/* Only fade left when at the end */
+.scrollContainer.fadeLeft {
+    mask-image: linear-gradient(to right, transparent, black var(--mask-fade-width), black);
+}
+
+/* Fade both sides when in the middle */
+.scrollContainer.fadeBoth {
+    mask-image: linear-gradient(to right, transparent, black var(--mask-fade-width), black calc(100% - var(--mask-fade-width)), transparent);
+}
+
+/* Scroll indicators (shadows) as fallback/enhancement */
+.indicator {
+    position: absolute;
+    width: 3rem;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.indicatorLeft {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.05), transparent);
+}
+
+.indicatorRight {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.05), transparent);
+}
+
+.indicatorVisible {
+    opacity: 1;
+}
+
+/* Hide scrollbar */
+.scrollContainer::-webkit-scrollbar {
+    display: none;
+}
+

@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect, ReactNode } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { classNames } from "../../lib/tailwind";
+import styles from "../../styles/components/HorizontalScroll.module.css";
+import useCheckMobileScreen from "../../hooks/useIsMobile";
 
 interface HorizontalScrollProps {
     children: ReactNode;
@@ -16,6 +18,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [showLeftButton, setShowLeftButton] = useState(false);
     const [showRightButton, setShowRightButton] = useState(false);
+    const isMobile = useCheckMobileScreen();
 
     const checkScrollButtons = () => {
         if (!scrollContainerRef.current) return;
@@ -41,7 +44,24 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
     const scroll = (direction: "left" | "right") => {
         if (!scrollContainerRef.current) return;
 
-        const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
+        let scrollAmount;
+        
+        if (isMobile) {
+            // On mobile, scroll exactly one item width
+            const firstChild = scrollContainerRef.current.querySelector('.flex')?.firstElementChild as HTMLElement;
+            if (firstChild) {
+                // Item width + gap (gap-8 = 2rem = 32px)
+                const gapSize = 32;
+                scrollAmount = firstChild.offsetWidth + gapSize;
+            } else {
+                // Fallback if child not found
+                scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
+            }
+        } else {
+            // On desktop, scroll 80% of viewport width
+            scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
+        }
+
         const targetScroll = direction === "left"
             ? scrollContainerRef.current.scrollLeft - scrollAmount
             : scrollContainerRef.current.scrollLeft + scrollAmount;
@@ -54,11 +74,23 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
 
     return (
         <div className="relative">
+            {/* Scroll Indicators (shadow fallback) */}
+            <div className={classNames(
+                styles.indicator,
+                styles.indicatorLeft,
+                showLeftButton ? styles.indicatorVisible : ""
+            )} />
+            <div className={classNames(
+                styles.indicator,
+                styles.indicatorRight,
+                showRightButton ? styles.indicatorVisible : ""
+            )} />
+
             {/* Left Button */}
             <button
                 onClick={() => scroll("left")}
                 className={classNames(
-                    "absolute left-0 top-1/2 z-10 -translate-y-1/2 transform",
+                    "absolute -left-6 top-1/2 z-10 -translate-y-1/2 transform",
                     "h-12 w-12 rounded-full bg-white/90 dark:bg-black/90",
                     "flex items-center justify-center",
                     "shadow-lg backdrop-blur-sm",
@@ -71,14 +103,18 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
                 <BsChevronLeft className="text-black dark:text-white" size={24} />
             </button>
 
-            {/* Scrollable Container */}
+            {/* Scrollable Container with Mask */}
             <div
                 ref={scrollContainerRef}
                 onScroll={checkScrollButtons}
                 className={classNames(
+                    styles.scrollContainer,
+                    showLeftButton && showRightButton ? styles.fadeBoth :
+                    showRightButton ? styles.fadeRight :
+                    showLeftButton ? styles.fadeLeft : "",
                     "horizontal-scroller overflow-x-auto overflow-y-visible",
                     "scrollbar-hide scroll-smooth",
-                    "py-4", // Add vertical padding for hover effects
+                    "py-4",
                     className
                 )}
                 style={{
@@ -86,7 +122,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
                     msOverflowStyle: "none",
                 }}
             >
-                <div className={classNames("flex gap-4 px-2", itemClassName)}>
+                <div className={classNames("flex gap-8 px-8", itemClassName)}>
                     {children}
                 </div>
             </div>
@@ -95,7 +131,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
             <button
                 onClick={() => scroll("right")}
                 className={classNames(
-                    "absolute right-0 top-1/2 z-10 -translate-y-1/2 transform",
+                    "absolute -right-6 top-1/2 z-10 -translate-y-1/2 transform",
                     "h-12 w-12 rounded-full bg-white/90 dark:bg-black/90",
                     "flex items-center justify-center",
                     "shadow-lg backdrop-blur-sm",

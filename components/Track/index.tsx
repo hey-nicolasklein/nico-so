@@ -32,7 +32,7 @@ const Track = (props: { track: ITrack }) => {
                         href={props.track.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="block rounded-lg transition duration-500 group-hover:drop-shadow-3xl"
+                        className="block rounded-lg transition duration-500 group-hover:drop-shadow-xl"
                     >
                         <Image
                             className="rounded-lg transition ease-in-out group-hover:brightness-100"
