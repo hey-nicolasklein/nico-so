@@ -20,7 +20,7 @@ const Wobbly: React.FC<Props> = (props: Props): React.ReactElement => {
 
     const [isHovered, setHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
-    const animationFrameRef = useRef<number>();
+    const animationFrameRef = useRef<number | undefined>(undefined);
     const timeRef = useRef(0);
 
     // Detect if device is mobile/touch
