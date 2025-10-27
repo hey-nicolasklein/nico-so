@@ -1,8 +1,9 @@
-import { useRef, useState, useEffect, ReactNode } from "react";
+import { useRef, useState, useEffect, ReactNode, Children } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { classNames } from "../../lib/tailwind";
 import styles from "../../styles/components/HorizontalScroll.module.css";
 import useCheckMobileScreen from "../../hooks/useIsMobile";
+import ScrollFadeItem from "./ScrollFadeItem";
 
 interface HorizontalScrollProps {
     children: ReactNode;
@@ -123,7 +124,14 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
                 }}
             >
                 <div className={classNames("flex gap-8 px-8", itemClassName)}>
-                    {children}
+                    {Children.map(children, (child, index) => (
+                        <ScrollFadeItem
+                            key={index}
+                            scrollContainerRef={scrollContainerRef}
+                        >
+                            {child}
+                        </ScrollFadeItem>
+                    ))}
                 </div>
             </div>
 

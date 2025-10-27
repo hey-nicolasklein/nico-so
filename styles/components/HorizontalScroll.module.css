@@ -1,28 +1,48 @@
 /* Scroll masking with fade effects at edges */
 .scrollContainer {
-    --mask-fade-width: 2.5rem;
+    --mask-fade-width: 8rem;
     transition: mask-image 0.3s ease-in-out;
 }
 
 /* Only fade right when at the start */
 .scrollContainer.fadeRight {
-    mask-image: linear-gradient(to right, black, black calc(100% - var(--mask-fade-width)), transparent);
+    mask-image: linear-gradient(
+        to right,
+        black,
+        black calc(100% - var(--mask-fade-width)),
+        rgba(0, 0, 0, 0.6) calc(100% - calc(var(--mask-fade-width) * 0.5)),
+        transparent
+    );
 }
 
 /* Only fade left when at the end */
 .scrollContainer.fadeLeft {
-    mask-image: linear-gradient(to right, transparent, black var(--mask-fade-width), black);
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        rgba(0, 0, 0, 0.6) calc(var(--mask-fade-width) * 0.5),
+        black var(--mask-fade-width),
+        black
+    );
 }
 
 /* Fade both sides when in the middle */
 .scrollContainer.fadeBoth {
-    mask-image: linear-gradient(to right, transparent, black var(--mask-fade-width), black calc(100% - var(--mask-fade-width)), transparent);
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        rgba(0, 0, 0, 0.6) calc(var(--mask-fade-width) * 0.5),
+        black var(--mask-fade-width),
+        black calc(100% - var(--mask-fade-width)),
+        rgba(0, 0, 0, 0.6) calc(100% - calc(var(--mask-fade-width) * 0.5)),
+        transparent
+    );
 }
 
 /* Scroll indicators (shadows) as fallback/enhancement */
 .indicator {
     position: absolute;
-    width: 3rem;
+    width: 6rem;
     height: 100%;
     pointer-events: none;
     z-index: 5;
@@ -32,12 +52,22 @@
 
 .indicatorLeft {
     left: 0;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.05), transparent);
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.08) 50%,
+        transparent
+    );
 }
 
 .indicatorRight {
     right: 0;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.05), transparent);
+    background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.08) 50%,
+        transparent
+    );
 }
 
 .indicatorVisible {
