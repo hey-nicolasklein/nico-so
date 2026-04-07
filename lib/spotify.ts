@@ -19,9 +19,43 @@ const idAndSecretBase64 = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
 interface RefreshResponse {
     access_token: string;
     token_type: string;
-    expires_in: string;
+    expires_in: number;
     scope: string;
 }
+
+interface SpotifyArtist {
+    name: string;
+    external_urls: { spotify: string };
+}
+
+interface SpotifyTrack {
+    artists: SpotifyArtist[];
+    external_urls: { spotify: string };
+    album: { images: { url: string }[] };
+    name: string;
+    explicit: boolean;
+    duration_ms: number;
+}
+
+interface SpotifyTopTracksResponse {
+    items: SpotifyTrack[];
+}
+
+interface SpotifyRecentTrackItem {
+    track: SpotifyTrack;
+}
+
+interface SpotifyRecentTracksResponse {
+    items: SpotifyRecentTrackItem[];
+}
+
+let accessTokenCache: { token: string; expiresAt: number } | null = null;
+let topTracksCache: { tracks: ITrack[]; expiresAt: number } | null = null;
+let recentTracksCache: { tracks: ITrack[]; expiresAt: number } | null = null;
+
+const TOKEN_REFRESH_BUFFER_MS = 60_000;
+const TRACKS_CACHE_MS = 5 * 60_000;
+const MAX_RETRIES = 2;
 
 /**
  * Converts the current millies to the format hh:mm
@@ -32,12 +66,74 @@ const getDuration = (ms: number): string => {
     return `${minutes}:${seconds.length === 1 ? "0" : ""}${seconds}`;
 };
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const getRetryDelay = (attempt: number, retryAfterHeader: string | null) => {
+    const retryAfterSeconds = Number(retryAfterHeader);
+    if (!Number.isNaN(retryAfterSeconds) && retryAfterSeconds > 0) {
+        return retryAfterSeconds * 1000;
+    }
+    return Math.min(1000 * 2 ** attempt, 10_000);
+};
+
+const fetchWithRetry = async (
+    input: string,
+    init?: RequestInit
+): Promise<Response> => {
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+        const response = await fetch(input, init);
+        const isRetryable = response.status === 429 || response.status >= 500;
+
+        if (!isRetryable || attempt === MAX_RETRIES) {
+            return response;
+        }
+
+        await sleep(getRetryDelay(attempt, response.headers.get("retry-after")));
+    }
+
+    throw new Error("Unexpected retry flow while calling Spotify API");
+};
+
+const assertEnvVars = () => {
+    if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
+        throw new Error(
+            "Missing Spotify env vars. Expected SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_REFRESH_TOKEN."
+        );
+    }
+};
+
+const mapSpotifyTrack = (track: SpotifyTrack): ITrack => ({
+    artists: track.artists.map((artist) => ({
+        name: artist.name,
+        url: artist.external_urls.spotify,
+    })),
+    url: track.external_urls.spotify,
+    cover: track.album.images[0]?.url ?? "",
+    title: track.name,
+    explicit: track.explicit,
+    duration: getDuration(track.duration_ms),
+});
+
 /**
  * Transacts the {@constant REFRESH_TOKEN} for an access-token
  * as defined in the spotify developer docs.
  */
 const getAccessToken = async (): Promise<RefreshResponse> => {
-    const response: Response = await fetch(REFRESH_ENDPOINT, {
+    assertEnvVars();
+
+    if (accessTokenCache && Date.now() < accessTokenCache.expiresAt) {
+        return {
+            access_token: accessTokenCache.token,
+            token_type: "Bearer",
+            expires_in: Math.max(
+                1,
+                Math.floor((accessTokenCache.expiresAt - Date.now()) / 1000)
+            ),
+            scope: "",
+        };
+    }
+
+    const response: Response = await fetchWithRetry(REFRESH_ENDPOINT, {
         method: "POST",
         headers: {
             Authorization: `Basic ${idAndSecretBase64}`,
@@ -49,7 +145,20 @@ const getAccessToken = async (): Promise<RefreshResponse> => {
         }).toString(),
     });
 
-    let body: RefreshResponse = await response.json();
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+            `Spotify token refresh failed (${response.status}): ${errorText}`
+        );
+    }
+
+    const body: RefreshResponse = await response.json();
+    accessTokenCache = {
+        token: body.access_token,
+        expiresAt:
+            Date.now() +
+            Math.max(0, body.expires_in * 1000 - TOKEN_REFRESH_BUFFER_MS),
+    };
 
     return body;
 };
@@ -61,33 +170,28 @@ const getAccessToken = async (): Promise<RefreshResponse> => {
  * Limits the results to 10 by default.
  */
 export const getRecentTracks = async (): Promise<ITrack[]> => {
+    if (recentTracksCache && Date.now() < recentTracksCache.expiresAt) {
+        return recentTracksCache.tracks;
+    }
+
     const { access_token } = await getAccessToken();
 
-    const { items } = await fetch(
+    const response = await fetchWithRetry(
         `${RECENT_TRACKS_ENTPOINT}?${new URLSearchParams({ limit: "10" })}`,
         { headers: { Authorization: `Bearer ${access_token}` } }
-    ).then((res) => res.json());
+    );
 
-    const tracks: ITrack[] = items.map((track: any) => {
-        let song = track.track;
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+            `Spotify recent tracks request failed (${response.status}): ${errorText}`
+        );
+    }
 
-        return {
-            artists: song.artists.map(
-                (artist: {
-                    name: string;
-                    external_urls: { spotify: string };
-                }) => ({
-                    name: artist.name,
-                    url: artist.external_urls.spotify,
-                })
-            ),
-            url: song.external_urls.spotify,
-            cover: song.album.images[0].url,
-            title: song.name,
-            explicit: song.explicit,
-            duration: getDuration(song.duration_ms),
-        };
-    });
+    const { items }: SpotifyRecentTracksResponse = await response.json();
+
+    const tracks: ITrack[] = items.map((item) => mapSpotifyTrack(item.track));
+    recentTracksCache = { tracks, expiresAt: Date.now() + TRACKS_CACHE_MS };
 
     return tracks;
 };
@@ -100,9 +204,13 @@ export const getRecentTracks = async (): Promise<ITrack[]> => {
  * Limits the results to 10 by default.
  */
 export const getTopTracks = async (): Promise<ITrack[]> => {
+    if (topTracksCache && Date.now() < topTracksCache.expiresAt) {
+        return topTracksCache.tracks;
+    }
+
     const { access_token } = await getAccessToken();
 
-    const { items } = await fetch(
+    const response = await fetchWithRetry(
         `${TOP_TRACKS_ENDPOINT}?${new URLSearchParams({
             time_range: "medium_term",
             limit: "10",
@@ -112,21 +220,18 @@ export const getTopTracks = async (): Promise<ITrack[]> => {
                 Authorization: `Bearer ${access_token}`,
             },
         }
-    ).then((res) => res.json());
+    );
 
-    const tracks = items.slice(0, 10).map((track: any) => ({
-        artists: track.artists.map(
-            (artist: { name: string; external_urls: { spotify: string } }) => ({
-                name: artist.name,
-                url: artist.external_urls.spotify,
-            })
-        ),
-        url: track.external_urls.spotify,
-        cover: track.album.images[0].url,
-        title: track.name,
-        explicit: track.explicit,
-        duration: getDuration(track.duration_ms),
-    }));
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+            `Spotify top tracks request failed (${response.status}): ${errorText}`
+        );
+    }
+
+    const { items }: SpotifyTopTracksResponse = await response.json();
+    const tracks = items.slice(0, 10).map(mapSpotifyTrack);
+    topTracksCache = { tracks, expiresAt: Date.now() + TRACKS_CACHE_MS };
 
     return tracks;
 };
