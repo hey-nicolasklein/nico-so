@@ -1,5 +1,9 @@
 # nico.so
 
+<p align="center">
+  <img src="public/assets/site-preview.png" alt="Screenshot of nico.so" width="800" />
+</p>
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhey-nicolasklein%2Fnico-so&env=SPOTIFY_REFRESH_TOKEN,SPOTIFY_CLIENT_SECRET,SPOTIFY_CLIENT_ID&envDescription=For%20the%20spotify%20connection%20to%20work%20you%20need%20to%20authenticate%20via%20a%20client_id%2C%20client_secret%20and%20refresh_token.%20Checkout%20the%20spotify%20docs%20to%20find%20out%20how%20to%20create%20them%20for%20your%20own%20account.&envLink=https%3A%2F%2Fdeveloper.spotify.com%2Fdocumentation%2Fgeneral%2Fguides%2Fauthorization%2Fcode-flow%2F)
 
 > My personal website ✨
