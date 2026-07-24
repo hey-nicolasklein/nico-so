@@ -33,6 +33,7 @@ import CV from "../components/CV";
 import Skills from "../components/Skills";  
 import SayHello from "../components/SayHello";
 import CustomButton from "../components/SayHello/CustomButton";
+import RotatingText from "../components/RotatingText";
 
 export const getStaticProps: GetStaticProps = async () => {
     let tracks: ITrack[] = [];
@@ -154,21 +155,35 @@ const Home: React.FC<Props> = (props: Props) => {
                                     Hey I&apos;m
                                 </h2>
                                 <h1
-                                    className="m-0 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text 
+                                    className="m-0 bg-gradient-to-br from-emerald-500 to-green-300 bg-clip-text
                                         text-6xl font-bold text-transparent sm:text-[130px]"
                                 >
                                     Nicolas
                                 </h1>
 
-                                <h3 className="ml-2 hidden text-4xl font-normal opacity-90 sm:block sm:text-4xl">
-                                    Frontend developer by{" "}
+                                <h3 className="ml-2 hidden text-4xl font-normal opacity-90 sm:flex sm:text-4xl">
+                                    <RotatingText
+                                        words={[
+                                            "Frontend developer",
+                                            "UX-Engineer",
+                                            "Digital artist",
+                                        ]}
+                                    />
+                                    &nbsp;by{" "}
                                     <span className="dark:hidden">🖤</span>
                                     <span className="hidden dark:inline-block">
                                         🤍
                                     </span>
                                 </h3>
-                                <h3 className="m-0 text-3xl font-normal sm:hidden sm:text-4xl">
-                                    Developer by{" "}
+                                <h3 className="m-0 flex text-3xl font-normal sm:hidden sm:text-4xl">
+                                    <RotatingText
+                                        words={[
+                                            "Developer",
+                                            "Engineer",
+                                            "Artist",
+                                        ]}
+                                    />
+                                    &nbsp;by{" "}
                                     <span className="dark:hidden">🖤</span>
                                     <span className="hidden dark:inline-block">
                                         🤍
