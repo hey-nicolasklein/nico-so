@@ -2,7 +2,7 @@ import { useAnimation, motion } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import MediaType from "../../interfaces/IMediaType";
-import { PortfolioItem } from "../../lib/strapi";
+import { PortfolioItem } from "../../interfaces/content";
 import BoopedItem from "../BoopedItem";
 import Heading, { HeadingDescription } from "../Heading";
 import Link from "../Link";
