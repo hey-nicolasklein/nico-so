@@ -1,5 +1,5 @@
 import { useGesture } from "@use-gesture/react";
-import React, { ReactComponentElement, useState } from "react";
+import React, { ReactComponentElement, useRef, useState } from "react";
 import { animated, useChain, useSpring, useSpringRef } from "@react-spring/web";
 import styles from "../../styles/components/CustomButton.module.css";
 import Perspective from "../Perspecitive";
@@ -46,13 +46,13 @@ const CustomButton = (props: {
         scale: isShown ? 1.2 : 1,
     });
 
-    let hovered = false;
+    const hovered = useRef(false);
 
     // Use Gesture Hook to keep track of mouse movement velocity
     const bind: any = useGesture({
         onHover: () => {
-            if (hovered) return;
-            hovered = true;
+            if (hovered.current) return;
+            hovered.current = true;
             setShown(true);
             apiButton.start({
                 to: {
@@ -69,7 +69,7 @@ const CustomButton = (props: {
                     x: 0,
                 },
             });
-            hovered = false;
+            hovered.current = false;
         },
     });
 
