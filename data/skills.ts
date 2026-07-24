@@ -37,7 +37,7 @@ const skills: Skill[] = [
     },
     {
         id: 5,
-        title: "Framework",
+        title: "Qt",
         iconName: "SiQt",
         category: "framework",
         order: 4,
