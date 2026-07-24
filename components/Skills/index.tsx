@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import * as SimpleIcons from "react-icons/si";
 import * as FontAwesome from "react-icons/fa";
-import { Skill as SkillType } from "../../lib/strapi";
+import { Skill as SkillType } from "../../interfaces/content";
 import Heading from "../Heading";
 import memoji from "../../public/assets/memoji_dark.png";
 import Image from "next/image";

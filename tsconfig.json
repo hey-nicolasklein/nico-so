@@ -16,8 +16,8 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleResolution": "node",
-    "jsx": "preserve"
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx"
   },
   "include": [
     "next-env.d.ts",

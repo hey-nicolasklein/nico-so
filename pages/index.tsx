@@ -12,7 +12,11 @@ import {
 } from "react-icons/bs";
 import * as ReactIcons from "react-icons/bs";
 import { getTopTracks } from "../lib/spotify";
-import { fetchAllStrapiContent, CvEntry, Skill, PortfolioItem, PageContent, Section, SocialLink, SiteSettings } from "../lib/strapi";
+import { CvEntry, Skill, PortfolioItem, SocialLink } from "../interfaces/content";
+import cvEntries from "../data/cv";
+import skills from "../data/skills";
+import portfolioItems from "../data/portfolio";
+import socialLinks from "../data/socialLinks";
 import Image from "next/image";
 import ITrack from "../interfaces/ITrack";
 import Link from "../components/Link";
@@ -31,8 +35,7 @@ import SayHello from "../components/SayHello";
 import CustomButton from "../components/SayHello/CustomButton";
 
 export const getStaticProps: GetStaticProps = async () => {
-    let tracks = [];
-    let strapiContent = {};
+    let tracks: ITrack[] = [];
 
     // Fetch Spotify tracks
     try {
@@ -43,26 +46,8 @@ export const getStaticProps: GetStaticProps = async () => {
         tracks = [];
     }
 
-    // Fetch all Strapi content
-    try {
-        strapiContent = await fetchAllStrapiContent();
-    } catch (error) {
-        console.warn('Failed to fetch Strapi content during build:', error);
-        // Return empty content if Strapi fails during build
-        strapiContent = {
-            cvEntries: [],
-            skills: [],
-            portfolioItems: [],
-            sections: [],
-            socialLinks: [],
-        };
-    }
-
-    // Calculate age from birthday in Strapi or fallback to hardcoded
-    const pageContent = (strapiContent as any).pageContent;
-    const birthday = pageContent?.birthday
-        ? new Date(pageContent.birthday)
-        : new Date("10/05/1998");
+    // Calculate age from hardcoded birthday
+    const birthday = new Date("10/05/1998");
     birthday.setHours(0, 0, 0, 0);
     const i = Interval.fromDateTimes(birthday, DateTime.now());
 
@@ -72,7 +57,10 @@ export const getStaticProps: GetStaticProps = async () => {
             tracks,
             refreshed: DateTime.now().valueOf(),
             year: DateTime.now().year,
-            ...strapiContent,
+            cvEntries,
+            skills,
+            portfolioItems,
+            socialLinks,
         },
     };
 };
@@ -85,10 +73,7 @@ interface Props {
     cvEntries?: CvEntry[];
     skills?: Skill[];
     portfolioItems?: PortfolioItem[];
-    pageContent?: PageContent;
-    sections?: Section[];
     socialLinks?: SocialLink[];
-    siteSettings?: SiteSettings;
 }
 
 const Home: React.FC<Props> = (props: Props) => {

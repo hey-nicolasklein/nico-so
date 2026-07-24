@@ -4,7 +4,7 @@ import Heading from "../Heading";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { BiBuildings } from "react-icons/bi";
 import { BsFillSignpostSplitFill } from "react-icons/bs";
-import { CvEntry } from "../../lib/strapi";
+import { CvEntry } from "../../interfaces/content";
 
 import { IconType } from "react-icons";
 
