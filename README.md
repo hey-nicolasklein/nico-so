@@ -29,13 +29,25 @@ cd nico-so
 3. Install all dependencies:
 
 ```sh
-yarn install
+npm install
 ```
 
-4. Run locally:
+4. Set up environment variables:
 
 ```sh
-yarn run dev
+cp .env.example .env
+```
+
+The site content itself is static (see [Content](#content) below), so the only
+environment variables are for the live Spotify "Music I love" row. See the
+[Spotify docs](https://developer.spotify.com/documentation/web-api/concepts/authorization)
+for how to obtain a `client_id`, `client_secret` and `refresh_token`. Without
+them the app still builds; the music row is simply empty.
+
+5. Run locally:
+
+```sh
+npm run dev
 ```
 
 The basic file structure for the project is organized in the following way:
@@ -43,6 +55,7 @@ The basic file structure for the project is organized in the following way:
 ```
 .
 |-- components
+|-- data
 |-- hooks
 |-- interfaces
 |-- lib
@@ -50,17 +63,22 @@ The basic file structure for the project is organized in the following way:
 |-- public
 ```
 
-### [components](https://github.com/hey-nicolasklein/nico-so/tree/master/articles)
+### [components](https://github.com/hey-nicolasklein/nico-so/tree/master/components)
 
 This folder contains reusable React components.
 
-### [hooks](https://github.com/hey-nicolasklein/nico-so/tree/master/components)
+### [data](https://github.com/hey-nicolasklein/nico-so/tree/master/data)
+
+This folder contains the site content as static, version-controlled files
+(portfolio items, skills, CV entries, social links). See [Content](#content).
+
+### [hooks](https://github.com/hey-nicolasklein/nico-so/tree/master/hooks)
 
 This folder contains custom hooks.
 
 ### [interfaces](https://github.com/hey-nicolasklein/nico-so/tree/master/interfaces)
 
-This folder contains interfaces describing the data coming from the api endpoints.
+This folder contains the TypeScript types for the site content and the Spotify API.
 
 ### [lib](https://github.com/hey-nicolasklein/nico-so/tree/master/lib)
 
@@ -73,6 +91,21 @@ This folder containts the main pages of the site.
 ### [public](https://github.com/zenorocha/zenorocha.com/tree/master/public)
 
 This folder contains the any images or graphics used on the site.
+
+## Content
+
+The site is **git-first**: all content lives in the repository, with no external
+CMS. To update the page, edit the relevant file and commit.
+
+-   `data/portfolio.ts` — the "Things I love" cabinet of curiosities
+-   `data/skills.ts` — the orbiting skills
+-   `data/cv.ts` — experience and education entries
+-   `data/socialLinks.ts` — hero social links
+-   `interfaces/content.ts` — the types backing the above
+
+Images referenced by the content live in `public/assets` and are served from
+`/assets/...`. The Spotify "Music I love" row is the one exception — it is
+fetched live at build time (see [Running locally](#running-locally)).
 
 ## Contributing
 
